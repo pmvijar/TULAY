@@ -1,0 +1,154 @@
+Traffic law in the Philippines consists of multiple laws that govern the regulation and management of road transportation and the conduct of road users within the country.
+
+The official and latest traffic code of the Philippines is Republic Act No. 4136, also known as the "Land Transportation and Traffic Code", which was enacted into law on June 20, 1964.[1]
+
+Applicable laws
+The following table lists all Philippine laws applicable to the governance of road transportation and road users across the Philippines or in specific major areas within the country.
+
+Designation	Date passed	Title	Status	Scope
+List of national traffic laws 
+Act No. 3045	March 10, 1922	Motor Vehicle Law	Repealed by RA 4136	Establishes a law regulating motor vehicle traffic and requiring the registration of motor vehicles and licensing of motor vehicle drivers.[2]
+Act No. 3992	December 3, 1932	Revised Motor Vehicle Law	Repealed by RA 4136	Revises provisions in Act No. 3045. Some of these changes include changes to definitions, penalties, and speed limits. [3]
+RA 2000	June 22, 1957	Limited Access Highway Act	In effect	Authorizes the construction of limited-access highways and defines traffic laws applicable to users of limited-access highways.[4]
+RA 4136	June 20, 1964	Land Transportation and Traffic Code	In effect	National traffic code. Covers the regulation and licensing of owners, dealers, conductors, drivers, and similar matters of motor vehicles, as well as the traffic laws that apply only to motor vehicles.[1] This act is based on Act No. 3992 and repeals it.[3]
+PD 96	January 13, 1973	Presidential Decree No. 96	In effect	Prohibits and penalizes the usage of sirens, horns, or other similar gadgets with "exceptionally loud or startling sound" on motor vehicles and restricts such usage to authorized government vehicles.[5]
+RA 8750	August 5, 1999	Seat Belts Use Act of 1999	In effect	Mandates the inclusion of seat belts on private and public motor vehicles, excluding tricycles and motorcycles.[6]
+RA 10054	July 27, 2009	Motorcycle Helmet Act of 2009	In effect	Mandates the wearing of a standard motorcycle helmet for riders and backriders of motorcycles.[7]
+RA 10586	July 23, 2012	Anti-Drunk and Drugged Driving Act of 2013	In effect	Penalizes driving under the influence of alcohol, dangerous drugs, and other substances.[8]
+RA 10666	July 28, 2014	Children's Safety on Motorcycles Act of 2015	In effect	Regulates the backriding of children onboard on public roads with heavy and fast moving traffic.[9]
+RA 10913	July 27, 2015	Anti-Distracted Driving Act	In effect	Defines and penalizes distracted driving, particularly with electronics such as mobile phones.[10]
+RA 10916	July 27, 2015	Road Speed Limiter Act of 2016	In effect	Prohibits the registration and operation of any covered motor vehicle without a speed limiter device.[11]
+RA 11697	April 15, 2022	Electric Vehicle Industry Act (EVIDA)	In effect	Defines policies and responsibilities to create an enabling environment for the development of electric vehicles and micromobility.[12]
+Designation	Date passed	Title	Status	Scope
+List of department-level traffic issuances and orders 
+DPWC AO No. 1 s. 1968	February 19, 1968	Revised Rules and Regulations Governing Limited Access Highways	Amended by DPWH DO No. 123 s. 2001	An administrative order issued by the Department of Public Works and Communications (now the Department of Public Works and Highways), by virtue of RA 2000, defining traffic rules and regulations governing limited-access highways.[13]
+DPWH DO No. 123 s. 2001	July 18, 2001	Revised Rules and Regulations Governing Limited Access Highways	In effect	Amends provisions in DPWC AO 1 s. 1968 to allow motorcycles on limited access highways and defines rules and regulations specific to motorcycles on such highways.[14]
+LTO AHS 2008-015	May 15, 2008	Rules and Regulations for the Use and Operation of Motorcycles on Highways	In effect	Defines traffic rules and regulations for motorcycles on roads and highways.[15]
+JAO 2014-01	June 2, 2014	Revised Schedule of Fines and Penalties for Violations of Laws, Rules and Regulations Governing Land Transportation	In effect	Additional fines and penalties for the violation of land transportation traffic laws.[16]
+JMC 2018-01	January 17, 2018	Guidelines and Standards for the Classifications of Roads, Setting of Speed Limits Under Republic Act No. 4136, and Collection of Road Crash Data	In effect	Standardizes speed limits to be based on road classification and empowers local government units to collect road crash data and set local speed limits on local roads.[17]
+DOTr DO No. 2020-14	August 25, 2020	Guidelines and Protocols for Active Transportation and Light Mobility Vehicles	In effect	Establishes and prescribes road safety protocols and penalties for motor vehicles, bicycles, and other non-motorized transport on the road.[18]
+LTO AO No. 2021-039	May 11, 2021	Consolidated Guidelines in the Classification, Registration and Operation of All Types of Electric Motor Vehicles	Partially suspended[19]	Defines, classifies, and regulates the operation, registration, and related penalties of electric motor vehicles, including electric cars, electric bicycles, and mobility scooters.[20]
+LTO AO No. VDM-2024-044	February 21, 2024	Amended Consolidated Guidelines in the Classification, Registration and Operation of All Types of Electric Vehicles	Partially suspended[19]	Amends and revises sections of LTO AO No. 2021-039 for light electric vehicles.[21]
+The following laws are only applicable to the Metro Manila area.
+
+Designation	Date passed	Title	Status	Scope
+List of Metro Manila traffic laws 
+Joint Metro Manila Traffic Circular No. 01	February 1, 2023	Metro Manila Traffic Code of 2023	In effect	Regional traffic code for Metro Manila covering unified traffic rules, regulations, ticketing, and penalties.[22]
+Since its enactment in 1964, there have been 12 amendments to RA 4136, the latest being in 2017.
+
+Vehicles
+Motor vehicles are defined by RA 4136 and the Metro Manila Traffic Code as any vehicle propelled by any power other than human power. Exceptions to this definition include vehicles on railway tracks, motor vehicles such as road rollers, trolley cars, street sweepers, sprinklers, lawn mowers, bulldozers, graders, forklifts, amphibian trucks, and cranes when not on public roads, as well as tractors, trailers, and vehicles with traction engines used exclusively for agriculture. In addition, trailers with any number of wheels propelled or intended to be proplled by a motor vehicle are classified as a separate motor vehicle.[1][22]
+
+Regulations for the use of bicycles and other non-motorized vehicles are defined by the DOTr in Department Order No. 2020-14.[18]
+
+Motor vehicle classifications
+Motor vehicles in the Philippines are classified by the Land Transportation Office (LTO) according to vehicle category classifications established by the United Nations Economic Commission for Europe (UNECE).[35] Vehicles are classified according to whether they are propelled by diesel, electric, or gasoline powered motor engines, as well as maximum design speed and vehicle weight. Electric motor vehicles are classified in a similar manner, but are subject to additional criteria based on power output, particularly for light electric vehicles (LEVs), which have added restrictions and exemptions.[20]
+
+Electric vehicles were first classified on May 11, 2021 with the issuance of LTO Administrative Order No. 2021-039. This order integrated purely electric-powered vehicles into the existing vehicle category classification system and introduced specific requirements for LEVs, delineating restrictions on allowed roads, registration and licensing requirements, and the requirement of motorcycle or bicycle helmet.[20]
+
+In 2024, LTO Administrative Order No. VDM-2024-044 revised these classification guidelines, allowing LEVs to operate on all public highways, excluding expressways, provided they are registered with the LTO and operated by appropriately licensed drivers. Certain classifications were also removed, and all two-wheeled vehicles were required to use motorcycle helmets.[21]
+
+As of October 2024, provisions concerning the licensing, registration, and restrictions of LEVs in both LTO Administrative Order No. 2021-039 and LTO Administrative order No. VDM-2024-044 have been suspended following a directive from the Department of Transportation (DOTr) to review all LTO issuances that are inconsistent with the Electric Vehicle Industry Act (RA 11697).[19]
+
+Category	Specifications	Restrictions
+Road restrictions	Driver's license restrictions	Vehicle registration
+Category M1
+Car, Van, and SUV	
+Electric, diesel, and gasoline vehicles with not more than 8 passenger seats
+Gasoline and diesel variants with a gross vehicle weight up to 5,000 kilograms (5.0 t)
+Electric variants with a gross vehicle weight up to 3.5 metric tons (3,500 kg)
+Allowed on all roads including limited-access highways	B restriction	Required
+Category M2
+Utility Vehicle and Jeepney	
+Electric, diesel, and gasoline vehicles with more than 8 passenger seats
+Gasoline and diesel variants with a gross vehicle weight up to 5,000 kilograms (5.0 t)
+Electric variants with a gross vehicle weight of 3.500 to 5.000 kilograms (7.716 to 11.023 lb)
+B1 restriction	Required
+Category M3
+Bus and e-Bus	
+Electric, diesel, and gasoline passenger vehicles with more than 8 seats
+Gross vehicle weight exceeding 5,000 kilograms (5.0 t)
+D restriction	Required
+Category N1
+Truck	
+Electric, diesel, and gasoline vehicles carrying goods with a gross vehicle weight up to 3,500 kilograms (3.5 t)
+C restriction	Required
+Category N2
+Truck	
+Electric, diesel, and gasoline vehicles carrying goods with a gross vehicle weight of 3,500 to 12,000 kilograms (3.5 to 12.0 t)
+C restriction	Required
+Category N3
+Truck	
+Electric, diesel, and gasoline vehicles carrying goods with a gross vehicle weight exceeding 12,000 kilograms (12 t)
+C restriction	Required
+Category O1
+Articulated Car	
+Articulated gasoline and diesel vehicles with a gross vehicle weight up to 750 kilograms (0.75 t)
+BE restriction	Required
+Category O2
+Articulated Car	
+Articulated gasoline and diesel vehicles with a gross vehicle weight of 750 to 3,500 kilograms (0.75 to 3.50 t)
+BE restriction	Required
+Category O3
+Articulated Truck	
+Articulated gasoline and diesel vehicles with a gross vehicle weight exceeding 3,500 kilograms (3.5 t)
+CE restriction	Required
+
+Roads
+All public roads and highways, defined as thoroughfares, boulevards, driveways, avenues, parks, and alleys are covered by RA 4136. This does not include corridors within private property or any institutions.[1]
+
+Republic Act No. 917 or the Philippine Highway Act of 1953 prohibits highways, bridges, or right-of-ways covered by RA 4136 from being obstructed, or from being usurped or converted to private use. The act also prohibits the removal or tampering of road infrastructure such as markers, signs, and other road-side facilities.[36]
+
+RA 4136 also applies to limited-access highways, more commonly known as expressways, alongside additional traffic laws and restrictions provided by Republic Act No. 2000 and DPWC Administrative Order No. 1 series of 1968.
+
+In Metro Manila, the Metro Manila Traffic Code covers all roads and public places within the metro.[22]
+
+Parking
+Under RA 4136 and the Metro Manila Traffic Code, a motor vehicle is considered to be parked when it has been stopped on the shoulder or edge of a highway for an "appreciable" period of time. A motor vehicle stopping to unload passengers or cargo is not considered to be parked if the vehicle moves away "without delay".[1][22]
+
+RA 4136 states that parking a vehicle — by leaving it attended or unattended for an "appreciable" period of time — is prohibited inside an intersection or within 6 m (20 ft) of it, in front of a private driveway, on a pedestrian crossing, within 4 m (13 ft) of a fire hydrant or a driveway of a fire station, and where "no parking" signs are placed.[1]
+
+Parking on any sidewalk, path, or alley not intended for vehicular traffic or parking (such as bicycle lanes) is also prohibited by RA 4136 and DOTr Department Order No. 2020-014.[1][18]
+
+Standard rules
+List of some standard rules of the road for motor vehicles and animal-drawn vehicles, all based on RA 4136:[1]
+
+Keep to the right of the road except to pass others, where passing is allowed
+Vehicles must not exceed their registered carrying capacity
+Right of way at marked and unmarked intersections under various conditions
+Prohibited places for parking a vehicle
+Yield to police, fire department, and ambulance vehicles with a siren
+Yield right of way to pedestrian crossings
+Observe proper vehicle lighting and traffic light signalling
+Observe caution while driving and avoid impeding traffic
+Stopping if there has been a traffic collision
+Speed limits
+Main article: Speed limits in the Philippines
+Speed limits for motor vehicles across the country are defined by RA 4136 based on the type of roads and their conditions. A higher maximum speed limit is generally applied to light motor vehicles while lower maximum speed limits are applied to heavier motor vehicles.[1]
+
+There are no minimum speed limits on public roads except on expressways.[13] However, RA 4136 states that a driver of a motor vehicle must drive at a "careful and prudent speed, not greater nor less than is reasonable and proper" with regards to road conditions.[1]
+
+Pursuant to DILG-DPWH-DOTr Joint Memorandum Circular 2018-001, local government units may designate lower maximum speed limits on local roads in the interest of road safety.[17][22]
+
+Lane splitting and filtering
+Main articles: Lane splitting and Lane sharing
+Lane splitting and lane filtering is not explicitly illegal on Philippine roads for any type of vehicle. However, lane sharing (which is incorrectly defined as "lane splitting") is considered illegal for motorcycles under LTO Administrative Order 2008-015, which states that a motorcycle or scooter must observe one lane per vehicle only.[15] This policy however, is not actively enforced on the road.[37]
+
+Section 3 of DPWC AO No. 1 s. 1968 prohibits any vehicle from lane splitting, lane sharing, or lane filtering on all expressways in the Philippines. This also applies to motorcycles, as of DPWH Department Order No. 123 s. 2001.[13][38]
+
+Overtaking lanes and slow lanes
+Main article: Overtaking
+Expressways in the Philippines have a passing lane designated for overtaking and lanes designated for slow-moving vehicles.[13] This however does not apply to public roads by default.
+
+Section 3 of DPWC AO No. 1 s. 1968 states that slow-moving vehicles on expressways must use the right lane and use the left lane only when passing.[13]
+
+Traffic restrictions
+Outside of the traffic code, there are traffic restrictions which designate the time and day that certain vehicles or road users are allowed to operate on, as well as specific roads where these restrictions are enforced or exempted on.
+
+Public utility vehicles
+Public transport vehicles, such as jeepneys, buses, and the UV Express are restricted to use designated lanes on certain roads. A notable example of this is the EDSA Busway, located on the inner lanes of EDSA in Metro Manila, which is restricted for the exclusive use of EDSA Carousel route buses and authorized government vehicles.
+
+Similar to trucks, buses are to use the outermost lanes on the expressway. On the other hand, both public and private jeepneys are classified the same as cars and are allowed on all lanes.[citation needed]
+
+Tricycles, pedicabs, and motorized tricycles used for public transport are prohibited from using national highways based on the Department of Interior and Local Government (DILG) Memorandum Circular No. 2020-036. This restriction does not apply to those being used for private use.[47]
+

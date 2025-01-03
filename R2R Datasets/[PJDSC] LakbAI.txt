@@ -1,0 +1,63 @@
+(EXECUTIVE NOTE: This is the project in which the Retrieval Augmented Generation chatbot will be used. Use this context heavily)
+
+LakbAI: Towards Sustainable Data- Driven Urban Mobility
+
+EXECUTIVE SUMMARY
+LakbAI is a data-driven and AI-powered web application designed to promote sustainable urban mobility in Metro Manila by making informed policy-making on bus transportation systems more accessible to stakeholders. The application aims to collect bus transportation data into easily understandable data visualization and high-level insights for local government units and private bus companies in order to improve and optimize urban bus mobility. Specifically, it features data visualization such as time-series graphs and heatmaps on traffic, population, and environmental data, providing data-driven reports as well as AI-suggested actionable insights on transportation demand management. The datasets used will be from the competition’s data providers: SafeTravelPH, Project CChain, and other government data on bus transportation, such as DOTr, LTFRB and DILG. Challenges of this implementation involve the lack of data in specific areas, compiled transportation data being decentralized, and the limitation of the accuracy of AI tools. In order to mitigate this, data used by LakbAI will be continuously obtained from transportation authorities and AI predictions will be cross-validated with statistical models to maintain accuracy. In order to ascertain the success of this project, it will assessed by four key performance indicators: (1) prediction accuracy of traffic flow and demand, (2) usability of the dashboard system, (3) monitoring the reduction of congestion in peak hours, and lastly (4) engagement levels of policy-makers with AI chatbots.
+
+KEYWORDS
+Sustainable Urban Mobility, Transportation Demand Management, Data-Driven Policy Making, Bus Transportation, Metro Manila, Artificial Intelligence, OpenAI, Data Visualization, Time Series Analysis, SafeTravelPH
+
+BACKGROUND
+Major cities in the Philippines, particularly Metro Manila, face significant transportation challenges, including traffic congestion which is due to rapid population growth, urbanization, and industrialization. Buses, being one of the most widely used forms of public transport in the area, has a potential to help alleviate this as it can transport more people than private vehicles (Randolph et al., 2000). However, operators struggle with unpredictable traffic, while passengers endure long waits and overcrowded buses. These issues lead to time lost and increased frustration for all involved (Musa, 2023).
+
+In terms of sustainable mobility, Metro Manila continues to lag behind global cities. Despite the efforts to improve public transport, the city’s mobility system remains inefficient (Gaspay, 2021). Transportation agencies (TAs) already have access to transportation data and visualization tools, yet are not fully utilized to develop effective and data-driven solutions (Asian Development Bank, 2012). Consequently, Philippine transportation policies often fail to meet the specific needs of the population, leading to ineffective transportation plans and worsening traffic congestion (Schechtner & Hanson, 2017). Therefore, the study proposes the use of time dependent analysis for processing the data together with AI-generated insights to enhance the predictive capabilities of existing data and visualization tools.
+
+THE PROBLEM
+While transportation agencies already have access to data visualization tools, these tools are not properly utilized to optimize urban mobility policies. Despite having access to transportation data, agencies fail to use these tools effectively to manage and improve bus routes and schedules resulting in inefficient bus operations, with unpredictable routes and inconsistent service times. As a consequence, Metro Manila continues to experience issues such as increased traffic congestion, and a lack of sustainability in its transportation systems.
+
+LITERATURE
+A study about systemic analysis on traffic congestion by Sidel (2020) performs a holistic analysis on the state of traffic in Metro Manila and places the spotlight on the contexts it is involved in, such as institutional, economical, and political. It highlights the major systemic issue in our mobility architecture; government bodies on traffic management being decentralized, resulting in difficulties maintaining coordination and structure in our country’s policy making. Systemic reforms when it comes to the management of our transportation system is encouraged.
+
+These systemic reforms can be in the form of data-driven policies. A study by Urbanek (2019) highlights the importance of big data and data analytics when it comes to policy making in urban mobility. The paper reviewed the prevalence of data-driven policies in different countries in Europe. However, even though there is an existing database for transportation and mobility, the importance of data analysis and actionable insights must not be forgoed, especially when even private sectors have a large data collection of their own for business purposes.
+
+An example of this would be through the use of urban mobility data to inform policy making. In a software development study by Refuerza et al. (2023), a solution was proposed on optimizing urban mobility through the use of physical sensor data feeds on jeepneys, to create a dashboard that enables stakeholders to be informed of jeepney systems. In comparison, LakbAI
+
+aims to be able to provide similar data story points in terms of visualization, along with the use of AI to provide high-level insights for bus systems in Manila.
+
+OBJECTIVE
+The study aims to fulfill the following:
+Provide data visualization from traffic, environmental, and population data using heatmaps, line graphs, ARIMA, SARIMA, and Exponential Smoothing.
+Provide data driven analytics and reports from the visualized data.
+Provide actionable insight on the analytics and reports for policies formulation for Transportation Demand Management and enhance the volume of people moved in the road network.
+
+SCOPE & DEFINITIONS
+
+The study is limited to the Philippines particularly at Metro Manila where traffic, population, and environmental data are more accessible largely due to its status as a densely populated urban center with significant governmental and academic interest in urban planning and development (Fillone & Mateo-Babiano, 2018). It is also limited to the bus terminals as it has routes which can still be optimized and have regular departure and arrival schedules (Shaohui & Yanyan, 2010).This is applicable even to routes prescribed by the Local Public Transport Route Plan (LPTRP). 
+
+DATASETS UTILIZED
+
+The data sources will be limited to the transportation data of bus operations, traffic flow, commuter demand, and environmental weather data to be sourced in SafeTravelPH, Project CCHAIN,
+
+and the  LPTRP from the DOTr, DILG, LTFRB. Project CCHAIN will be utilized primarily for its environmental weather data and its effects in traffic situations. SafeTravel PH will be the primary data source as the data will be used as a basis for traffic heatmaps and passenger loads. Local transport agencies which will be the source of traffic policy data as a basis for providing insights and suggestions using LLMs.
+
+METHODOLOGY
+1. Web Application Set-up
+2. Collation of Existing Data Set
+3. Data Visualization dashboard
+4. AI-generated Insights and Policy Recommendations
+5. AI-powered chatbot for custom queries
+
+Our proposal seeks to develop LakbAI, a data-driven web application that is implemented using MongoDB, Express, Next.js, and Node.js as the primary technological stack. The application involves data handling, dashboard visualization, and AI-generated insights regarding bus transportation to assist transportation agencies in formulating sustainable policies based on actual vehicle data. Our application will first collate existing datasets in Metro Manila and generate reliable predictions through forecasting models such as ARIMA, SARIMA, and exponential smoothing using Python statistical libraries. Afterwards, it will visualize the data through a dashboard containing maps, graphs, and charts through Leaflet and plotting libraries. The data format will be transformed from CSV to JSON so that the files can be fed through a large language model. Specifically, the OpenAI API shall be used to automatically generate major findings, predictions, and policy recommendations by embedding the dataset into the AI model through Pinecone. Finally, an OpenAI-powered chatbot is integrated for policy-makers to construct customized prompts to investigate potential impacts concerning the bus-related findings in real-time.
+
+POTENTIAL CHALLENGES
+
+The proposed solution faces common challenges and limitations such as the availability of datasets, geographical coverage, and reliability of AI analysis. First, the existing bus transportation datasets are limited to specific regions in the Philippines such as Edsa, Navotas, Mandaluyong, and Muntinlupa for the SafeTravelPH and Project CCHAIN datasets (see Appendix C). The bus transportation metrics are also limited such as carbon emission data, ongoing bus routes and schedules, as well as peak hours in national roads. Moreover, there is no centralized compilation of the different datasets along with key vehicle factors, hence, the accuracy of statistical results and generation of insights based on these results could be affected. Lastly, the effectiveness of the AI tools in suggesting policies based on numerous variables–such as bus routes, travel time, peak hours, passenger loads, among others–pose a challenge because of the dynamic and complexity of using all these metrics.  
+
+MITIGATION STRATEGIES
+To address these challenges, the project will actively promote app usage among bus operators and commuters to collect real-time data on bus routes, schedules, boarding and alighting, and passenger loads on the busy areas of Metro Manila to continuously provide reliable data through time. This will be supplemented by partnerships with transportation authorities to integrate additional data sources. Advanced statistical tools related to time series forecasting will be employed to predict missing data and account for irregularities. Regular model validation and testing against real-world outcomes will ensure the reliability and accuracy of AI tools in policy generation. Furthermore, the web application will aggregate the existing datasets and build upon current dashboard systems (see Appendix B) to provide precise data visualization features through heatmaps, line graphs, and other data representations. Additional efforts can be made to crowdsource missing data from users and leverage satellite or IoT sensors to monitor environmental factors such as carbon emissions.  
+
+
+SUCCESS METRICS AND KPI’S
+
+The project's impact will be assessed through several key performance indicators (KPIs) that measure its effectiveness in enhancing urban mobility policy decisions. Firstly, prediction accuracy of traffic flow and commuter demand forecasts are to be enhanced by lowering the Mean Absolute Percentage Error (MAPE) and Root Mean Square Error (RMSE), which are classic time-series evaluation metrics. Secondly, the usability of the dashboard will be gauged through the system usability scale (SUS) by targeting policymakers as survey participants and aiming for an SUS score greater than 68 to indicate acceptable usability. Thirdly, the reduction in congestion during peak hours will be monitored, with a target of decreasing average traffic delays by 15% within the first six months of policy implementation based on the data-driven recommendations. Finally, the engagement level with the OpenAI chatbot will be measured by tracking the frequency of interactions and insights generated, with a goal of at least 50 interactions per involved policymaker within the first month of the application's deployment.

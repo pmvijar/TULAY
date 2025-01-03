@@ -1,3 +1,3 @@
-# LakbAI
-LakbAI: Towards Sustainable Data- Driven Urban Mobility
 # TULAY
+Template from LakbAI
+Towards Better Pedestrian Mobility 

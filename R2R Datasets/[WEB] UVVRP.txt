@@ -1,0 +1,38 @@
+The Unified Vehicular Volume Reduction Program (UVVRP), commonly called number coding or color coding, is a road space rationing program in the Philippines that aims to reduce traffic congestion, in particular during peak hours, by restricting the use of major public roads by certain types of vehicles based on the final digit on their license plates. First implemented in 1995 in Metro Manila, the program has since been emulated in the cities of Baguio, Cabanatuan, and Dagupan, and the province of Cavite with slight variations.
+The Unified Vehicular Volume Reduction Program was the culmination of two plans devised in the mid-1990s to help resolve the issue of heavy traffic congestion in Metro Manila, which by then was the subject of many complaints among motorists by restricting the number of vehicles on the road. Although it was first implemented in 1995, the UVVRP, in its current form, dates back to 1996.
+
+The traffic situation in Metro Manila and initial impetus (1995)
+The original UVVRP was conceived by Col. Romeo Maganto, who served as the executive director of the Metropolitan Manila Development Authority's traffic management office.[1] First implemented in October 1995 on an experimental basis to address the traffic congestion caused by the construction of the Metro Rail Transit Line 3 (MRT-3) on Epifanio de los Santos Avenue (EDSA),[2] it initially targeted public utility vehicles, later expanding to all vehicles plying EDSA, where traffic congestion in Metro Manila was at its heaviest.[1] Vehicles covered under the original UVVRP were banned from EDSA for the entire day based on the last digit of a vehicle's license plate, similar to the current UVVRP.[3]
+
+On November 6, 1995, upon the urging of public transport groups, Maganto expanded the UVVRP to include all vehicles on most Metro Manila roads to prevent rat running, which caused private vehicular traffic to use secondary roads alongside jeepneys. By this time, of the estimated 1.1 million motor vehicles then plying city roads, around 70 per cent of those vehicles — which numbered around 800,000 — were private vehicles, and the MMDA was under pressure to resolve Metro Manila's worsening traffic problems. The worsening traffic on secondary roads forced Maganto to implement a blanket ban on private vehicles as well, with the ban being implemented during rush hour from 7:00 to 9:00 a.m. and 5:00–7:00 p.m.[1]
+
+The UVVRP, however, was still largely voluntary, and while it was implemented by Maganto's office, the program did not have a legal basis in Metro Manila law. Mayors, in particular Jejomar Binay of Makati, were leery of the program, accusing Maganto of circumventing the Metro Manila Council, which sets policy for the MMDA, and with Maganto even threatening to resign if mayors did not support the plan. This was compounded by the fact that Maganto's original scheme did not specify penalties for violations of the UVVRP since penalties could only be imposed by the MMC.[4] Tensions came to a head on November 21, 1995, when Senator Vicente Sotto III had to appeal to Maganto and the mayors during a Senate hearing on the scheme to work together to resolve Metro Manila's traffic problems.[5]
+
+This changed on November 23, 1995, when Chairman Prospero Oreta signed MMDA Regulation No. 95-001, codifying Maganto's scheme and mandating that strict implementation begin on December 1, 1995. The final version adopted by the MMDA combined elements of the original UVVRP and the partial ban implemented by Maganto for private vehicles, where vehicles with plate numbers ending in an odd number were to be barred from major streets in Metro Manila on Mondays, Wednesdays, and Fridays, and vehicles with plate numbers ending in an even number were to barred on Tuesdays, Thursdays, and Saturdays, from 7:00 to 9:00 a.m. and 5:00 to 7:00 p.m.[6] No total ban was mandated in the version passed by the MMC. This was the subject of much confusion and criticism on the first day of its implementation, with motorists claiming that the new scheme did not significantly reduce traffic congestion, unlike Maganto's original scheme.[6]
+
+Return to the original UVVRP (1996–2003)
+Although the UVVRP was implemented in the manner specified in MMDA Regulation 95-001, the original UVVRP was reimplemented in early 1996, with Maganto announcing a twelve-hour ban on vehicles plying EDSA depending on the final digit of the vehicle's license plate. Originally imposed due to rehabilitation works on the Guadalupe Bridge, the start of three major road projects resulted in the ban being extended to September to reduce the number of vehicles using EDSA to go around affected roads in inner Manila, coexisting alongside the odd-even UVVRP which was implemented on all other roads.[7]
+
+COVID-19 pandemic
+The program was suspended in Metro Manila from March 13, 2020, until November 30, 2021, during the community quarantines due to the COVID-19 pandemic.[8][9] This was except in Makati, where a modified number coding scheme was implemented, except on vehicles carrying two or more passengers and during weekends and holidays.[10]
+
+The suspension was lifted on December 1, 2021, implementing a modified scheme.[11] All vehicles with banned motor vehicle plate endings under the UVVRP, except for public utility vehicles, transportation network vehicle services, motorcycles, garbage trucks, fuel trucks, and vehicles carrying essential and perishable goods and physicians with valid ID are covered in the modified scheme from 5:00 to 8:00 p.m. on Mondays to Fridays, excluding holidays. Meanwhile, light trucks are prohibited from using EDSA between Magallanes, Makati and North Avenue, Quezon City, from 5:00 a.m. to 8:00 p.m. from Mondays to Fridays, excluding holidays.[12][13] The scheme was later expanded to morning rush hours on August 15, 2022, from 7:00 to 10:00 a.m. from Mondays to Fridays, excluding holidays, under MMDA Resolution No. 22-14.[14]
+
+The full number coding scheme in Makati was resumed on March 16, 2022, wherein all vehicles with banned motor vehicle plate endings under the UVVRP, except for vehicles that carry senior citizen BluCard holders and those traveling for an official business or medical emergency, are covered in the scheme from 7:00 a.m. to 7:00 p.m. from Mondays to Fridays, excluding holidays.[15][16]
+
+Current implementation
+The following table shows which plate number endings are barred from travelling in Metro Manila:
+
+Day of Week	Plates Ending in
+Monday	1, 2
+Tuesday	3, 4
+Wednesday	5, 6
+Thursday	7, 8
+Friday	9, 0
+As of 2023, the UVVRP is currently implemented as follows:[14][17][18][19]
+
+Applies from 7:00 a.m. to 10:00 a.m. and from 5:00 p.m. to 8:00 p.m., from Mondays to Fridays, excluding holidays.
+Window hours from 10:01 a.m. to 4:59 p.m. Some differences apply to certain cities. See below.
+Applies to major roads, radial roads, and circumferential roads in Metro Manila.
+Not applied to expressways traversing Metro Manila.
+Motorcycles, electric vehicles,[20] public utility vehicles (PUV), transport network vehicle services (TNVS), garbage trucks, fuel trucks, marked government vehicles, marked media vehicles, emergency vehicles (e.g. fire trucks, ambulances), and motor vehicles carrying essential and/or perishable goods are exempt.

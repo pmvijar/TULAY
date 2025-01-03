@@ -1,0 +1,22 @@
+Title: Reforms in Metro Manila’s bus transport system hastened by the Covid-19 pandemic: A policy capacity analysis of the EDSA busway
+Date: 2023
+
+Summary:
+
+The article examines the significant reforms in Metro Manila's bus transport system that were accelerated by the Covid-19 pandemic, focusing specifically on the implementation of the EDSA Busway. The authors conducted a policy capacity analysis to understand how the pandemic created an opportunity for the Philippine government to enhance public transport operations along one of the busiest corridors in Metro Manila.
+
+The study highlights the context of the EDSA Busway, which was established as a response to the challenges faced by the public transport system, particularly during the pandemic. The authors conducted interviews with key stakeholders, including officials from the Department of Transportation (DOTr), the Land Transportation Franchising and Regulatory Board (LTFRB), and private sector representatives, to gather insights on the policy-making process and the operational challenges encountered.
+
+Key policies featured in the article include:
+
+Service Contracting Program: This program was designed to provide financial support to bus drivers during the pandemic. It aimed to ensure that drivers received direct payments, which posed challenges due to the lack of a comprehensive driver database. The program drew lessons from the previous Metro Rail Transit Bus Augmentation program, which had similar objectives.
+
+Bayanihan to Recover as One Act: This legislation provided the necessary funding for the initial phase of the Service Contracting Program. It emphasized that drivers would be the primary beneficiaries, necessitating the establishment of a system to track their services and payments.
+
+EDSA Busway Implementation: The EDSA Busway was a transformative project that involved the reallocation of road space to prioritize bus transit. This initiative aimed to improve the efficiency of public transport and reduce congestion along EDSA.
+
+The article discusses the challenges faced during the implementation of these policies, including issues with compliance to GPS installation policies, the need for a mix of manual and digital monitoring methods, and the difficulties in tracking Key Performance Indicators for contract payments. The authors also highlight the importance of system-level analytical capacity, which involves data collection and dissemination among stakeholders to inform policy decisions.
+
+Furthermore, the article addresses the political capacity at the system level, emphasizing the need for stakeholder participation and accountability in the policy process. It notes that while various stakeholders were consulted during the planning stage, there were limitations in their involvement, particularly in the formulation of policies.
+
+In conclusion, the authors argue that the Covid-19 pandemic served as a catalyst for reforming the public transport system in Metro Manila. The EDSA Busway project exemplifies how crises can lead to innovative solutions and improvements in policy capacity, ultimately enhancing the governance of public transport services. The study provides valuable insights into the interplay between policy capacity, stakeholder engagement, and the challenges of implementing transport reforms in a rapidly changing environment.
