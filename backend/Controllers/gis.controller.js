@@ -2,16 +2,13 @@ import { GeoUnit } from "../Models/geoUnit.model.js"; // Import the GeoUnit mode
 import { PedestrianPassage } from "../Models/pedestrianPassage.model.js"; // Import the PedestrianPassage model
 import { Station } from "../Models/station.model.js"; // Import the Station model
 import mongoose from "mongoose";
+import * as turf from "@turf/turf";
 
 export const uploadGeoJSON = async (request, reply) => {
   try {
-    const { uploadType, geoJSON, dataSource } = request.body; // Get uploadType and geoJSON from the request body
+    const { geoJSON, dataSource } = request.body; // Get uploadType and geoJSON from the request body
 
-    // Ensure the geoJSON is in valid format
-    const parsedGeoJSON = geoJSON;
-
-    let model; // Declare variable to hold the model
-    const transformedData = parsedGeoJSON.features.map((feature) => ({
+    const transformedData = geoJSON.features.map((feature) => ({
       source: dataSource,
       name: feature.properties.name,
       postalCode: feature.properties.postal_code || "N/A",
@@ -26,6 +23,57 @@ export const uploadGeoJSON = async (request, reply) => {
 
       // Save each GeoUnit document
       await geoUnit.save();
+    }
+
+    return reply
+      .code(201)
+      .send({ message: "GeoJSON data uploaded successfully!" });
+  } catch (error) {
+    console.error("Error uploading GeoJSON:", error);
+    return reply.code(500).send({ error: "Internal Server Error" });
+  }
+};
+
+export const uploadStationGeoJSON = async (request, reply) => {
+  try {
+    const { geoJSON, dataSource, transportType, stationType, multiModal } =
+      request.body;
+
+    const transformedData = geoJSON.features.map((feature) => {
+      const { geometry } = feature;
+      let location = null;
+
+      if (geometry.type === "Point") {
+        // Use the coordinates directly
+        location = {
+          type: "Point",
+          coordinates: geometry.coordinates,
+        };
+      } else {
+        // Calculate centroid and use it as the location
+        const centroid = turf.centroid(geometry);
+        location = {
+          type: "Point",
+          coordinates: centroid.geometry.coordinates,
+        };
+      }
+
+      return {
+        source: dataSource,
+        name: feature.properties.name || "N/A",
+        transportType: transportType,
+        stationType: stationType,
+        multiModal: multiModal,
+        location: location ? location : null, // Add coordinates to location
+      };
+    });
+
+    // Loop through each feature and save as a GeoUnit
+    for (const feature of transformedData) {
+      const station = new Station(feature);
+
+      // Save each GeoUnit document
+      await station.save();
     }
 
     return reply
