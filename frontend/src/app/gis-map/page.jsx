@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import * as turf from "@turf/turf";
 import { useMapEvent } from "react-leaflet";
+import qcBarangays from "@/geojson/qc_barangays.geojson";
+import qcTrainStations from "@/geojson/qc_train_stations.geojson";
 
 import "leaflet/dist/leaflet.css";
 
@@ -30,14 +32,32 @@ const Tooltip = dynamic(
 const GISMapPage = () => {
   const [geoJsonLayers, setGeoJsonLayers] = useState([]);
 
+  const createPolygonLayer = (geoJsonData) => {
+    return geoJsonData.features; // Return GeoJSON features directly without transformation
+  };
+
   useEffect(() => {
     // Sample points (GeoJSON)
-    const points = [
-      turf.point([0, 51.505]),
-      turf.point([0.01, 51.51]),
-      turf.point([0.02, 51.515]),
-      turf.point([0.00319, 51.50293]),
-    ];
+    const points = qcTrainStations.features
+      .map((feature) => {
+        const { geometry } = feature;
+
+        if (geometry.type === "Point") {
+          // Use the coordinates directly
+          return turf.point(geometry.coordinates);
+        } else if (
+          geometry.type === "Polygon" ||
+          geometry.type === "LineString"
+        ) {
+          // Calculate centroid
+          const centroid = turf.centroid(geometry);
+          return turf.point(centroid.geometry.coordinates);
+        }
+
+        // Ignore unsupported geometry types
+        return null;
+      })
+      .filter(Boolean); // Remove null values
 
     // Define buffer distances (in kilometers)
     const bufferDistances = {
@@ -74,29 +94,59 @@ const GISMapPage = () => {
     const yellowUnion = unionBuffers(buffers.yellow);
     const redUnion = unionBuffers(buffers.red);
 
-    const bufferFillOpacity = 0.25;
+    const bufferFillOpacity = 0.45;
+    const lineOpacity = 0;
 
     // Define buffer layers with the unioned geometries
     const greenBufferLayer = {
       data: greenUnion,
-      style: { color: "green", fillOpacity: bufferFillOpacity },
+      style: {
+        color: "green",
+        fillOpacity: bufferFillOpacity,
+        opacity: lineOpacity,
+      },
     };
 
     const yellowBufferLayer = {
       data: yellowUnion,
-      style: { color: "yellow", fillOpacity: bufferFillOpacity },
+      style: {
+        color: "yellow",
+        fillOpacity: bufferFillOpacity,
+        opacity: lineOpacity,
+      },
     };
 
     const redBufferLayer = {
       data: redUnion,
-      style: { color: "red", fillOpacity: bufferFillOpacity },
+      style: {
+        color: "red",
+        fillOpacity: bufferFillOpacity,
+        opacity: lineOpacity,
+      },
     };
 
-    // Collect all layers
-    const layers = [greenBufferLayer, yellowBufferLayer, redBufferLayer];
+    const barangayPolygonLayer = createPolygonLayer(qcBarangays);
 
-    // Reverse the layers array
-    setGeoJsonLayers([...layers].reverse()); // Reversing before setting state
+    const barangayBoundaryLayer = barangayPolygonLayer.map((feature) => ({
+      data: feature,
+      style: { color: "black", weight: 2, opacity: 1, fillOpacity: 0 },
+    }));
+
+    const barangayFillShape = barangayPolygonLayer.map((feature) => ({
+      data: feature,
+      style: { color: "gray", weight: 2, opacity: 1, fillOpacity: 0.5 },
+    }));
+
+    // Collect all layers (buffers + GeoJSON)
+    const layers = [
+      ...barangayBoundaryLayer,
+      greenBufferLayer,
+      yellowBufferLayer,
+      redBufferLayer,
+      ...barangayFillShape,
+    ];
+
+    setGeoJsonLayers([...layers].reverse());
   }, []);
 
   // Tooltip on hover to show lat, lon
@@ -104,7 +154,7 @@ const GISMapPage = () => {
     const map = useMapEvent("mousemove", (e) => {
       const { lat, lng } = e.latlng;
       const tooltip = document.getElementById("latlon-tooltip");
-      tooltip.innerHTML = `Lat: ${lat.toFixed(5)} | Lng: ${lng.toFixed(5)}`;
+      tooltip.innerHTML = `Lat: ${lat.toFixed(6)} | Lng: ${lng.toFixed(6)}`;
       tooltip.style.left = `${e.originalEvent.clientX + 10}px`;
       tooltip.style.top = `${e.originalEvent.clientY + 10}px`;
       tooltip.style.display = "block";
@@ -135,13 +185,14 @@ const GISMapPage = () => {
         <p>This is a right-side hovering panel</p>
       </div>
       <MapContainer
-        center={[51.505, -0.09]}
+        center={[14.651675, 121.049444]}
         zoom={13}
         style={{ height: "100vh", width: "100%" }}
       >
         <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>'
+          zIndex={100000}
         />
         {geoJsonLayers.map((layer, index) => (
           <GeoJSON key={index} data={layer.data} style={layer.style} />
