@@ -34,6 +34,53 @@ export const uploadGeoJSON = async (request, reply) => {
   }
 };
 
+export const uploadPedestrianGeoJSON = async (request, reply) => {
+  try {
+    const { geoJSON, dataSource, passageType } = request.body;
+
+    const transformedData = geoJSON.features.map((feature) => {
+      const { geometry } = feature;
+      let location = null;
+
+      if (geometry.type === "Point") {
+        // Use the coordinates directly
+        location = {
+          type: "Point",
+          coordinates: geometry.coordinates,
+        };
+      } else {
+        // Calculate centroid and use it as the location
+        const centroid = turf.centroid(geometry);
+        location = {
+          type: "Point",
+          coordinates: centroid.geometry.coordinates,
+        };
+      }
+
+      return {
+        source: dataSource,
+        type: passageType,
+        location: location ? location : null, // Add coordinates to location
+      };
+    });
+
+    // Loop through each feature and save as a GeoUnit
+    for (const feature of transformedData) {
+      const pedestrianPassage = new PedestrianPassage(feature);
+
+      // Save each GeoUnit document
+      await pedestrianPassage.save();
+    }
+
+    return reply
+      .code(201)
+      .send({ message: "GeoJSON data uploaded successfully!" });
+  } catch (error) {
+    console.error("Error uploading GeoJSON:", error);
+    return reply.code(500).send({ error: "Internal Server Error" });
+  }
+};
+
 export const uploadStationGeoJSON = async (request, reply) => {
   try {
     const { geoJSON, dataSource, transportType, stationType, multiModal } =
