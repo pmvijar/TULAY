@@ -33,33 +33,75 @@ const GISMapPage = () => {
   const [geoJsonLayers, setGeoJsonLayers] = useState([]);
   const [selectedBarangay, setSelectedBarangay] = useState(null);
 
-  const createPolygonLayer = (geoJsonData) => {
-    return geoJsonData.features; // Return GeoJSON features directly without transformation
-  };
+  const [geoUnits, setGeoUnits] = useState([]);
+  const [stations, setStations] = useState([]);
+  const [passages, setPassages] = useState([]);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  function generateColorFromScore(score) {
+    // Clamp the score between 0 and 1
+    score = Math.min(Math.max(score, 0), 1);
+
+    // Calculate the red and green values based on the score
+    const red = Math.floor((1 - score) * 255); // Red decreases as score increases
+    const green = Math.floor(score * 255); // Green increases as score increases
+
+    // Return the color in RGB format
+    return `rgb(${red}, ${green}, 0)`;
+  }
 
   useEffect(() => {
-    // Sample points (GeoJSON)
-    const points = qcTrainStations.features
-      .map((feature) => {
-        const { geometry } = feature;
+    console.log("stations:", stations); // Logs when stations are updated
+  }, [stations]);
 
-        if (geometry.type === "Point") {
-          // Use the coordinates directly
-          return turf.point(geometry.coordinates);
-        } else if (
-          geometry.type === "Polygon" ||
-          geometry.type === "LineString"
-        ) {
-          // Calculate centroid
-          const centroid = turf.centroid(geometry);
-          return turf.point(centroid.geometry.coordinates);
-        }
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
 
-        // Ignore unsupported geometry types
-        return null;
-      })
-      .filter(Boolean); // Remove null values
+      try {
+        const [geoUnits, stations, passages] = await Promise.all([
+          fetch("http://localhost:3001/get-geounits", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ location: "EDSA" }), // Include body
+          }).then((res) => res.json()),
 
+          fetch("http://localhost:3001/get-stations", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ location: "EDSA" }), // Include body
+          }).then((res) => res.json()),
+
+          fetch("http://localhost:3001/get-passages", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ location: "EDSA" }), // Include body
+          }).then((res) => res.json()),
+        ]);
+
+        setGeoUnits(geoUnits);
+        setStations(stations);
+        setPassages(passages);
+      } catch (err) {
+        setError("Failed to fetch data. Please try again later.");
+        console.error("Error fetching data:", err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
     // Define buffer distances (in kilometers)
     const bufferDistances = {
       green: 0.4, // Near
@@ -70,17 +112,39 @@ const GISMapPage = () => {
     // Create buffers for each priority
     const buffers = { green: [], yellow: [], red: [] };
 
-    points.forEach((point) => {
-      buffers.green.push(
-        turf.buffer(point, bufferDistances.green, { units: "kilometers" })
-      );
-      buffers.yellow.push(
-        turf.buffer(point, bufferDistances.yellow, { units: "kilometers" })
-      );
-      buffers.red.push(
-        turf.buffer(point, bufferDistances.red, { units: "kilometers" })
-      );
+    stations.forEach((station) => {
+      if (station.location && station.location.coordinates) {
+        // Proceed with buffer creation
+        buffers.green.push(
+          turf.buffer(
+            turf.point(station.location.coordinates),
+            bufferDistances.green,
+            { units: "kilometers" }
+          )
+        );
+
+        buffers.yellow.push(
+          turf.buffer(
+            turf.point(station.location.coordinates),
+            bufferDistances.yellow,
+            { units: "kilometers" }
+          )
+        );
+
+        buffers.red.push(
+          turf.buffer(
+            turf.point(station.location.coordinates),
+            bufferDistances.red,
+            { units: "kilometers" }
+          )
+        );
+        // Do the same for yellow and red buffers
+      } else {
+        console.warn(`Invalid station data: ${station._id}`);
+      }
     });
+
+    console.log("hey:", buffers.green);
 
     // Function to safely union multiple buffers
     const unionBuffers = (bufferArray) => {
@@ -126,29 +190,32 @@ const GISMapPage = () => {
       },
     };
 
-    const barangayPolygonLayer = createPolygonLayer(qcBarangays);
-
-    const barangayBoundaryLayer = barangayPolygonLayer.map((feature) => ({
-      data: feature,
+    const barangayBoundaryLayer = geoUnits.map((geoUnit) => ({
+      data: geoUnit.location,
       style: { color: "black", weight: 2, opacity: 1, fillOpacity: 0 },
     }));
 
-    const barangayFillShape = barangayPolygonLayer.map((feature) => ({
-      data: feature,
-      style: { color: "gray", weight: 2, opacity: 1, fillOpacity: 0.5 },
+    const barangayFillShape = geoUnits.map((geoUnit) => ({
+      data: geoUnit.location,
+      style: {
+        color: generateColorFromScore(geoUnit.proximityScore),
+        weight: 2,
+        opacity: 1,
+        fillOpacity: 0.5,
+      },
     }));
+
+    const bufferLayers = [greenBufferLayer, yellowBufferLayer, redBufferLayer];
 
     // Collect all layers (buffers + GeoJSON)
     const layers = [
       ...barangayBoundaryLayer,
-      greenBufferLayer,
-      yellowBufferLayer,
-      redBufferLayer,
+      /*...bufferLayers,*/
       ...barangayFillShape,
     ];
 
     setGeoJsonLayers([...layers].reverse());
-  }, []);
+  }, [geoUnits, stations, passages]);
 
   const onBarangayClick = (e) => {
     const { properties } = e.target.feature;
@@ -168,6 +235,8 @@ const GISMapPage = () => {
 
     return null;
   }
+
+  if (isLoading) return <div>Loading...</div>;
 
   return (
     <div>
