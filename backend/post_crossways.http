@@ -1,5 +1,5 @@
 ###
-POST http://localhost:3001/
+POST http://localhost:3001/upload-passage
 Content-Type: application/json
 
 {

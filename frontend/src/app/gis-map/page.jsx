@@ -31,6 +31,7 @@ const Tooltip = dynamic(
 
 const GISMapPage = () => {
   const [geoJsonLayers, setGeoJsonLayers] = useState([]);
+  const [selectedBarangay, setSelectedBarangay] = useState(null);
 
   const createPolygonLayer = (geoJsonData) => {
     return geoJsonData.features; // Return GeoJSON features directly without transformation
@@ -61,9 +62,9 @@ const GISMapPage = () => {
 
     // Define buffer distances (in kilometers)
     const bufferDistances = {
-      green: 0.2, // Near
-      yellow: 0.5, // Medium
-      red: 1.0, // Far
+      green: 0.4, // Near
+      yellow: 0.8, // Medium
+      red: 1.2, // Far
     };
 
     // Create buffers for each priority
@@ -149,6 +150,11 @@ const GISMapPage = () => {
     setGeoJsonLayers([...layers].reverse());
   }, []);
 
+  const onBarangayClick = (e) => {
+    const { properties } = e.target.feature;
+    setSelectedBarangay(properties);
+  };
+
   // Tooltip on hover to show lat, lon
   function MapWithTooltip() {
     const map = useMapEvent("mousemove", (e) => {
@@ -184,6 +190,13 @@ const GISMapPage = () => {
         <h3 className="text-lg font-semibold">Right Panel</h3>
         <p>This is a right-side hovering panel</p>
       </div>
+      {/* Display selected barangay info if exists */}
+      {selectedBarangay && (
+        <div className="absolute top-10 left-1/2 transform -translate-x-1/2 bg-white p-4 shadow-lg z-50">
+          <h3 className="text-xl font-semibold">{selectedBarangay.name}</h3>
+          <p>Proximity Score: {selectedBarangay.proximityScore}</p>
+        </div>
+      )}
       <MapContainer
         center={[14.651675, 121.049444]}
         zoom={13}

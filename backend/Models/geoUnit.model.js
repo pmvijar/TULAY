@@ -19,6 +19,10 @@ const geoUnitSchema = new mongoose.Schema({
   location: polygonSchema,
   area: { type: Number, required: false },
   population: { type: Number, required: false },
+  proximityScore: { type: Number, required: false }, // 0-1
+  fatalityRate: { type: Number, required: false }, // 0-1
+  injuryRate: { type: Number, required: false },
+  percentAccident: { type: Number, required: false }, // out of all barangays within city
 });
 
 // 2D-sphere indexing for efficient geospatial query
