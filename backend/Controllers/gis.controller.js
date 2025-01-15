@@ -1,8 +1,15 @@
 import { GeoUnit } from "../Models/geoUnit.model.js"; // Import the GeoUnit model
 import { PedestrianPassage } from "../Models/pedestrianPassage.model.js"; // Import the PedestrianPassage model
 import { Station } from "../Models/station.model.js"; // Import the Station model
-import mongoose from "mongoose";
 import * as turf from "@turf/turf";
+
+export const updateDependentAttributes = async (request, reply) => {
+  try {
+  } catch (error) {
+    console.error("Error calculating proximity score:", error);
+    return reply.code(500).send({ error: "Internal Server Error" });
+  }
+};
 
 export const calculateProximityScore = async (request, reply) => {
   try {
@@ -302,6 +309,82 @@ export const getPedestrianPassages = async (request, reply) => {
   } catch (error) {
     // Log the error for debugging purposes
     console.error("Error getting Stations:", error);
+
+    // Return an error response with status code 500
+    return reply.code(500).send({ error: "Internal Server Error" });
+  }
+};
+
+export const uploadWays = async (request, reply) => {
+  try {
+    const { geoJSON, name, wayType } = request.body;
+
+    // Find the geoUnit by postalCode to get the city boundary
+    const geoUnits = await GeoUnit.find({ name: name });
+    if (!geoUnits) {
+      return reply.code(404).send({ error: "GeoUnit not found" });
+    }
+
+    let totalWayLength = 0;
+
+    const sidewalks = geoJSON.features.map((feature) => {
+      if (feature.geometry.type !== "LineString") {
+        throw new Error("Invalid geometry type. Only LineString is supported.");
+      }
+
+      const length = turf.length(feature.geometry);
+
+      if (wayType === "sidewalk") totalWayLength += length;
+
+      return {
+        sidewalkType: feature.properties.sidewalk || "unknown",
+        location: feature.geometry,
+      };
+    });
+
+    // Process each road in the geoJSON
+    const roads = geoJSON.features.map((feature) => {
+      if (feature.geometry.type !== "LineString") {
+        throw new Error("Invalid geometry type. Only LineString is supported.");
+      }
+
+      const length = turf.length(feature.geometry);
+
+      if (wayType === "road") totalWayLength += length;
+
+      return {
+        roadType: feature.properties.highway,
+        location: feature.geometry,
+      };
+    });
+
+    const validRoads = roads.filter((road) => road !== null);
+    const validSidewalks = sidewalks.filter((sidewalk) => sidewalk !== null);
+
+    for (const geoUnit of geoUnits) {
+      if (wayType === "road") {
+        // Assuming validRoads and totalRoadLength are already calculated
+        geoUnit.roadsWithin = {
+          roads: validRoads, // Assign the list of valid roads
+          roadLength: totalWayLength, // Assign the total length of the roads
+        };
+
+        // Save the updated geoUnit object
+        await geoUnit.save();
+      } else if (wayType === "sidewalk") {
+        geoUnit.sidewalksWithin = {
+          sidewalks: validSidewalks,
+          sidewalkLength: totalWayLength,
+        };
+
+        await geoUnit.save();
+      }
+    }
+
+    return reply.code(200).send({ success: true, roads: validRoads });
+  } catch (error) {
+    // Log the error for debugging purposes
+    console.error("Error uploading roads:", error);
 
     // Return an error response with status code 500
     return reply.code(500).send({ error: "Internal Server Error" });

@@ -13,6 +13,7 @@ const pointSchema = new mongoose.Schema({
 });
 
 const pedestrianPassageSchema = new mongoose.Schema({
+  osm_id: { type: String, required: true },
   source: { type: String, required: true },
   location: pointSchema,
   type: {
