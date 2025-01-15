@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { point, buffer, featureCollection, union } from "@turf/turf";
 import { useMapEvent } from "react-leaflet";
+import qcBarangays from "@/geojson/qc_barangays.geojson";
+import qcTrainStations from "@/geojson/qc_train_stations.geojson";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -79,9 +81,9 @@ const GISMapPage = () => {
 
     // Define buffer distances (in kilometers)
     const bufferDistances = {
-      green: 0.2, // Near
-      yellow: 0.5, // Medium
-      red: 1.0, // Far
+      green: 0.4, // Near
+      yellow: 0.8, // Medium
+      red: 1.2, // Far
     };
 
     // Create buffers for each priority
@@ -97,6 +99,8 @@ const GISMapPage = () => {
       buffers.red.push(buffer(p, bufferDistances.red, { units: "kilometers" }));
     });
 
+    console.log("hey:", buffers.green);
+
     // Function to safely union multiple buffers
     const unionBuffers = (bufferArray) => {
       if (bufferArray.length > 1) {
@@ -110,26 +114,53 @@ const GISMapPage = () => {
     const yellowUnion = unionBuffers(buffers.yellow);
     const redUnion = unionBuffers(buffers.red);
 
-    const bufferFillOpacity = 0.25;
+    const bufferFillOpacity = 0.45;
+    const lineOpacity = 0;
 
     // Define buffer layers with the unioned geometries
     const greenBufferLayer = {
       data: greenUnion,
-      style: { color: "green", fillOpacity: bufferFillOpacity },
+      style: {
+        color: "green",
+        fillOpacity: bufferFillOpacity,
+        opacity: lineOpacity,
+      },
     };
 
     const yellowBufferLayer = {
       data: yellowUnion,
-      style: { color: "yellow", fillOpacity: bufferFillOpacity },
+      style: {
+        color: "yellow",
+        fillOpacity: bufferFillOpacity,
+        opacity: lineOpacity,
+      },
     };
 
     const redBufferLayer = {
       data: redUnion,
-      style: { color: "red", fillOpacity: bufferFillOpacity },
+      style: {
+        color: "red",
+        fillOpacity: bufferFillOpacity,
+        opacity: lineOpacity,
+      },
     };
 
-    // Collect all layers
-    const layers = [greenBufferLayer, yellowBufferLayer, redBufferLayer];
+    const barangayBoundaryLayer = geoUnits.map((geoUnit) => ({
+      data: geoUnit.location,
+      style: { color: "black", weight: 2, opacity: 1, fillOpacity: 0 },
+    }));
+
+    const barangayFillShape = geoUnits.map((geoUnit) => ({
+      data: geoUnit.location,
+      style: {
+        color: generateColorFromScore(geoUnit.proximityScore),
+        weight: 2,
+        opacity: 1,
+        fillOpacity: 0.5,
+      },
+    }));
+
+    const bufferLayers = [greenBufferLayer, yellowBufferLayer, redBufferLayer];
 
     // Reverse the layers array
     setGeoJsonLayers([...layers].reverse()); // Reversing before setting state
@@ -703,7 +734,7 @@ const GISMapPage = () => {
     const map = useMapEvent("mousemove", (e) => {
       const { lat, lng } = e.latlng;
       const tooltip = document.getElementById("latlon-tooltip");
-      tooltip.innerHTML = `Lat: ${lat.toFixed(5)} | Lng: ${lng.toFixed(5)}`;
+      tooltip.innerHTML = `Lat: ${lat.toFixed(6)} | Lng: ${lng.toFixed(6)}`;
       tooltip.style.left = `${e.originalEvent.clientX + 10}px`;
       tooltip.style.top = `${e.originalEvent.clientY + 10}px`;
       tooltip.style.display = "block";
@@ -711,6 +742,8 @@ const GISMapPage = () => {
 
     return null;
   }
+
+  if (isLoading) return <div>Loading...</div>;
 
   return (
     <div className="min-h-screen flex flex-row">

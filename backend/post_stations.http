@@ -1,0 +1,1211 @@
+###
+
+POST http://localhost:3001/
+Content-Type: application/json
+
+{
+}
+
+###
+
+POST http://localhost:3001/upload-station
+Content-Type: application/json
+
+{
+  "dataSource": "OpenStreetMap",
+  "transportType": "train",
+  "stationType": "station",
+  "multiModal": false,
+  "geoJSON":
+  {
+  "type": "FeatureCollection",
+  "generator": "overpass-turbo",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "timestamp": "2025-01-13T14:33:05Z",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "relation/12200115",
+        "air_conditioning": "no",
+        "building": "yes",
+        "internet_access": "wlan",
+        "internet_access:fee": "no",
+        "layer": "5",
+        "light_rail": "yes",
+        "name": "Quezon Avenue",
+        "name:es": "Avenida Quezon",
+        "name:etymology": "Manuel Luis Quezon",
+        "name:etymology:wikidata": "Q1503",
+        "name:etymology:wikipedia": "es:Manuel L. Quezon",
+        "network": "MRT Line 3",
+        "operator": "Metro Rail Transit Corporation",
+        "public_transport": "station",
+        "railway": "station",
+        "start_date": "1999-12-15",
+        "station": "light_rail",
+        "type": "multipolygon",
+        "wikidata": "Q7271600"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [121.0390811, 14.6419457],
+            [121.0386111, 14.6426606],
+            [121.0386442, 14.6426809],
+            [121.0385212, 14.6428679],
+            [121.0385757, 14.6429014],
+            [121.0386409, 14.6429416],
+            [121.0385937, 14.6430134],
+            [121.0386172, 14.6430279],
+            [121.0385358, 14.6431516],
+            [121.038449, 14.6430982],
+            [121.0383774, 14.6430541],
+            [121.0383367, 14.6430291],
+            [121.0383203, 14.643019],
+            [121.0383051, 14.6430096],
+            [121.0382899, 14.6430003],
+            [121.0382747, 14.6429909],
+            [121.0382596, 14.6429816],
+            [121.0382258, 14.6429608],
+            [121.0381875, 14.6429373],
+            [121.0381379, 14.6429067],
+            [121.0381186, 14.6428949],
+            [121.038201, 14.6427696],
+            [121.0382497, 14.6426955],
+            [121.0382613, 14.6426779],
+            [121.0382765, 14.6426872],
+            [121.0383289, 14.6427194],
+            [121.0383634, 14.6427407],
+            [121.0383752, 14.6427479],
+            [121.0384857, 14.6425798],
+            [121.0384954, 14.6425857],
+            [121.0389636, 14.6418735],
+            [121.0391442, 14.641666],
+            [121.0389766, 14.6418815],
+            [121.039004, 14.6418984],
+            [121.0390314, 14.6419152],
+            [121.0392079, 14.6417008],
+            [121.0390811, 14.6419457]
+          ]
+        ]
+      },
+      "id": "relation/12200115"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/26202828",
+        "building": "construction",
+        "building:levels": "2",
+        "building:min_level": "1",
+        "construction:building": "train_station",
+        "construction:public_transport": "station",
+        "layer": "1",
+        "name": "Don Antonio",
+        "railway": "station",
+        "subway": "yes"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [121.08256, 14.6777067],
+            [121.0820095, 14.6766706],
+            [121.0820327, 14.676659],
+            [121.0820551, 14.6766481],
+            [121.0822152, 14.6765692],
+            [121.0824559, 14.6764487],
+            [121.0826895, 14.6763325],
+            [121.0832399, 14.6773686],
+            [121.0827603, 14.6776071],
+            [121.0826061, 14.6776838],
+            [121.0825751, 14.6776992],
+            [121.08256, 14.6777067]
+          ]
+        ]
+      },
+      "id": "way/26202828"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/30262758",
+        "air_conditioning": "no",
+        "building": "transportation",
+        "internet_access": "wlan",
+        "internet_access:fee": "no",
+        "layer": "4",
+        "light_rail": "yes",
+        "name": "GMA Kamuning",
+        "network": "MRT Line 3",
+        "operator": "Metro Rail Transit",
+        "public_transport": "station",
+        "railway": "station",
+        "station": "light_rail",
+        "wikidata": "Q6359855",
+        "wikipedia": "en:Kamuning station"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [121.0432534, 14.6349826],
+            [121.0433372, 14.63503],
+            [121.0433895, 14.6350638],
+            [121.0435543, 14.6348051],
+            [121.0435658, 14.634812],
+            [121.043584, 14.6348229],
+            [121.0436002, 14.6348325],
+            [121.0436165, 14.6348422],
+            [121.0436327, 14.6348519],
+            [121.0436489, 14.6348615],
+            [121.0436645, 14.6348708],
+            [121.0436967, 14.63489],
+            [121.0435343, 14.635145],
+            [121.0435568, 14.6351585],
+            [121.0436565, 14.6352179],
+            [121.0435316, 14.6354139],
+            [121.0433945, 14.6353322],
+            [121.0430405, 14.6358879],
+            [121.0430205, 14.635876],
+            [121.0430065, 14.6358677],
+            [121.0429949, 14.6358607],
+            [121.0429797, 14.6358517],
+            [121.0429645, 14.6358426],
+            [121.0429494, 14.6358336],
+            [121.0429343, 14.6358246],
+            [121.0429225, 14.6358176],
+            [121.0429036, 14.6358063],
+            [121.0428906, 14.6357986],
+            [121.0432424, 14.6352462],
+            [121.0431287, 14.6351784],
+            [121.0432534, 14.6349826]
+          ]
+        ]
+      },
+      "id": "way/30262758"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/95496202",
+        "air_conditioning": "no",
+        "building": "yes",
+        "building:levels": "2",
+        "internet_access": "wlan",
+        "internet_access:fee": "no",
+        "layer": "4",
+        "light_rail": "yes",
+        "name": "Santolan-Annapolis",
+        "network": "MRT Line 3",
+        "operator": "Metro Rail Transit Corporation",
+        "public_transport": "station",
+        "railway": "station",
+        "start_date": "1999-12-15",
+        "station": "light_rail",
+        "wikidata": "Q7420578",
+        "wikipedia": "en:Santolan–Annapolis station"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [121.0564659, 14.6072445],
+            [121.0565846, 14.6072962],
+            [121.0566343, 14.6073179],
+            [121.0566528, 14.6073259],
+            [121.0566675, 14.6073323],
+            [121.0566822, 14.6073387],
+            [121.0566969, 14.6073451],
+            [121.0567116, 14.6073515],
+            [121.0567272, 14.6073583],
+            [121.056811, 14.6073948],
+            [121.0569436, 14.6074487],
+            [121.0568417, 14.6076728],
+            [121.0567064, 14.6076188],
+            [121.0566683, 14.6076022],
+            [121.0562657, 14.6084678],
+            [121.0562397, 14.6084564],
+            [121.0562264, 14.6084507],
+            [121.0562127, 14.6084447],
+            [121.0561966, 14.6084377],
+            [121.0561805, 14.6084307],
+            [121.0561643, 14.6084236],
+            [121.0561482, 14.6084166],
+            [121.0561336, 14.6084102],
+            [121.0561224, 14.6084054],
+            [121.0561044, 14.6083976],
+            [121.0565056, 14.6075351],
+            [121.0564775, 14.6075229],
+            [121.0563016, 14.6074463],
+            [121.0563458, 14.6073512],
+            [121.0563714, 14.6072963],
+            [121.0564299, 14.6073218],
+            [121.0564659, 14.6072445]
+          ]
+        ]
+      },
+      "id": "way/95496202"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/113358959",
+        "air_conditioning": "no",
+        "building": "yes",
+        "internet_access": "wlan",
+        "internet_access:fee": "no",
+        "layer": "3",
+        "name": "Betty Go-Belmonte",
+        "network": "LRT Line 2",
+        "operator": "Light Rail Transit Authority",
+        "public_transport": "station",
+        "railway": "station",
+        "start_date": "2004-04-05",
+        "station": "subway",
+        "subway": "yes",
+        "wheelchair": "yes",
+        "wikidata": "Q3545741",
+        "wikipedia": "en:Betty Go-Belmonte station"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [121.0422504, 14.6184303],
+            [121.0423457, 14.6182794],
+            [121.0427728, 14.6185324],
+            [121.0431617, 14.6187643],
+            [121.0431217, 14.618834],
+            [121.0430777, 14.618915],
+            [121.0422504, 14.6184303]
+          ]
+        ]
+      },
+      "id": "way/113358959"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/184582280",
+        "air_conditioning": "no",
+        "building": "transportation",
+        "building:levels": "3",
+        "building:min_level": "1",
+        "height": "33",
+        "internet_access": "wlan",
+        "internet_access:fee": "no",
+        "layer": "3",
+        "min_height": "10",
+        "name": "Araneta Center - Cubao",
+        "network": "LRT Line 2",
+        "operator": "Light Rail Transit Authority",
+        "public_transport": "station",
+        "railway": "station",
+        "roof:height": "3",
+        "roof:shape": "round",
+        "source:outline": "Bing",
+        "start_date": "2003-04-05",
+        "station": "subway",
+        "subway": "yes",
+        "train": "yes",
+        "wheelchair": "yes",
+        "wikidata": "Q4784087",
+        "wikipedia": "en:Araneta Center–Cubao station (LRT)",
+        "wikipedia:en": "Araneta Center–Cubao station (LRT)"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [121.0521896, 14.6224042],
+            [121.0522177, 14.6223482],
+            [121.0522189, 14.6223458],
+            [121.052485, 14.6224707],
+            [121.0525629, 14.6225072],
+            [121.0526668, 14.622556],
+            [121.0531311, 14.6227738],
+            [121.0531117, 14.6228125],
+            [121.0541423, 14.623296],
+            [121.0541306, 14.6233193],
+            [121.0541111, 14.6233584],
+            [121.0541018, 14.6233769],
+            [121.0530575, 14.622887],
+            [121.0530526, 14.6228969],
+            [121.0530425, 14.622917],
+            [121.0530352, 14.6229315],
+            [121.0530231, 14.6229556],
+            [121.0530217, 14.6229584],
+            [121.0530058, 14.6229902],
+            [121.0521073, 14.6225686],
+            [121.0521281, 14.622527],
+            [121.0521304, 14.6225224],
+            [121.0521405, 14.6225024],
+            [121.0521476, 14.6224881],
+            [121.0521576, 14.6224682],
+            [121.0521648, 14.6224538],
+            [121.0521815, 14.6224204],
+            [121.0521896, 14.6224042]
+          ]
+        ]
+      },
+      "id": "way/184582280"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/188169761",
+        "air_conditioning": "no",
+        "building": "train_station",
+        "building:levels": "3",
+        "height": "33",
+        "internet_access": "yes",
+        "internet_access:fee": "no",
+        "layer": "2",
+        "name": "Gilmore",
+        "network": "LRT Line 2",
+        "operator": "Light Rail Transit Authority",
+        "public_transport": "station",
+        "railway": "station",
+        "roof:height": "3",
+        "roof:shape": "round",
+        "start_date": "2004-04-05",
+        "station": "subway",
+        "subway": "yes",
+        "wheelchair": "yes",
+        "wikipedia": "en:Gilmore station (Line 2)"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [121.0345968, 14.6137078],
+            [121.0345138, 14.6138414],
+            [121.0342501, 14.613688],
+            [121.0336948, 14.6133646],
+            [121.0337778, 14.6132311],
+            [121.0343374, 14.6135567],
+            [121.0345968, 14.6137078]
+          ]
+        ]
+      },
+      "id": "way/188169761"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/188169786",
+        "air_conditioning": "no",
+        "building": "yes",
+        "internet_access": "wlan",
+        "internet_access:fee": "no",
+        "layer": "2",
+        "name": "Anonas",
+        "network": "LRT Line 2",
+        "operator": "Light Rail Transit Authority",
+        "public_transport": "station",
+        "railway": "station",
+        "start_date": "2003-04-05",
+        "station": "subway",
+        "subway": "yes",
+        "wheelchair": "yes",
+        "wikidata": "Q4770011",
+        "wikipedia": "en:Anonas station (Line 2)"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [121.064257, 14.6278417],
+            [121.0646573, 14.6279075],
+            [121.0646759, 14.6278019],
+            [121.0647302, 14.6278109],
+            [121.0647129, 14.6279092],
+            [121.0652193, 14.6279925],
+            [121.065188, 14.6281705],
+            [121.064227, 14.6280124],
+            [121.064257, 14.6278417]
+          ]
+        ]
+      },
+      "id": "way/188169786"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/222628892",
+        "air_conditioning": "no",
+        "building": "transportation",
+        "internet_access": "wlan",
+        "light_rail": "yes",
+        "name": "North Avenue",
+        "network": "MRT Line 3",
+        "note": "Possible expansion of station for UGCS integration",
+        "operator": "Metro Rail Transit Corporation",
+        "public_transport": "station",
+        "railway": "station",
+        "start_date": "1999-12-15",
+        "station": "light_rail",
+        "wikidata": "Q22349799",
+        "wikipedia": "en:North Avenue station"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [121.0320515, 14.6527172],
+            [121.0320268, 14.652702],
+            [121.0319799, 14.6526731],
+            [121.0319647, 14.6526638],
+            [121.0319495, 14.6526544],
+            [121.0319343, 14.652645],
+            [121.0319191, 14.6526357],
+            [121.0319091, 14.6526296],
+            [121.0318898, 14.6526177],
+            [121.0321211, 14.6522658],
+            [121.0320982, 14.6522517],
+            [121.032033, 14.6522116],
+            [121.0320176, 14.6522021],
+            [121.0321565, 14.6519907],
+            [121.0322407, 14.6520416],
+            [121.0322712, 14.6520613],
+            [121.0325613, 14.6516199],
+            [121.0325741, 14.6516278],
+            [121.0325878, 14.6516362],
+            [121.032593, 14.6516394],
+            [121.032608, 14.6516486],
+            [121.032623, 14.6516579],
+            [121.032638, 14.6516671],
+            [121.0326529, 14.6516762],
+            [121.0326714, 14.6516876],
+            [121.0326835, 14.6516951],
+            [121.0327026, 14.6517068],
+            [121.0324158, 14.6521432],
+            [121.0324729, 14.6521775],
+            [121.0325616, 14.6522307],
+            [121.0326082, 14.6522604],
+            [121.032667, 14.6522977],
+            [121.0325183, 14.652524],
+            [121.0324821, 14.6525013],
+            [121.0324125, 14.6524578],
+            [121.0323275, 14.6524047],
+            [121.0322763, 14.6523751],
+            [121.0320515, 14.6527172]
+          ]
+        ]
+      },
+      "id": "way/222628892"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/402882917",
+        "air_conditioning": "no",
+        "building": "yes",
+        "internet_access": "wlan",
+        "internet_access:fee": "no",
+        "layer": "1",
+        "light_rail": "yes",
+        "name": "Balintawak",
+        "name:zh-Hant": "描林沓瓦",
+        "network": "LRT Line 1",
+        "operator": "Light Rail Manila Corporation",
+        "public_transport": "station",
+        "railway": "station",
+        "start_date": "2010-03-22",
+        "station": "light_rail",
+        "wheelchair": "yes",
+        "wikidata": "Q4850961",
+        "wikipedia": "en:Balintawak station"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [121.0034021, 14.6575534],
+            [121.003403, 14.6574723],
+            [121.0034041, 14.6573645],
+            [121.0034051, 14.6572713],
+            [121.0038309, 14.6572754],
+            [121.0038315, 14.6572118],
+            [121.0039367, 14.6572129],
+            [121.003936, 14.6572765],
+            [121.0043897, 14.6572809],
+            [121.0043889, 14.6573531],
+            [121.0043887, 14.6573718],
+            [121.0043875, 14.6574903],
+            [121.0043873, 14.6575092],
+            [121.0043867, 14.657563],
+            [121.0038869, 14.6575581],
+            [121.0038865, 14.6575969],
+            [121.0039797, 14.6575978],
+            [121.0039793, 14.6576369],
+            [121.0038191, 14.6576353],
+            [121.00382, 14.6575574],
+            [121.0034968, 14.6575543],
+            [121.0034021, 14.6575534]
+          ]
+        ]
+      },
+      "id": "way/402882917"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/402882918",
+        "addr:city": "Quezon City",
+        "addr:district": "Project 7",
+        "addr:postcode": "1100",
+        "addr:region": "Metro Manila",
+        "addr:street": "EDSA",
+        "air_conditioning": "no",
+        "building": "transportation",
+        "internet_access": "wlan",
+        "internet_access:fee": "no",
+        "layer": "3",
+        "light_rail": "yes",
+        "name": "Fernando Poe Jr.",
+        "network": "LRTA",
+        "old_name": "Roosevelt",
+        "operator": "Light Rail Manila Corporation",
+        "public_transport": "station",
+        "railway": "station",
+        "start_date": "2010-10-22",
+        "station": "light_rail"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [121.0206861, 14.6577283],
+            [121.0206814, 14.6576952],
+            [121.0206768, 14.6576627],
+            [121.0206606, 14.6575485],
+            [121.0206565, 14.6575196],
+            [121.0206504, 14.6574768],
+            [121.0210969, 14.6574176],
+            [121.0210543, 14.6573705],
+            [121.0209246, 14.6573854],
+            [121.020921, 14.6573725],
+            [121.0209174, 14.6573595],
+            [121.0213537, 14.6573005],
+            [121.0213563, 14.6573155],
+            [121.0213589, 14.6573309],
+            [121.0211897, 14.6573564],
+            [121.0211625, 14.6574089],
+            [121.0215886, 14.6573524],
+            [121.0215934, 14.6573862],
+            [121.0215977, 14.6574164],
+            [121.0216153, 14.657541],
+            [121.0216195, 14.6575707],
+            [121.0216242, 14.6576038],
+            [121.021203, 14.6576597],
+            [121.0212097, 14.6577184],
+            [121.021261, 14.6577462],
+            [121.0213937, 14.6577259],
+            [121.0213983, 14.6577432],
+            [121.021401, 14.6577534],
+            [121.0209346, 14.6578174],
+            [121.0209328, 14.657807],
+            [121.0209304, 14.6577929],
+            [121.0211136, 14.6577684],
+            [121.0211484, 14.65773],
+            [121.0211373, 14.6576684],
+            [121.0206861, 14.6577283]
+          ]
+        ]
+      },
+      "id": "way/402882918"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/402888750",
+        "air_conditioning": "yes",
+        "building": "transportation",
+        "building:levels:underground": "2",
+        "internet_access": "wlan",
+        "internet_access:fee": "no",
+        "layer": "-1",
+        "level": "-1",
+        "location": "underground",
+        "name": "Katipunan",
+        "network": "LRT Line 2",
+        "operator": "Light Rail Transit Authority",
+        "public_transport": "station",
+        "railway": "station",
+        "start_date": "2003-04-05",
+        "station": "subway",
+        "subway": "yes",
+        "wheelchair": "limited",
+        "wikidata": "Q3547775",
+        "wikipedia": "en:Katipunan station"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [121.0734713, 14.6315374],
+            [121.0726024, 14.6310975],
+            [121.072584, 14.6311305],
+            [121.0725429, 14.6312075],
+            [121.0724276, 14.6311498],
+            [121.0722735, 14.6310712],
+            [121.0723318, 14.6309634],
+            [121.0722131, 14.6309033],
+            [121.0723594, 14.630633],
+            [121.0727354, 14.6308234],
+            [121.0727566, 14.6307822],
+            [121.07277, 14.6307553],
+            [121.0728358, 14.6306293],
+            [121.073117, 14.6307672],
+            [121.0732423, 14.6308295],
+            [121.0731755, 14.6309551],
+            [121.0731399, 14.6310202],
+            [121.0736197, 14.6312631],
+            [121.0734713, 14.6315374]
+          ]
+        ]
+      },
+      "id": "way/402888750"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/529409684",
+        "building": "construction",
+        "building:levels": "1",
+        "building:levels:underground": "2",
+        "construction:building": "train_station",
+        "construction:public_transport": "station",
+        "name": "University Avenue",
+        "network": "MRT",
+        "operator": "SMC-MRT7 Inc.",
+        "public_transport": "station",
+        "railway": "station",
+        "station": "subway",
+        "subway": "yes"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [121.0557157, 14.6556856],
+            [121.0540107, 14.6545507],
+            [121.0541271, 14.654387],
+            [121.0558321, 14.6555219],
+            [121.0557157, 14.6556856]
+          ]
+        ]
+      },
+      "id": "way/529409684"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/564479403",
+        "building": "transportation",
+        "building:levels": "4",
+        "building:levels:underground": "2",
+        "light_rail": "yes",
+        "name": "North Triangle Common Station",
+        "public_transport": "station",
+        "railway": "station",
+        "station": "subway",
+        "subway": "yes"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [121.0308738, 14.6550754],
+            [121.031059, 14.6547936],
+            [121.0312623, 14.6549306],
+            [121.0313148, 14.6551422],
+            [121.0309956, 14.6552146],
+            [121.0309779, 14.6551398],
+            [121.0308738, 14.6550754]
+          ]
+        ]
+      },
+      "id": "way/564479403"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/670398505",
+        "building": "construction",
+        "building:levels": "2",
+        "building:min_level": "1",
+        "construction:building": "train_station",
+        "construction:public_transport": "station",
+        "layer": "1",
+        "name": "Tandang Sora",
+        "note": "roof installments is ongoing",
+        "public_transport": "station",
+        "railway": "station",
+        "station": "subway",
+        "subway": "yes"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [121.0670475, 14.6629372],
+            [121.0680516, 14.6635961],
+            [121.0679488, 14.6637428],
+            [121.0677801, 14.6639834],
+            [121.0667759, 14.6633245],
+            [121.0669447, 14.6630838],
+            [121.0670475, 14.6629372]
+          ]
+        ]
+      },
+      "id": "way/670398505"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/793338657",
+        "area": "yes",
+        "layer": "3",
+        "name": "Araneta Center - Cubao",
+        "public_transport": "platform",
+        "railway": "platform"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [121.0530058, 14.6229902],
+            [121.0521073, 14.6225686],
+            [121.0521281, 14.622527],
+            [121.0521304, 14.6225224],
+            [121.0530231, 14.6229556],
+            [121.0530217, 14.6229584],
+            [121.0530058, 14.6229902]
+          ]
+        ]
+      },
+      "id": "way/793338657"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/793338658",
+        "area": "yes",
+        "layer": "3",
+        "name": "Araneta Center - Cubao",
+        "public_transport": "platform",
+        "railway": "platform"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [121.0521896, 14.6224042],
+            [121.0530841, 14.622837],
+            [121.0530745, 14.6228555],
+            [121.0530575, 14.622887],
+            [121.0521648, 14.6224538],
+            [121.0521815, 14.6224204],
+            [121.0521896, 14.6224042]
+          ]
+        ]
+      },
+      "id": "way/793338658"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/793338663",
+        "area": "yes",
+        "layer": "1",
+        "level": "1",
+        "public_transport": "platform",
+        "railway": "platform"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [121.050844, 14.6200511],
+            [121.0513708, 14.6189199],
+            [121.0514013, 14.6189336],
+            [121.0514311, 14.6189462],
+            [121.0512199, 14.6193998],
+            [121.0511381, 14.6195756],
+            [121.0509736, 14.6199287],
+            [121.0509246, 14.620034],
+            [121.0509043, 14.6200774],
+            [121.0508679, 14.6200615],
+            [121.050844, 14.6200511]
+          ]
+        ]
+      },
+      "id": "way/793338663"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/793338664",
+        "area": "yes",
+        "layer": "1",
+        "level": "1",
+        "public_transport": "platform",
+        "railway": "platform"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [121.0507839, 14.6200249],
+            [121.0507547, 14.6200122],
+            [121.0507107, 14.619993],
+            [121.0509808, 14.6194132],
+            [121.0510245, 14.6193192],
+            [121.0512375, 14.6188618],
+            [121.0512784, 14.6188794],
+            [121.0513108, 14.6188937],
+            [121.0507839, 14.6200249]
+          ]
+        ]
+      },
+      "id": "way/793338664"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/799600846",
+        "building": "construction",
+        "building:levels": "2",
+        "construction:building": "train_station",
+        "construction:public_transport": "station",
+        "name": "Manggahan",
+        "railway": "station",
+        "subway": "yes"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [121.0872002, 14.6981128],
+            [121.087219, 14.6969147],
+            [121.0874284, 14.6969178],
+            [121.0874095, 14.6981159],
+            [121.0872002, 14.6981128]
+          ]
+        ]
+      },
+      "id": "way/799600846"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/901908936",
+        "building": "construction",
+        "building:levels": "2",
+        "building:min_level": "1",
+        "construction:building": "train_station",
+        "construction:public_transport": "station",
+        "layer": "1",
+        "name": "Batasan",
+        "note": "station",
+        "railway": "station",
+        "subway": "yes"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [121.0868493, 14.6855072],
+            [121.0868096, 14.6855228],
+            [121.0866844, 14.6855721],
+            [121.0863969, 14.6856854],
+            [121.0862512, 14.6857428],
+            [121.0861892, 14.6857672],
+            [121.0857252, 14.684665],
+            [121.0857807, 14.6846431],
+            [121.0859141, 14.6845906],
+            [121.0862276, 14.6844671],
+            [121.0863445, 14.684421],
+            [121.0863853, 14.6844049],
+            [121.0868493, 14.6855072]
+          ]
+        ]
+      },
+      "id": "way/901908936"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/910654579",
+        "building": "construction",
+        "building:levels": "3",
+        "building:min_level": "1",
+        "construction:building": "transportation",
+        "construction:public_transport": "station",
+        "layer": "1",
+        "name": "Regalado Avenue",
+        "railway": "station",
+        "subway": "yes"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [121.0689239, 14.7066336],
+            [121.0673025, 14.7066375],
+            [121.0673018, 14.7063521],
+            [121.0689232, 14.7063483],
+            [121.0689239, 14.7066336]
+          ]
+        ]
+      },
+      "id": "way/910654579"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/910654580",
+        "building": "construction",
+        "building:levels": "3",
+        "building:min_level": "1",
+        "construction:building": "transportation",
+        "construction:public_transport": "station",
+        "layer": "1",
+        "name": "Doña Carmen",
+        "railway": "station",
+        "subway": "yes"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [121.0788953, 14.7052586],
+            [121.077746, 14.7052554],
+            [121.0777447, 14.7049701],
+            [121.078894, 14.7049733],
+            [121.0788953, 14.7052586]
+          ]
+        ]
+      },
+      "id": "way/910654580"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1105797864",
+        "building:levels": "2",
+        "layer": "1",
+        "name": "Green Meadows",
+        "proposed:building": "yes",
+        "proposed:light_rail": "yes",
+        "proposed:railway": "station",
+        "public_transport": "station",
+        "station": "light_rail"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [121.0793451, 14.6015766],
+            [121.0792802, 14.6015728],
+            [121.0791949, 14.6015677],
+            [121.0792552, 14.6006215],
+            [121.079333, 14.6006261],
+            [121.0794028, 14.6006303],
+            [121.079475, 14.6006346],
+            [121.0794148, 14.6015808],
+            [121.0793451, 14.6015766]
+          ]
+        ]
+      },
+      "id": "way/1105797864"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1172036361",
+        "building:levels": "2",
+        "building:min_level": "-1",
+        "construction:building": "train_station",
+        "construction:public_transport": "station",
+        "fixme": "tags for the underground section",
+        "layer": "-1",
+        "name": "Tandang Sora",
+        "public_transport": "station",
+        "railway": "station",
+        "station": "subway",
+        "subway": "yes"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [121.0669447, 14.6630838],
+            [121.0670475, 14.6629372],
+            [121.0672415, 14.6626604],
+            [121.0682457, 14.6633193],
+            [121.0680516, 14.6635961],
+            [121.0679488, 14.6637428],
+            [121.0669447, 14.6630838]
+          ]
+        ]
+      },
+      "id": "way/1172036361"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1264383647",
+        "access": "no",
+        "foot": "designated",
+        "operator": "Metro Rail Transit Corporation",
+        "public_transport": "platform",
+        "railway": "platform",
+        "train": "yes"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [121.0566844, 14.6074931],
+          [121.0562397, 14.6084564]
+        ]
+      },
+      "id": "way/1264383647"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1264383648",
+        "access": "no",
+        "foot": "designated",
+        "operator": "Metro Rail Transit Corporation",
+        "public_transport": "platform",
+        "railway": "platform",
+        "train": "yes"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [121.0561224, 14.6084054],
+          [121.056557, 14.6074397]
+        ]
+      },
+      "id": "way/1264383648"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1264397955",
+        "public_transport": "platform",
+        "railway": "platform",
+        "train": "yes"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [121.0326714, 14.6516876],
+          [121.0323066, 14.6522304]
+        ]
+      },
+      "id": "way/1264397955"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1264397956",
+        "public_transport": "platform",
+        "railway": "platform",
+        "train": "yes"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [121.0322269, 14.6521816],
+          [121.0325878, 14.6516362]
+        ]
+      },
+      "id": "way/1264397956"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1264401240",
+        "access": "no",
+        "foot": "designated",
+        "public_transport": "platform",
+        "railway": "platform",
+        "train": "yes"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [121.0392079, 14.6417008],
+          [121.0384309, 14.6428545]
+        ]
+      },
+      "id": "way/1264401240"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1264401241",
+        "foot": "designated",
+        "public_transport": "platform",
+        "railway": "platform",
+        "train": "yes"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [121.0383646, 14.6428125],
+          [121.0391442, 14.641666]
+        ]
+      },
+      "id": "way/1264401241"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/5377269277",
+        "name": "Katipunan",
+        "public_transport": "station",
+        "railway": "station",
+        "station": "subway",
+        "subway": "yes",
+        "wikidata": "Q3547775",
+        "wikipedia": "en:Katipunan station",
+        "wikipedia:en": "Katipunan station (Line 2)"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [121.0727741, 14.6310644]
+      },
+      "id": "node/5377269277"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/11329697351",
+        "light_rail": "yes",
+        "name": "Cubao",
+        "public_transport": "station",
+        "railway": "station",
+        "station": "light_rail",
+        "wikidata": "Q4784084",
+        "wikipedia": "en:Cubao station (Line 3)"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [121.0510726, 14.6194837]
+      },
+      "id": "node/11329697351"
+    }
+  ]
+}
+
+}

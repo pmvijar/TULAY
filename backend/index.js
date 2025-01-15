@@ -5,6 +5,7 @@ import multipart from "@fastify/multipart";
 import cors from "@fastify/cors";
 import mapRoutes from "./Routers/map.routes.js";
 import chatBotRoutes from "./Routers/chatbot.routes.js";
+import GISRoutes from "./Routers/gis.routes.js";
 
 dotenv.config();
 
@@ -20,12 +21,10 @@ fastify.register(multipart, {
   },
 });
 
-
 // Register fastify-cors to enable CORS
 fastify.register(cors, {
   origin: true, // Allow access from all origins
 });
-
 
 // Connect to MongoDB
 mongoose
@@ -36,6 +35,7 @@ mongoose
 // Register routes
 fastify.register(mapRoutes);
 fastify.register(chatBotRoutes);
+fastify.register(GISRoutes);
 
 // Start server
 const start = async () => {
