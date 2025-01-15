@@ -1,0 +1,11 @@
+### 
+
+POST http://localhost:3001/upload-ways
+Content-Type: application/json
+
+{
+    "wayType": "road",
+    "name": "Central",
+    "geoJSON":
+    
+}
