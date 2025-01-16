@@ -14,6 +14,7 @@ import {
   TrainFront,
   BusFront,
   X,
+  Rows4,
 } from "lucide-react";
 import ReactDOMServer from "react-dom/server";
 
@@ -67,6 +68,17 @@ const BusIcon = L.divIcon({
   iconAnchor: [20, 20], // Anchor point in the center of the circle
 });
 
+const PassageIcon = L.divIcon({
+  className: "custom-div-icon", // Base class for styling
+  html: ReactDOMServer.renderToString(
+    <div className="flex items-center justify-center w-6 h-6 bg-gray-800 opacity-80 border-1 border-gray-500 rounded-full shadow-md">
+      <Rows4 className="w-4 h-4 text-white" />
+    </div>
+  ),
+  iconSize: [40, 40],
+  iconAnchor: [20, 20],
+});
+
 const GISMapPage = () => {
   const [geoJsonLayers, setGeoJsonLayers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -106,6 +118,42 @@ const GISMapPage = () => {
           }}
         >
           <Tooltip>{station.name}</Tooltip>
+        </Marker>
+      ));
+  };
+
+  const renderPassageMarkers = () => {
+    const renderedPassages = new Set();
+
+    return passages
+      .filter((passage) => passage.osm_id && passage.osm_id !== "N/A")
+      .filter((passage) => {
+        if (renderedPassages.has(passage.osm_id)) {
+          return false;
+        } else {
+          renderedPassages.add(passage.osm_id);
+          return true;
+        }
+      })
+      .map((passage) => (
+        <Marker
+          key={passage.osm_id}
+          position={[
+            passage.location.coordinates[1],
+            passage.location.coordinates[0],
+          ]}
+          icon={PassageIcon}
+          eventHandlers={{
+            click: () => {
+              // const updatedPassage = { ...passage, type: "passage" };
+              // console.log("Selected Passage:", updatedPassage);
+              // setSelectedFeature(updatedPassage);
+            },
+          }}
+        >
+          <Tooltip>
+            {passage.type.charAt(0).toUpperCase() + passage.type.slice(1)}
+          </Tooltip>
         </Marker>
       ));
   };
@@ -376,6 +424,7 @@ const GISMapPage = () => {
             />
           ))}
           {renderStationMarkers()}
+          {renderPassageMarkers()}
 
           {/* <MapWithTooltip /> */}
         </MapContainer>
