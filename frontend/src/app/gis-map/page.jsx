@@ -44,12 +44,16 @@ const GISMapPage = () => {
     // Clamp the score between 0 and 1
     score = Math.min(Math.max(score, 0), 1);
 
-    // Calculate the red and green values based on the score
-    const red = Math.floor((1 - score) * 255); // Red decreases as score increases
-    const green = Math.floor(score * 255); // Green increases as score increases
+    const startColor = { r: 19, g: 78, b: 74 }; // LOW SCORE
+    const endColor = { r: 204, g: 255, b: 255 }; // HIGH SCORE
+
+    // Interpolate the colors based on the score
+    const r = Math.floor(startColor.r + (endColor.r - startColor.r) * score);
+    const g = Math.floor(startColor.g + (endColor.g - startColor.g) * score);
+    const b = Math.floor(startColor.b + (endColor.b - startColor.b) * score);
 
     // Return the color in RGB format
-    return `rgb(${red}, ${green}, 0)`;
+    return `rgb(${r}, ${g}, ${b})`;
   }
 
   useEffect(() => {
@@ -210,7 +214,7 @@ const GISMapPage = () => {
     // Collect all layers (buffers + GeoJSON)
     const layers = [
       ...barangayBoundaryLayer,
-      /*...bufferLayers,*/
+      ...bufferLayers,
       ...barangayFillShape,
     ];
 

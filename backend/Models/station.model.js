@@ -13,6 +13,7 @@ const pointSchema = new mongoose.Schema({
 });
 
 const stationSchema = new mongoose.Schema({
+  osm_id: { type: String, required: true },
   source: { type: String, required: true },
   name: { type: String, required: false }, // Some stops might not have official names
   transportType: {
@@ -33,6 +34,6 @@ const stationSchema = new mongoose.Schema({
   location: pointSchema,
 });
 
-stationSchema.index({ location: "2dsphere" });
+stationSchema.index({ location: "2dsphere", type: 1 });
 
 export const Station = mongoose.model("Station", stationSchema);
