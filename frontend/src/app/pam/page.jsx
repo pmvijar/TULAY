@@ -308,20 +308,35 @@ const GISMapPage = () => {
 
         setGeoUnits(geoUnits);
 
-        const enrichedGeoUnits = geoUnits.map((unit) => ({
-          type: "Feature",
-          properties: {
-            id: unit._id,
-            name: unit.name || "Unnamed GeoUnit",
-            postalCode: unit.postalCode || "N/A",
-            area: unit.area,
-            population: unit.population,
-            color: generateColorFromScore(unit.proximityScore) || "gray",
-            proximityScore: unit.proximityScore || 0,
-            fillOpacity: 0.3,
-          },
-          geometry: unit.location, // Use the location field directly
-        }));
+        const enrichedGeoUnits = geoUnits.map((unit) => {
+          const sidewalkRatio =
+            unit.roadsWithin.roadLength !== 0
+              ? unit.sidewalksWithin.sidewalkLength /
+                unit.roadsWithin.roadLength
+              : undefined;
+
+          return {
+            type: "Feature",
+            properties: {
+              id: unit._id,
+              name: unit.name || "Unnamed GeoUnit",
+              postalCode: unit.postalCode || "N/A",
+              area: unit.area,
+              population: unit.population,
+              color: generateColorFromScore(unit.proximityScore) || "gray",
+              proximityScore: unit.proximityScore || 0,
+              fillOpacity: 0.4,
+              ...(sidewalkRatio !== undefined && { sidewalkRatio }), // Add sidewalkRatio only if it's defined
+              ...(unit.injuryRate !== undefined && {
+                injuryRate: unit.injuryRate,
+              }), // Add injuryRate only if it exists
+              ...(unit.fatalityRate !== undefined && {
+                fatalityRate: unit.fatalityRate,
+              }), // Add fatalityRate only if it exists
+            },
+            geometry: unit.location, // Use the location field directly
+          };
+        });
 
         setGeoJsonLayers(
           enrichedGeoUnits.map((geoUnit) => ({
