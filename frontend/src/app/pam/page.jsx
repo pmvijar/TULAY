@@ -178,6 +178,103 @@ const GISMapPage = () => {
     return `rgb(${red}, ${green}, 0)`;
   };
 
+  const getRoadColor = (hasSidewalk) => (hasSidewalk ? "green" : "red");
+
+  const getSidewalkColor = (sidewalkType) => {
+    switch (sidewalkType) {
+      case "both":
+        return "green";
+      case "separate":
+        return "yellow";
+      case "none":
+      case "unknown":
+      default:
+        return "gray"; // Optional for visualization
+    }
+  };
+
+  const renderRoads = () => {
+    return geoUnits.flatMap((geoUnit) =>
+      geoUnit.roadsWithin.roads
+        .filter((road) => !road.hasSidewalk) // Only render roads without sidewalks
+        .map((road) => (
+          <GeoJSON
+            key={road.osm_id}
+            data={{
+              type: "Feature",
+              properties: { hasSidewalk: road.hasSidewalk },
+              geometry: road.location,
+            }}
+            style={{
+              color: "red", // Red for roads without sidewalks
+              weight: 4,
+              opacity: 0.6,
+            }}
+            onEachFeature={(feature, layer) => {
+              const label = "Missing sidewalks on both sides";
+              layer.bindTooltip(label);
+            }}
+          />
+        ))
+    );
+  };
+
+  const renderSidewalks = () => {
+    return geoUnits.flatMap((geoUnit) =>
+      geoUnit.sidewalksWithin.sidewalks.map((sidewalk) => (
+        <GeoJSON
+          key={sidewalk.osm_id}
+          data={{
+            type: "Feature",
+            properties: { sidewalkType: sidewalk.sidewalkType },
+            geometry: sidewalk.location,
+          }}
+          style={{
+            color: sidewalk.sidewalkType === "both" ? "green" : "yellow", // Green for both, yellow for others
+            weight: 4,
+            opacity: 0.6,
+          }}
+          onEachFeature={(feature, layer) => {
+            const label =
+              sidewalk.sidewalkType === "both"
+                ? "Has sidewalks on both sides"
+                : "Missing sidewalk on one side";
+            layer.bindTooltip(label);
+          }}
+        />
+      ))
+    );
+  };
+
+  const getSidewalkLabel = (sidewalkType) => {
+    switch (sidewalkType) {
+      case "both":
+        return "Has sidewalks on both sides";
+      case "left":
+      case "right":
+        return "Missing sidewalk on one side";
+      case "none":
+      case "unknown":
+      default:
+        return "Missing sidewalks on both sides";
+    }
+  };
+
+  const getRoadLabel = (hasSidewalk) =>
+    hasSidewalk
+      ? "Has sidewalks on both sides"
+      : "Missing sidewalks on both sides";
+
+  const onEachRoad = (feature, layer) => {
+    const label = getRoadLabel(feature.properties.hasSidewalk);
+    layer.bindTooltip(label);
+  };
+
+  const onEachSidewalk = (feature, layer) => {
+    const label = getSidewalkLabel(feature.properties.sidewalkType);
+    layer.bindTooltip(label);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
@@ -425,6 +522,8 @@ const GISMapPage = () => {
           ))}
           {renderStationMarkers()}
           {renderPassageMarkers()}
+          {renderRoads()}
+          {renderSidewalks()}
 
           {/* <MapWithTooltip /> */}
         </MapContainer>
