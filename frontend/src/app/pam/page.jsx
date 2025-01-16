@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import L from "leaflet";
-import { point, buffer, featureCollection, union } from "@turf/turf";
 import { useMapEvent } from "react-leaflet";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -13,6 +12,8 @@ import {
   Lightbulb,
   Footprints,
   TrainFront,
+  BusFront,
+  X,
 } from "lucide-react";
 import ReactDOMServer from "react-dom/server";
 
@@ -44,11 +45,22 @@ const Marker = dynamic(
   { ssr: false }
 );
 
-const customDivIcon = L.divIcon({
+const TrainIcon = L.divIcon({
   className: "custom-div-icon", // Add a base class for potential extensions
   html: ReactDOMServer.renderToString(
-    <div className="flex items-center justify-center w-10 h-10 bg-white border-2 border-black rounded-full shadow-md">
-      <TrainFront className="w-6 h-6 text-black" />
+    <div className="flex items-center justify-center w-10 h-10 bg-white opacity-80 border-1 border-gray-600 rounded-full shadow-md">
+      <TrainFront className="w-6 h-6 text-blue-600" />
+    </div>
+  ),
+  iconSize: [40, 40], // Size of the outer circle
+  iconAnchor: [20, 20], // Anchor point in the center of the circle
+});
+
+const BusIcon = L.divIcon({
+  className: "custom-div-icon", // Add a base class for potential extensions
+  html: ReactDOMServer.renderToString(
+    <div className="flex items-center justify-center w-10 h-10 bg-white opacity-50 border-1 border-gray-600 rounded-full shadow-md">
+      <BusFront className="w-6 h-6 text-blue-600" />
     </div>
   ),
   iconSize: [40, 40], // Size of the outer circle
@@ -57,9 +69,6 @@ const customDivIcon = L.divIcon({
 
 const GISMapPage = () => {
   const [geoJsonLayers, setGeoJsonLayers] = useState([]);
-  const [barangayData, setBarangayData] = useState(null);
-  const [selectedBarangay, setSelectedBarangay] = useState(null); // To track the clicked barangay
-  const [selectedStation, setSelectedStation] = useState(null); // For clicked station details
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [geoUnits, setGeoUnits] = useState([]);
@@ -87,17 +96,12 @@ const GISMapPage = () => {
             station.location.coordinates[1],
             station.location.coordinates[0],
           ]}
-          icon={customDivIcon}
+          icon={station.transportType[0] === "train" ? TrainIcon : BusIcon} // Conditional icon
           eventHandlers={{
             click: () => {
-              setSelectedFeature({
-                type: "station",
-                name: station.name,
-                transportType: station.transport_type.type,
-                status: station.transport_type.status,
-                latitude: station.location.coordinates[1],
-                longitude: station.location.coordinates[0],
-              });
+              const updatedStation = { ...station, type: "station" }; // Add type: "station"
+              console.log("Selected Station:", updatedStation);
+              setSelectedFeature(updatedStation);
             },
           }}
         >
@@ -110,9 +114,17 @@ const GISMapPage = () => {
     // Clamp the score between 0 and 1
     score = Math.min(Math.max(score, 0), 1);
 
-    // Calculate the red and green values based on the score
-    const red = Math.floor((1 - score) * 255); // Red decreases as score increases
-    const green = Math.floor(score * 255); // Green increases as score increases
+    let red, green;
+
+    if (score < 0.5) {
+      // Transition from red to yellow
+      red = 255;
+      green = Math.floor(score * 2 * 255);
+    } else {
+      // Transition from yellow to green
+      red = Math.floor((1 - score) * 2 * 255);
+      green = 255;
+    }
 
     // Return the color in RGB format
     return `rgb(${red}, ${green}, 0)`;
@@ -167,13 +179,13 @@ const GISMapPage = () => {
         }));
 
         setGeoJsonLayers(
-          enrichedGeoUnits.map((feature) => ({
-            data: feature,
+          enrichedGeoUnits.map((geoUnit) => ({
+            data: geoUnit,
             style: {
               color: "gray", // Outline color
-              weight: 1, // Border thickness
-              fillOpacity: 0.5, // Fill transparency
-              fillColor: feature.properties.color, // Use generated color
+              weight: 1.3, // Border thickness
+              fillOpacity: 0.2, // Fill transparency
+              fillColor: geoUnit.properties.color, // Use generated color
             },
           }))
         );
@@ -194,43 +206,21 @@ const GISMapPage = () => {
     fetchData();
   }, []);
 
-  const barangayStyle = (feature) => ({
-    color: "black", // Outline color
-    weight: 2, // Outline thickness
-    fillColor: feature.properties.color, // Color based on accessibility score
-    fillOpacity: 0.6, // Transparency of the fill
-  });
-
-  const geoUnitStyle = (feature) => ({
-    color: "black", // Strong outline color
-    weight: 2, // Outline thickness (increase for more visibility)
-    opacity: 1, // Fully opaque outline
-    fillColor: feature.properties.color || "gray", // Fill color based on property
-    fillOpacity: 0.5, // Transparency of the fill
-  });
-
   const onEachBarangay = (feature, layer) => {
     if (feature.properties) {
       // Bind a tooltip to display the name and accessibility score
-      layer.bindTooltip(
-        `${feature.properties.name} - Accessibility Score: ${feature.properties.proximityScore}`
-      );
+      layer.bindTooltip(`${feature.properties.name}`);
 
       // Add a click event listener to the layer
       layer.on("click", () => {
-        console.log("Feature:", feature);
-        setSelectedFeature({
-          type: "barangay",
-          name: feature.properties.name,
-          population: feature.properties.population || "Unknown",
-          area: feature.properties.area || "Unknown",
-          proximityScore: feature.properties.proximityScore || "Unknown",
-        });
+        const updatedProperties = { ...feature.properties, type: "geounit" };
+        console.log("Selected Geo Unit:", updatedProperties);
+        setSelectedFeature(updatedProperties);
       });
     }
   };
 
-  // Tooltip on hover to show lat, lon
+  // Tooltip on hover to show lat, long
   function MapWithTooltip() {
     const map = useMapEvent("mousemove", (e) => {
       const { lat, lng } = e.latlng;
@@ -296,7 +286,7 @@ const GISMapPage = () => {
                 className="flex flex-row rounded-lg w-full justify-start px-4 text-left hover:bg-teal-50"
               >
                 <Footprints className="mr-2 h-4 w-4" />
-                Pedestrian Mobility Map
+                Pedestrian Accessibility Map
               </Button>
             </Link>
           </section>
@@ -320,32 +310,50 @@ const GISMapPage = () => {
             zIndex: 1000,
           }}
         >
-          <h3 className="text-lg font-semibold">{selectedFeature.name}</h3>
+          <h1 className="font-bold text-xs text-gray-500">
+            {selectedFeature.type === "geounit"
+              ? "Barangay"
+              : "Station - " +
+                selectedFeature.transportType[0].charAt(0).toUpperCase() +
+                selectedFeature.transportType[0].slice(1)}
+          </h1>
 
-          {selectedFeature.type === "barangay" && (
-            <>
-              <p>Population: {selectedFeature.population || "N/A"}</p>
-              <p>Area: {selectedFeature.area || "N/A"} km²</p>
-            </>
-          )}
+          <div className="flex flex-col">
+            <div className="flex flex-row justify-between">
+              <h3 className="text-lg font-semibold">{selectedFeature.name}</h3>
+              <button
+                className=" text-gray"
+                onClick={() => setSelectedFeature(null)}
+              >
+                <X />
+              </button>
+            </div>
 
-          {selectedFeature.type === "station" && (
-            <>
-              <p>Type: {selectedFeature.transportType}</p>
-              <p>Status: {selectedFeature.status}</p>
-              <p>
-                Coordinates: {selectedFeature.latitude},{" "}
-                {selectedFeature.longitude}
-              </p>
-            </>
-          )}
+            {selectedFeature.type === "geounit" && (
+              <div classname="flex flex-col">
+                <div
+                  style={{ color: selectedFeature.color }}
+                  className="text-sm"
+                >
+                  {selectedFeature.proximityScore > 0.7 ? (
+                    <h1 className="text-sm">Highly Accessible</h1>
+                  ) : selectedFeature.proximityScore > 0.5 ? (
+                    <h1>Moderately Accessible</h1>
+                  ) : selectedFeature.proximityScore > 0.2 ? (
+                    <h1>Less Accessible</h1>
+                  ) : (
+                    <h1>Not Accessible</h1>
+                  )}
+                </div>
+                <h1>
+                  Accessibility Score:{" "}
+                  {(selectedFeature.proximityScore * 100).toFixed(2)}%
+                </h1>
+              </div>
+            )}
 
-          <button
-            className="mt-4 bg-red-500 text-white px-4 py-2 rounded"
-            onClick={() => setSelectedFeature(null)} // Close overlay on button click
-          >
-            Close
-          </button>
+            {selectedFeature.type === "station" && <></>}
+          </div>
         </div>
       )}
 
@@ -369,7 +377,7 @@ const GISMapPage = () => {
           ))}
           {renderStationMarkers()}
 
-          <MapWithTooltip />
+          {/* <MapWithTooltip /> */}
         </MapContainer>
 
         {/* Tooltip HTML element */}
