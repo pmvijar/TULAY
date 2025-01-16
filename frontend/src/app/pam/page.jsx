@@ -1,12 +1,20 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
+import L from "leaflet";
 import { point, buffer, featureCollection, union } from "@turf/turf";
 import { useMapEvent } from "react-leaflet";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { LayoutDashboard, LogOut, Lightbulb, Footprints } from "lucide-react";
+import {
+  LayoutDashboard,
+  LogOut,
+  Lightbulb,
+  Footprints,
+  TrainFront,
+} from "lucide-react";
+import ReactDOMServer from "react-dom/server";
 
 import "leaflet/dist/leaflet.css";
 
@@ -20,119 +28,231 @@ const TileLayer = dynamic(
 );
 const GeoJSON = dynamic(
   () => import("react-leaflet").then((mod) => mod.GeoJSON),
-  { ssr: false }
+  {
+    ssr: false,
+  }
 );
 const Tooltip = dynamic(
   () => import("react-leaflet").then((mod) => mod.Tooltip),
-  { ssr: false }
+  {
+    ssr: false,
+  }
 );
+
 const Marker = dynamic(
   () => import("react-leaflet").then((mod) => mod.Marker),
   { ssr: false }
 );
 
+const customDivIcon = L.divIcon({
+  className: "custom-div-icon", // Add a base class for potential extensions
+  html: ReactDOMServer.renderToString(
+    <div className="flex items-center justify-center w-10 h-10 bg-white border-2 border-black rounded-full shadow-md">
+      <TrainFront className="w-6 h-6 text-black" />
+    </div>
+  ),
+  iconSize: [40, 40], // Size of the outer circle
+  iconAnchor: [20, 20], // Anchor point in the center of the circle
+});
+
 const GISMapPage = () => {
   const [geoJsonLayers, setGeoJsonLayers] = useState([]);
   const [barangayData, setBarangayData] = useState(null);
+  const [selectedBarangay, setSelectedBarangay] = useState(null); // To track the clicked barangay
+  const [selectedStation, setSelectedStation] = useState(null); // For clicked station details
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [geoUnits, setGeoUnits] = useState([]);
   const [stations, setStations] = useState([]);
-  const [selectedFeature, setSelectedFeature] = useState(null);
+  const [passages, setPassages] = useState([]);
+  const [selectedFeature, setSelectedFeature] = useState(null); // Unified state for selected barangay or station
 
-  // Fetch GeoJSON data from backend
+  const renderStationMarkers = () => {
+    const renderedNames = new Set();
+
+    return stations
+      .filter((station) => station.name && station.name !== "N/A")
+      .filter((station) => {
+        if (renderedNames.has(station.name)) {
+          return false;
+        } else {
+          renderedNames.add(station.name);
+          return true;
+        }
+      })
+      .map((station) => (
+        <Marker
+          key={station.id}
+          position={[
+            station.location.coordinates[1],
+            station.location.coordinates[0],
+          ]}
+          icon={customDivIcon}
+          eventHandlers={{
+            click: () => {
+              setSelectedFeature({
+                type: "station",
+                name: station.name,
+                transportType: station.transport_type.type,
+                status: station.transport_type.status,
+                latitude: station.location.coordinates[1],
+                longitude: station.location.coordinates[0],
+              });
+            },
+          }}
+        >
+          <Tooltip>{station.name}</Tooltip>
+        </Marker>
+      ));
+  };
+
+  const generateColorFromScore = (score) => {
+    // Clamp the score between 0 and 1
+    score = Math.min(Math.max(score, 0), 1);
+
+    // Calculate the red and green values based on the score
+    const red = Math.floor((1 - score) * 255); // Red decreases as score increases
+    const green = Math.floor(score * 255); // Green increases as score increases
+
+    // Return the color in RGB format
+    return `rgb(${red}, ${green}, 0)`;
+  };
+
   useEffect(() => {
-    const fetchGeoJson = async () => {
+    const fetchData = async () => {
+      setIsLoading(true);
+
       try {
-        const response = await fetch("http://localhost:3001/get-geounits", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
+        const [geoUnits, stations, passages] = await Promise.all([
+          fetch("http://localhost:3001/get-geounits", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ location: "EDSA" }), // Include body
+          }).then((res) => res.json()),
+
+          fetch("http://localhost:3001/get-stations", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ location: "EDSA" }), // Include body
+          }).then((res) => res.json()),
+
+          fetch("http://localhost:3001/get-passages", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ location: "EDSA" }), // Include body
+          }).then((res) => res.json()),
+        ]);
+
+        setGeoUnits(geoUnits);
+
+        const enrichedGeoUnits = geoUnits.map((unit) => ({
+          type: "Feature",
+          properties: {
+            id: unit._id,
+            name: unit.name || "Unnamed GeoUnit",
+            postalCode: unit.postalCode || "N/A",
+            area: unit.area,
+            population: unit.population,
+            color: generateColorFromScore(unit.proximityScore) || "gray",
+            proximityScore: unit.proximityScore || 0,
+            fillOpacity: 0.3,
           },
-          body: JSON.stringify({ location: "EDSA" }),
-        });
-        const data = await response.json();
-        setBarangayData(data);
-      } catch (error) {
-        console.error("Failed to fetch GeoJSON data:", error);
+          geometry: unit.location, // Use the location field directly
+        }));
+
+        setGeoJsonLayers(
+          enrichedGeoUnits.map((feature) => ({
+            data: feature,
+            style: {
+              color: "gray", // Outline color
+              weight: 1, // Border thickness
+              fillOpacity: 0.5, // Fill transparency
+              fillColor: feature.properties.color, // Use generated color
+            },
+          }))
+        );
+
+        setStations(stations);
+        setPassages(passages);
+        console.log("stations:", stations); // Logs when stations are updated
+        console.log("passages:", passages); // Logs when passages are updated
+        console.log("geoUnits:", geoUnits); // Logs when geoUnits are updated
+      } catch (err) {
+        setError("Failed to fetch data. Please try again later.");
+        console.error("Error fetching data:", err);
+      } finally {
+        setIsLoading(false);
       }
     };
 
-    fetchGeoJson();
+    fetchData();
   }, []);
 
-  // Fetch station data from backend
-  useEffect(() => {
-    const fetchStations = async () => {
-      try {
-        const response = await fetch("http://localhost:3001/get-stations", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ location: "EDSA" }),
-        });
-        const data = await response.json();
-        setStations(data);
-      } catch (error) {
-        console.error("Failed to fetch stations:", error);
-      }
-    };
+  const barangayStyle = (feature) => ({
+    color: "black", // Outline color
+    weight: 2, // Outline thickness
+    fillColor: feature.properties.color, // Color based on accessibility score
+    fillOpacity: 0.6, // Transparency of the fill
+  });
 
-    fetchStations();
-  }, []);
-
-  // Generate GeoJSON layers
-  useEffect(() => {
-    if (barangayData) {
-      const layers = barangayData.features.map((feature) => ({
-        data: feature,
-        style: {
-          color: feature.properties.color || "black",
-          weight: 2,
-          fillOpacity: 0.6,
-        },
-      }));
-      setGeoJsonLayers(layers);
-    }
-  }, [barangayData]);
+  const geoUnitStyle = (feature) => ({
+    color: "black", // Strong outline color
+    weight: 2, // Outline thickness (increase for more visibility)
+    opacity: 1, // Fully opaque outline
+    fillColor: feature.properties.color || "gray", // Fill color based on property
+    fillOpacity: 0.5, // Transparency of the fill
+  });
 
   const onEachBarangay = (feature, layer) => {
-    if (feature.properties && feature.properties.name) {
+    if (feature.properties) {
+      // Bind a tooltip to display the name and accessibility score
       layer.bindTooltip(
-        `${feature.properties.name} - Accessibility Score: ${feature.properties.accessibilityScore}`
+        `${feature.properties.name} - Accessibility Score: ${feature.properties.proximityScore}`
       );
 
+      // Add a click event listener to the layer
       layer.on("click", () => {
+        console.log("Feature:", feature);
         setSelectedFeature({
           type: "barangay",
           name: feature.properties.name,
-          population: feature.properties.population,
-          area: feature.properties.area_km2,
+          population: feature.properties.population || "Unknown",
+          area: feature.properties.area || "Unknown",
+          proximityScore: feature.properties.proximityScore || "Unknown",
         });
       });
     }
   };
 
-  const renderStationMarkers = () => {
-    return stations.map((station) => (
-      <Marker
-        key={station.id}
-        position={[station.location.latitude, station.location.longitude]}
-        eventHandlers={{
-          click: () => {
-            setSelectedFeature({
-              type: "station",
-              name: station.name,
-              transportType: station.transport_type.type,
-              status: station.transport_type.status,
-              latitude: station.location.latitude,
-              longitude: station.location.longitude,
-            });
-          },
-        }}
-      >
-        <Tooltip>{station.name}</Tooltip>
-      </Marker>
-    ));
-  };
+  // Tooltip on hover to show lat, lon
+  function MapWithTooltip() {
+    const map = useMapEvent("mousemove", (e) => {
+      const { lat, lng } = e.latlng;
+      const tooltip = document.getElementById("latlon-tooltip");
+      tooltip.innerHTML = `Lat: ${lat.toFixed(6)} | Lng: ${lng.toFixed(6)}`;
+      tooltip.style.left = `${e.originalEvent.clientX + 10}px`;
+      tooltip.style.top = `${e.originalEvent.clientY + 10}px`;
+      tooltip.style.display = "block";
+    });
+
+    return null;
+  }
+
+  // Function to generate colors based on the proximity score
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p className="text-lg font-semibold">Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-row">
@@ -231,8 +351,8 @@ const GISMapPage = () => {
 
       <div className="flex-grow">
         <MapContainer
-          center={[14.6197, 121.051]}
-          zoom={15}
+          center={[14.6197, 121.051]} // Coordinates for Cubao, Araneta City
+          zoom={15} // Adjusted zoom level for a detailed view of the area
           style={{ height: "100vh", width: "100%" }}
         >
           <TileLayer
@@ -248,8 +368,11 @@ const GISMapPage = () => {
             />
           ))}
           {renderStationMarkers()}
+
+          <MapWithTooltip />
         </MapContainer>
 
+        {/* Tooltip HTML element */}
         <div
           id="latlon-tooltip"
           style={{
