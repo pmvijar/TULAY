@@ -18,6 +18,7 @@ const roadSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  hasSidewalk: { type: Boolean, required: true },
   location: {
     type: {
       type: String,
@@ -35,7 +36,7 @@ const sidewalkSchema = new mongoose.Schema({
   osm_id: { type: String, required: true },
   sidewalkType: {
     type: String,
-    enum: ["both", "left", "right", "unknown"],
+    enum: ["both", "left", "right", "none", "separate", "unknown"],
     required: true,
   },
   location: {
@@ -75,7 +76,7 @@ const geoUnitSchema = new mongoose.Schema({
 });
 
 // 2D-sphere indexing for efficient geospatial query
-geoUnitSchema.index({ location: "2dsphere" });
+geoUnitSchema.index({ location: "2dsphere", osm_id: 1, name: 1 });
 
 export const GeoUnit = mongoose.model("GeoUnit", geoUnitSchema);
 

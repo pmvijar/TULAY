@@ -1,3 +1,4 @@
+import { Db } from "mongodb";
 import { GeoUnit } from "../Models/geoUnit.model.js"; // Import the GeoUnit model
 import { PedestrianPassage } from "../Models/pedestrianPassage.model.js"; // Import the PedestrianPassage model
 import { Station } from "../Models/station.model.js"; // Import the Station model
@@ -129,20 +130,21 @@ export const uploadGeoJSON = async (request, reply) => {
     const { geoJSON, dataSource } = request.body; // Get uploadType and geoJSON from the request body
 
     const transformedData = geoJSON.features.map((feature) => ({
+      osm_id: feature.properties["@id"],
       source: dataSource,
       name: feature.properties.name,
       postalCode: feature.properties.postal_code || "N/A",
-      location: feature.geometry, // This will map the geometry directly to the location field
-      area: feature.properties.area || 0, // Assuming you have area, otherwise default to 0
-      population: feature.properties.population || 0, // Similarly, default population to 0 if not available
+      location: feature.geometry,
+      area: turf.area(feature.geometry) / 1_000_000,
+      population: feature.properties.population || 0,
     }));
 
-    // Loop through each feature and save as a GeoUnit
     for (const feature of transformedData) {
-      const geoUnit = new GeoUnit(feature);
-
-      // Save each GeoUnit document
-      await geoUnit.save();
+      await GeoUnit.findOneAndUpdate(
+        { osm_id: feature.osm_id },
+        { $set: feature },
+        { upsert: true, new: true }
+      );
     }
 
     return reply
@@ -178,18 +180,20 @@ export const uploadPedestrianGeoJSON = async (request, reply) => {
       }
 
       return {
+        osm_id: feature.properties["@id"],
         source: dataSource,
         type: passageType,
         location: location ? location : null, // Add coordinates to location
       };
     });
 
-    // Loop through each feature and save as a GeoUnit
+    // Loop through each feature and save as a PedestrianPassage
     for (const feature of transformedData) {
-      const pedestrianPassage = new PedestrianPassage(feature);
-
-      // Save each GeoUnit document
-      await pedestrianPassage.save();
+      await PedestrianPassage.findOneAndUpdate(
+        { osm_id: feature.osm_id },
+        { $set: feature },
+        { upsert: true, new: true }
+      );
     }
 
     return reply
@@ -226,6 +230,7 @@ export const uploadStationGeoJSON = async (request, reply) => {
       }
 
       return {
+        osm_id: feature.properties["@id"],
         source: dataSource,
         name: feature.properties.name || "N/A",
         transportType: transportType,
@@ -235,12 +240,13 @@ export const uploadStationGeoJSON = async (request, reply) => {
       };
     });
 
-    // Loop through each feature and save as a GeoUnit
+    // Check for duplicates
     for (const feature of transformedData) {
-      const station = new Station(feature);
-
-      // Save each GeoUnit document
-      await station.save();
+      await Station.findOneAndUpdate(
+        { osm_id: feature.osm_id },
+        { $set: feature },
+        { upsert: true, new: true }
+      );
     }
 
     return reply
@@ -337,7 +343,8 @@ export const uploadWays = async (request, reply) => {
       if (wayType === "sidewalk") totalWayLength += length;
 
       return {
-        sidewalkType: feature.properties.sidewalk || "unknown",
+        osm_id: feature.properties["@id"],
+        sidewalkType: feature.properties.sidewalk || "separate",
         location: feature.geometry,
       };
     });
@@ -350,11 +357,25 @@ export const uploadWays = async (request, reply) => {
 
       const length = turf.length(feature.geometry);
 
-      if (wayType === "road") totalWayLength += length;
+      if (wayType === "road") {
+        totalWayLength += length;
+      }
+
+      const hasSidewalk =
+        (feature.properties.sidewalk && feature.properties.sidewalk !== "no") ||
+        (feature.properties["sidewalk:right"] &&
+          feature.properties["sidewalk:right"] !== "no") ||
+        (feature.properties["sidewalk:left"] &&
+          feature.properties["sidewalk:left"] !== "no") ||
+        (feature.properties["sidewalk:both"] &&
+          feature.properties["sidewalk:both"] !== "no") ||
+        feature.properties.footway === "sidewalk";
 
       return {
+        osm_id: feature.properties["@id"],
         roadType: feature.properties.highway,
         location: feature.geometry,
+        hasSidewalk: hasSidewalk,
       };
     });
 

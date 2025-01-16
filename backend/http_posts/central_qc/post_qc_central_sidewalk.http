@@ -10,7 +10,7 @@ Content-Type: application/json
   "type": "FeatureCollection",
   "generator": "overpass-turbo",
   "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
-  "timestamp": "2025-01-15T06:09:01Z",
+  "timestamp": "2025-01-16T07:03:18Z",
   "features": [
     {
       "type": "Feature",
@@ -183,6 +183,60 @@ Content-Type: application/json
         ]
       },
       "id": "way/10404066"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/18578491",
+        "bicycle": "yes",
+        "cycleway:right": "lane",
+        "cycleway:right:lane": "advisory",
+        "foot": "no",
+        "highway": "primary",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "60",
+        "name": "East Avenue",
+        "oneway": "yes",
+        "ref": "174",
+        "sidewalk:right": "separate",
+        "source:maxspeed": "PH:urban",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0484369,
+            14.6480969
+          ],
+          [
+            121.0481958,
+            14.6470773
+          ],
+          [
+            121.04819,
+            14.6470528
+          ],
+          [
+            121.047951,
+            14.6460424
+          ],
+          [
+            121.0479437,
+            14.6460115
+          ],
+          [
+            121.0478772,
+            14.6457303
+          ],
+          [
+            121.0477134,
+            14.6450379
+          ]
+        ]
+      },
+      "id": "way/18578491"
     },
     {
       "type": "Feature",
@@ -667,6 +721,219 @@ Content-Type: application/json
     {
       "type": "Feature",
       "properties": {
+        "@id": "way/61450521",
+        "cycleway:right": "lane",
+        "cycleway:right:lane": "advisory",
+        "cycleway:separation:left": "double_solid_line",
+        "highway": "secondary",
+        "lanes": "3",
+        "lit": "yes",
+        "maxspeed": "50",
+        "name": "Kalayaan Avenue",
+        "oneway": "yes",
+        "oneway:bicycle": "yes",
+        "parking:lane:both": "no_parking",
+        "sidewalk:right": "yes",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0541882,
+            14.633739
+          ],
+          [
+            121.0542032,
+            14.6338049
+          ],
+          [
+            121.0542064,
+            14.6338462
+          ],
+          [
+            121.0541974,
+            14.6339037
+          ],
+          [
+            121.0541965,
+            14.6339666
+          ],
+          [
+            121.0542006,
+            14.6341879
+          ],
+          [
+            121.054233,
+            14.6344014
+          ],
+          [
+            121.05434,
+            14.6348525
+          ],
+          [
+            121.05439,
+            14.6350841
+          ],
+          [
+            121.0544416,
+            14.6353233
+          ],
+          [
+            121.0545816,
+            14.6358938
+          ],
+          [
+            121.0546158,
+            14.6360332
+          ],
+          [
+            121.0546426,
+            14.6361487
+          ],
+          [
+            121.0546621,
+            14.6362498
+          ],
+          [
+            121.0547313,
+            14.6366401
+          ],
+          [
+            121.0547404,
+            14.6366913
+          ],
+          [
+            121.0547618,
+            14.6368221
+          ],
+          [
+            121.0547863,
+            14.6369717
+          ],
+          [
+            121.0547871,
+            14.6369765
+          ],
+          [
+            121.0548752,
+            14.6375763
+          ],
+          [
+            121.0548878,
+            14.6376837
+          ],
+          [
+            121.0548965,
+            14.6378263
+          ],
+          [
+            121.054903,
+            14.637942
+          ],
+          [
+            121.0549205,
+            14.6382171
+          ],
+          [
+            121.0549308,
+            14.6385637
+          ],
+          [
+            121.0549357,
+            14.6392694
+          ],
+          [
+            121.0549352,
+            14.6393323
+          ],
+          [
+            121.0549122,
+            14.6398643
+          ],
+          [
+            121.054852,
+            14.6404678
+          ],
+          [
+            121.0548364,
+            14.640599
+          ],
+          [
+            121.0547325,
+            14.6412757
+          ],
+          [
+            121.0547034,
+            14.6414162
+          ],
+          [
+            121.0546858,
+            14.6415009
+          ],
+          [
+            121.0546535,
+            14.6416847
+          ],
+          [
+            121.0546155,
+            14.641848
+          ],
+          [
+            121.0545609,
+            14.6421014
+          ],
+          [
+            121.0545448,
+            14.6421703
+          ],
+          [
+            121.0544525,
+            14.6424944
+          ],
+          [
+            121.054359,
+            14.64278
+          ],
+          [
+            121.0543276,
+            14.642873
+          ],
+          [
+            121.0542989,
+            14.64297
+          ],
+          [
+            121.0540638,
+            14.6436198
+          ],
+          [
+            121.0537992,
+            14.6442958
+          ],
+          [
+            121.0537588,
+            14.6443798
+          ],
+          [
+            121.0535415,
+            14.6448301
+          ],
+          [
+            121.0533298,
+            14.645238
+          ],
+          [
+            121.0532836,
+            14.6453151
+          ]
+        ]
+      },
+      "id": "way/61450521"
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "@id": "way/85238956",
         "highway": "residential",
         "lane_markings": "yes",
@@ -703,6 +970,90 @@ Content-Type: application/json
         ]
       },
       "id": "way/85238956"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/106618133",
+        "bicycle": "yes",
+        "cycleway:right": "lane",
+        "cycleway:right:lane": "advisory",
+        "highway": "primary",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "60",
+        "name": "East Avenue",
+        "oneway": "yes",
+        "ref": "174",
+        "sidewalk:right": "yes",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0477134,
+            14.6450379
+          ],
+          [
+            121.047522,
+            14.644193
+          ],
+          [
+            121.0475023,
+            14.6441061
+          ],
+          [
+            121.0474602,
+            14.6439203
+          ],
+          [
+            121.0473749,
+            14.6435439
+          ],
+          [
+            121.0473567,
+            14.6434636
+          ],
+          [
+            121.0473518,
+            14.6434419
+          ],
+          [
+            121.0473486,
+            14.6434276
+          ],
+          [
+            121.0473288,
+            14.6433404
+          ],
+          [
+            121.0473212,
+            14.6433069
+          ],
+          [
+            121.0472672,
+            14.6430686
+          ],
+          [
+            121.0471467,
+            14.6425365
+          ],
+          [
+            121.0470748,
+            14.6422194
+          ],
+          [
+            121.0470579,
+            14.6421448
+          ],
+          [
+            121.0468865,
+            14.6413882
+          ]
+        ]
+      },
+      "id": "way/106618133"
     },
     {
       "type": "Feature",
@@ -763,6 +1114,68 @@ Content-Type: application/json
         ]
       },
       "id": "way/178724951"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/198153419",
+        "bicycle": "yes",
+        "cycleway:right": "lane",
+        "cycleway:right:lane": "advisory",
+        "foot": "no",
+        "highway": "primary",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "50",
+        "name": "East Avenue",
+        "oneway": "yes",
+        "ref": "174",
+        "sidewalk:right": "separate",
+        "source:maxspeed": "PH:urban",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0478134,
+            14.6450047
+          ],
+          [
+            121.047958,
+            14.6456043
+          ],
+          [
+            121.0480507,
+            14.6459836
+          ],
+          [
+            121.0482142,
+            14.6466581
+          ],
+          [
+            121.0483034,
+            14.647026
+          ],
+          [
+            121.0483094,
+            14.6470508
+          ],
+          [
+            121.0484176,
+            14.6474972
+          ],
+          [
+            121.0485444,
+            14.6480202
+          ],
+          [
+            121.048554,
+            14.6480597
+          ]
+        ]
+      },
+      "id": "way/198153419"
     },
     {
       "type": "Feature",
@@ -905,6 +1318,83 @@ Content-Type: application/json
         ]
       },
       "id": "way/227924733"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/234438270",
+        "bicycle": "yes",
+        "cycleway:right": "lane",
+        "cycleway:right:lane": "advisory",
+        "highway": "primary",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "60",
+        "name": "East Avenue",
+        "oneway": "yes",
+        "ref": "174",
+        "sidewalk:right": "separate",
+        "source:maxspeed": "PH:urban",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.046975,
+            14.6412474
+          ],
+          [
+            121.0471691,
+            14.6421175
+          ],
+          [
+            121.0471843,
+            14.6421852
+          ],
+          [
+            121.0472587,
+            14.6425186
+          ],
+          [
+            121.0474284,
+            14.6432791
+          ],
+          [
+            121.0474375,
+            14.6433202
+          ],
+          [
+            121.0474555,
+            14.6434009
+          ],
+          [
+            121.0474639,
+            14.6434382
+          ],
+          [
+            121.0474818,
+            14.6435188
+          ],
+          [
+            121.0475386,
+            14.6437731
+          ],
+          [
+            121.0476075,
+            14.644082
+          ],
+          [
+            121.0476792,
+            14.6444033
+          ],
+          [
+            121.0478134,
+            14.6450047
+          ]
+        ]
+      },
+      "id": "way/234438270"
     },
     {
       "type": "Feature",
@@ -1135,6 +1625,67 @@ Content-Type: application/json
         ]
       },
       "id": "way/675764052"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/675768339",
+        "cycleway:right": "lane",
+        "cycleway:right:lane": "advisory",
+        "cycleway:separation:left": "double_solid_line",
+        "highway": "secondary",
+        "lanes": "3",
+        "lit": "yes",
+        "maxspeed": "50",
+        "name": "Kalayaan Avenue",
+        "oneway": "yes",
+        "oneway:bicycle": "yes",
+        "parking:lane:both": "no_parking",
+        "sidewalk:right": "yes",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0520744,
+            14.6470183
+          ],
+          [
+            121.0521549,
+            14.6468939
+          ],
+          [
+            121.052471,
+            14.6464234
+          ],
+          [
+            121.0525909,
+            14.6462307
+          ],
+          [
+            121.052666,
+            14.6461153
+          ],
+          [
+            121.0527107,
+            14.6460436
+          ],
+          [
+            121.0528138,
+            14.6458872
+          ],
+          [
+            121.0529334,
+            14.6457033
+          ],
+          [
+            121.0530027,
+            14.6455864
+          ]
+        ]
+      },
+      "id": "way/675768339"
     },
     {
       "type": "Feature",
@@ -1645,6 +2196,113 @@ Content-Type: application/json
     {
       "type": "Feature",
       "properties": {
+        "@id": "way/894464831",
+        "cycleway:right": "lane",
+        "fine:foot": "2,000 PHP",
+        "fine:hgv": "5,000 PHP",
+        "foot": "use_sidepath",
+        "highway": "tertiary",
+        "lanes": "1",
+        "lit": "yes",
+        "maxspeed": "40",
+        "name": "Quezon Avenue",
+        "name:es": "Avenida Quezon",
+        "name:etymology": "Manuel Luis Quezon",
+        "name:etymology:wikidata": "Q1503",
+        "name:etymology:wikipedia": "es:Manuel L. Quezon",
+        "oneway": "yes",
+        "oneway:bicycle": "yes",
+        "ref": "170",
+        "sidewalk:right": "separate",
+        "wikidata": "Q7271598",
+        "wikipedia": "en:Quezon Avenue"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0412783,
+            14.646349
+          ],
+          [
+            121.0415553,
+            14.6464846
+          ],
+          [
+            121.0424492,
+            14.6470306
+          ],
+          [
+            121.0428494,
+            14.6472868
+          ],
+          [
+            121.0428744,
+            14.6473027
+          ],
+          [
+            121.0432283,
+            14.6475083
+          ],
+          [
+            121.0436037,
+            14.6477308
+          ],
+          [
+            121.0446845,
+            14.6483846
+          ],
+          [
+            121.0447638,
+            14.6484327
+          ],
+          [
+            121.0448765,
+            14.648501
+          ],
+          [
+            121.0457745,
+            14.6490456
+          ],
+          [
+            121.0461379,
+            14.649273
+          ],
+          [
+            121.0465629,
+            14.649539
+          ],
+          [
+            121.046689,
+            14.6496036
+          ],
+          [
+            121.0468014,
+            14.6496371
+          ],
+          [
+            121.0470353,
+            14.6496455
+          ],
+          [
+            121.047146,
+            14.6496299
+          ],
+          [
+            121.0472788,
+            14.6495871
+          ],
+          [
+            121.0477284,
+            14.6494052
+          ]
+        ]
+      },
+      "id": "way/894464831"
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "@id": "way/894557556",
         "access": "destination",
         "highway": "unclassified",
@@ -1671,6 +2329,147 @@ Content-Type: application/json
         ]
       },
       "id": "way/894557556"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/936510013",
+        "bicycle": "yes",
+        "cycleway:right": "lane",
+        "cycleway:right:lane": "advisory",
+        "foot": "no",
+        "highway": "primary",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "60",
+        "name": "East Avenue",
+        "oneway": "yes",
+        "ref": "174",
+        "sidewalk:right": "separate",
+        "source:maxspeed": "PH:urban",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0483717,
+            14.6486044
+          ],
+          [
+            121.0483953,
+            14.6485271
+          ],
+          [
+            121.0484099,
+            14.648468
+          ],
+          [
+            121.0484181,
+            14.6484356
+          ],
+          [
+            121.0484274,
+            14.6483869
+          ],
+          [
+            121.0484358,
+            14.6483383
+          ],
+          [
+            121.0484442,
+            14.6482734
+          ],
+          [
+            121.0484473,
+            14.6482278
+          ],
+          [
+            121.0484482,
+            14.6481981
+          ],
+          [
+            121.0484456,
+            14.6481553
+          ],
+          [
+            121.0484415,
+            14.6481235
+          ],
+          [
+            121.0484369,
+            14.6480969
+          ]
+        ]
+      },
+      "id": "way/936510013"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/936510014",
+        "bicycle": "yes",
+        "cycleway:right": "lane",
+        "cycleway:right:lane": "advisory",
+        "destination:ref": "170;173;174",
+        "foot": "no",
+        "highway": "primary",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "50",
+        "name": "East Avenue",
+        "oneway": "yes",
+        "ref": "174",
+        "sidewalk:right": "separate",
+        "source:maxspeed": "PH:urban",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.048554,
+            14.6480597
+          ],
+          [
+            121.0485649,
+            14.6480911
+          ],
+          [
+            121.0485823,
+            14.6481229
+          ],
+          [
+            121.0485998,
+            14.6481521
+          ],
+          [
+            121.0486189,
+            14.6481768
+          ],
+          [
+            121.048642,
+            14.6482033
+          ],
+          [
+            121.0486742,
+            14.6482338
+          ],
+          [
+            121.0487037,
+            14.6482585
+          ],
+          [
+            121.048764,
+            14.6483046
+          ],
+          [
+            121.0488332,
+            14.6483498
+          ]
+        ]
+      },
+      "id": "way/936510014"
     },
     {
       "type": "Feature",
@@ -1830,6 +2629,47 @@ Content-Type: application/json
         ]
       },
       "id": "way/1248787340"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1307844910",
+        "bicycle": "yes",
+        "cycleway:right": "lane",
+        "cycleway:right:lane": "advisory",
+        "foot": "no",
+        "highway": "primary",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "60",
+        "name": "East Avenue",
+        "oneway": "yes",
+        "ref": "174",
+        "sidewalk:right": "yes",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0468865,
+            14.6413882
+          ],
+          [
+            121.0468674,
+            14.6413061
+          ],
+          [
+            121.0468488,
+            14.6412266
+          ],
+          [
+            121.0468185,
+            14.6410973
+          ]
+        ]
+      },
+      "id": "way/1307844910"
     },
     {
       "type": "Feature",
@@ -2066,6 +2906,139 @@ Content-Type: application/json
         ]
       },
       "id": "way/1312053570"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1324904148",
+        "cycleway:right": "lane",
+        "cycleway:right:lane": "advisory",
+        "cycleway:separation:left": "double_solid_line",
+        "highway": "secondary",
+        "lanes": "3",
+        "lit": "yes",
+        "maxspeed": "50",
+        "name": "Kalayaan Avenue",
+        "oneway": "yes",
+        "oneway:bicycle": "yes",
+        "parking:lane:both": "no_parking",
+        "sidewalk:right": "yes",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0530027,
+            14.6455864
+          ],
+          [
+            121.0530793,
+            14.6454652
+          ],
+          [
+            121.053236,
+            14.645193
+          ],
+          [
+            121.0534699,
+            14.6447694
+          ],
+          [
+            121.053527,
+            14.6446509
+          ],
+          [
+            121.0537121,
+            14.6442621
+          ],
+          [
+            121.0539742,
+            14.6435981
+          ],
+          [
+            121.0542034,
+            14.6429359
+          ],
+          [
+            121.0542395,
+            14.6428463
+          ],
+          [
+            121.054276,
+            14.6427435
+          ],
+          [
+            121.0543631,
+            14.6424695
+          ],
+          [
+            121.0544574,
+            14.642141
+          ],
+          [
+            121.0545487,
+            14.6417742
+          ],
+          [
+            121.0546231,
+            14.6413986
+          ],
+          [
+            121.0546535,
+            14.6412587
+          ],
+          [
+            121.0547521,
+            14.6405814
+          ],
+          [
+            121.054768,
+            14.640456
+          ],
+          [
+            121.0548227,
+            14.6398615
+          ],
+          [
+            121.054832,
+            14.6393331
+          ],
+          [
+            121.0548369,
+            14.639275
+          ],
+          [
+            121.0548332,
+            14.6387241
+          ],
+          [
+            121.0548323,
+            14.6382279
+          ],
+          [
+            121.0548125,
+            14.6379354
+          ],
+          [
+            121.0547734,
+            14.6375942
+          ],
+          [
+            121.0546887,
+            14.6369871
+          ],
+          [
+            121.0546678,
+            14.6368536
+          ],
+          [
+            121.0546236,
+            14.6365721
+          ]
+        ]
+      },
+      "id": "way/1324904148"
     },
     {
       "type": "Feature",

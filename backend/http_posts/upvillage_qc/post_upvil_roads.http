@@ -1,0 +1,2365 @@
+###
+POST http://localhost:3001/upload-ways
+Content-Type: application/json
+
+{
+    "name": "UP Village",
+    "wayType": "road",
+    "geoJSON":
+    {
+  "type": "FeatureCollection",
+  "generator": "overpass-turbo",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "timestamp": "2025-01-16T07:09:30Z",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/4960405",
+        "access": "destination",
+        "highway": "residential",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "30",
+        "name": "Mahinhin Street",
+        "oneway": "yes",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0544829,
+            14.6472454
+          ],
+          [
+            121.0537061,
+            14.6484304
+          ]
+        ]
+      },
+      "id": "way/4960405"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/6120063",
+        "access": "destination",
+        "highway": "residential",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "30",
+        "name": "Mayumi Street",
+        "oneway": "yes",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.056919,
+            14.6482021
+          ],
+          [
+            121.0560096,
+            14.6480794
+          ],
+          [
+            121.0558521,
+            14.6480388
+          ],
+          [
+            121.0558408,
+            14.6480359
+          ],
+          [
+            121.0556589,
+            14.6479526
+          ],
+          [
+            121.0550805,
+            14.6476069
+          ]
+        ]
+      },
+      "id": "way/6120063"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/23090387",
+        "access": "yes",
+        "highway": "residential",
+        "lanes": "2",
+        "maxspeed": "20",
+        "motor_vehicle": "yes",
+        "name": "Maalindog Street",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0572882,
+            14.6509471
+          ],
+          [
+            121.0573304,
+            14.6509794
+          ],
+          [
+            121.057385,
+            14.6510101
+          ],
+          [
+            121.0574589,
+            14.6510266
+          ],
+          [
+            121.0575336,
+            14.6510058
+          ],
+          [
+            121.0576008,
+            14.6509552
+          ],
+          [
+            121.0577112,
+            14.6508431
+          ],
+          [
+            121.0578226,
+            14.6506926
+          ],
+          [
+            121.0579057,
+            14.6505304
+          ],
+          [
+            121.0579875,
+            14.6503397
+          ],
+          [
+            121.0582048,
+            14.6497895
+          ],
+          [
+            121.0582249,
+            14.6497026
+          ],
+          [
+            121.0582276,
+            14.6496578
+          ],
+          [
+            121.0582195,
+            14.6496118
+          ],
+          [
+            121.0581994,
+            14.6495774
+          ],
+          [
+            121.0581605,
+            14.6495469
+          ],
+          [
+            121.0581156,
+            14.6495307
+          ],
+          [
+            121.0580452,
+            14.6495158
+          ],
+          [
+            121.0575206,
+            14.6494348
+          ]
+        ]
+      },
+      "id": "way/23090387"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/23090403",
+        "highway": "residential",
+        "lanes": "2",
+        "maxspeed": "20",
+        "name": "Maayusin Street",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0569895,
+            14.6517677
+          ],
+          [
+            121.0569844,
+            14.6516784
+          ]
+        ]
+      },
+      "id": "way/23090403"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/24987926",
+        "access": "destination",
+        "highway": "residential",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "20",
+        "name": "Malinis Street",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0549866,
+            14.6510092
+          ],
+          [
+            121.0555705,
+            14.6509673
+          ],
+          [
+            121.0556419,
+            14.6509436
+          ],
+          [
+            121.05571,
+            14.6509107
+          ],
+          [
+            121.0557717,
+            14.6508746
+          ],
+          [
+            121.0558207,
+            14.6508336
+          ],
+          [
+            121.0558719,
+            14.6507911
+          ],
+          [
+            121.0559175,
+            14.6507397
+          ],
+          [
+            121.0559591,
+            14.6506769
+          ],
+          [
+            121.0559974,
+            14.6505842
+          ],
+          [
+            121.0560346,
+            14.6504833
+          ],
+          [
+            121.0562156,
+            14.6492558
+          ],
+          [
+            121.0563027,
+            14.6486959
+          ]
+        ]
+      },
+      "id": "way/24987926"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/24987927",
+        "access": "destination",
+        "highway": "residential",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "20",
+        "name": "Malusog Street",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0562156,
+            14.6492558
+          ],
+          [
+            121.0559921,
+            14.6492207
+          ],
+          [
+            121.0557944,
+            14.649188
+          ],
+          [
+            121.0556025,
+            14.649128
+          ],
+          [
+            121.0554907,
+            14.6490889
+          ],
+          [
+            121.0551416,
+            14.6489509
+          ],
+          [
+            121.0550628,
+            14.648918
+          ],
+          [
+            121.0550043,
+            14.6488963
+          ],
+          [
+            121.0549383,
+            14.648884
+          ],
+          [
+            121.0548765,
+            14.6488737
+          ],
+          [
+            121.0548052,
+            14.6488768
+          ],
+          [
+            121.0547437,
+            14.6488834
+          ],
+          [
+            121.0546878,
+            14.6488898
+          ],
+          [
+            121.0545824,
+            14.6489176
+          ]
+        ]
+      },
+      "id": "way/24987927"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/24987939",
+        "access": "private",
+        "highway": "residential",
+        "lanes": "2",
+        "maxspeed": "20",
+        "name": "Mapayapa Street",
+        "oneway": "yes",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0586983,
+            14.6472805
+          ],
+          [
+            121.0585499,
+            14.6481579
+          ],
+          [
+            121.058355,
+            14.649002
+          ]
+        ]
+      },
+      "id": "way/24987939"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/28119724",
+        "access": "private",
+        "highway": "residential",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "20",
+        "name": "Marilag Street",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0587855,
+            14.6493886
+          ],
+          [
+            121.0588029,
+            14.6494522
+          ],
+          [
+            121.0588203,
+            14.6495339
+          ],
+          [
+            121.0588244,
+            14.649617
+          ],
+          [
+            121.0588177,
+            14.6497325
+          ],
+          [
+            121.0587944,
+            14.6498544
+          ],
+          [
+            121.0585248,
+            14.6505293
+          ],
+          [
+            121.058372,
+            14.6508874
+          ],
+          [
+            121.0582758,
+            14.6510442
+          ],
+          [
+            121.0581605,
+            14.6511992
+          ],
+          [
+            121.0579537,
+            14.6513873
+          ],
+          [
+            121.0577275,
+            14.6515536
+          ],
+          [
+            121.0575686,
+            14.6516312
+          ],
+          [
+            121.0574132,
+            14.6516844
+          ],
+          [
+            121.0572056,
+            14.6517358
+          ],
+          [
+            121.0570667,
+            14.6517554
+          ]
+        ]
+      },
+      "id": "way/28119724"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/60341665",
+        "access": "destination",
+        "highway": "residential",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "20",
+        "name": "Matiwasay Street",
+        "oneway": "yes",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0548037,
+            14.6495949
+          ],
+          [
+            121.0549866,
+            14.6510092
+          ]
+        ]
+      },
+      "id": "way/60341665"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/94334002",
+        "highway": "tertiary",
+        "lane_markings": "yes",
+        "lanes": "4",
+        "lit": "yes",
+        "maxspeed": "40",
+        "name": "Maginhawa Street",
+        "sidewalk": "both",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0554731,
+            14.6516278
+          ],
+          [
+            121.0557585,
+            14.6515793
+          ],
+          [
+            121.0558256,
+            14.6515581
+          ],
+          [
+            121.0559111,
+            14.6515258
+          ],
+          [
+            121.055994,
+            14.6514877
+          ],
+          [
+            121.056074,
+            14.6514442
+          ],
+          [
+            121.0561527,
+            14.6513951
+          ],
+          [
+            121.0562386,
+            14.6513296
+          ],
+          [
+            121.0563205,
+            14.6512568
+          ],
+          [
+            121.0563922,
+            14.6511817
+          ],
+          [
+            121.0564574,
+            14.6511013
+          ],
+          [
+            121.0565158,
+            14.651016
+          ],
+          [
+            121.0565669,
+            14.6509266
+          ],
+          [
+            121.0566105,
+            14.6508334
+          ],
+          [
+            121.0566463,
+            14.6507372
+          ],
+          [
+            121.0566739,
+            14.6506385
+          ],
+          [
+            121.0566933,
+            14.6505381
+          ],
+          [
+            121.0567334,
+            14.6503153
+          ],
+          [
+            121.0567583,
+            14.6501513
+          ],
+          [
+            121.056905,
+            14.6493444
+          ],
+          [
+            121.0569187,
+            14.6492647
+          ]
+        ]
+      },
+      "id": "way/94334002"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/116910632",
+        "access": "destination",
+        "highway": "residential",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "20",
+        "name": "Manigo Street",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0555705,
+            14.6509673
+          ],
+          [
+            121.0555224,
+            14.6506477
+          ],
+          [
+            121.0555019,
+            14.6503978
+          ],
+          [
+            121.0555067,
+            14.6501747
+          ],
+          [
+            121.0555427,
+            14.649905
+          ],
+          [
+            121.055536,
+            14.649809
+          ],
+          [
+            121.0555065,
+            14.649735
+          ],
+          [
+            121.0554367,
+            14.6496702
+          ],
+          [
+            121.0553469,
+            14.6496261
+          ],
+          [
+            121.0552474,
+            14.6495961
+          ],
+          [
+            121.0551336,
+            14.6495806
+          ],
+          [
+            121.0549808,
+            14.6495742
+          ],
+          [
+            121.0548037,
+            14.6495949
+          ],
+          [
+            121.0542187,
+            14.6497253
+          ]
+        ]
+      },
+      "id": "way/116910632"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/354030021",
+        "highway": "residential",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "30",
+        "name": "Maharlika Street",
+        "oneway": "yes",
+        "sidewalk:right": "separate",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0542056,
+            14.6501922
+          ],
+          [
+            121.0541245,
+            14.6502045
+          ],
+          [
+            121.0538191,
+            14.650251
+          ],
+          [
+            121.0535841,
+            14.6502867
+          ]
+        ]
+      },
+      "id": "way/354030021"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/354030022",
+        "highway": "residential",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "20",
+        "name": "Mayaman Street",
+        "oneway": "yes",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0544078,
+            14.6517388
+          ],
+          [
+            121.054391,
+            14.65161
+          ],
+          [
+            121.0542477,
+            14.6505139
+          ],
+          [
+            121.0542109,
+            14.6502326
+          ],
+          [
+            121.0542056,
+            14.6501922
+          ]
+        ]
+      },
+      "id": "way/354030022"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/415383309",
+        "highway": "residential",
+        "lanes": "2",
+        "lit": "yes",
+        "name": "Marilag Street",
+        "oneway": "yes",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0562994,
+            14.651672
+          ],
+          [
+            121.056244,
+            14.6516135
+          ],
+          [
+            121.0562003,
+            14.6515463
+          ],
+          [
+            121.0561695,
+            14.6514728
+          ],
+          [
+            121.0561527,
+            14.6513951
+          ]
+        ]
+      },
+      "id": "way/415383309"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/415383310",
+        "highway": "pedestrian",
+        "name": "Alley 22"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0558719,
+            14.6507911
+          ],
+          [
+            121.0562369,
+            14.6511697
+          ],
+          [
+            121.0563205,
+            14.6512568
+          ]
+        ]
+      },
+      "id": "way/415383310"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/415383441",
+        "highway": "pedestrian"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0587751,
+            14.6506235
+          ],
+          [
+            121.0585248,
+            14.6505293
+          ],
+          [
+            121.0579875,
+            14.6503397
+          ],
+          [
+            121.0573997,
+            14.6502433
+          ],
+          [
+            121.0567583,
+            14.6501513
+          ]
+        ]
+      },
+      "id": "way/415383441"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/415399013",
+        "alt_name": "Maayusin Street",
+        "highway": "residential",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "30",
+        "name": "Maayusin Extension",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0570117,
+            14.6521749
+          ],
+          [
+            121.057009,
+            14.6522399
+          ],
+          [
+            121.0569958,
+            14.6523476
+          ],
+          [
+            121.0569763,
+            14.6524546
+          ],
+          [
+            121.0569388,
+            14.6527155
+          ],
+          [
+            121.0568997,
+            14.6529341
+          ],
+          [
+            121.0568929,
+            14.6530518
+          ],
+          [
+            121.0568885,
+            14.6531176
+          ],
+          [
+            121.0568874,
+            14.6533443
+          ],
+          [
+            121.0569108,
+            14.6533959
+          ],
+          [
+            121.0569317,
+            14.6536567
+          ]
+        ]
+      },
+      "id": "way/415399013"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/415399014",
+        "alt_name": "Maayusin Street",
+        "highway": "residential",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "30",
+        "name": "Maayusin Extension",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0569895,
+            14.6517677
+          ],
+          [
+            121.0570068,
+            14.6520922
+          ],
+          [
+            121.0570107,
+            14.6521581
+          ],
+          [
+            121.0570117,
+            14.6521749
+          ]
+        ]
+      },
+      "id": "way/415399014"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/415698171",
+        "access": "destination",
+        "highway": "residential",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "20",
+        "name": "Malumanay Street",
+        "oneway": "yes",
+        "postal_code": "1101",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0545751,
+            14.6459809
+          ],
+          [
+            121.0545119,
+            14.6460778
+          ]
+        ]
+      },
+      "id": "way/415698171"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/415700105",
+        "access": "destination",
+        "highway": "residential",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "20",
+        "name": "Matiwasay Street",
+        "oneway": "yes",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0546463,
+            14.6480315
+          ],
+          [
+            121.0549232,
+            14.6476224
+          ]
+        ]
+      },
+      "id": "way/415700105"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/559724882",
+        "highway": "residential",
+        "lanes": "1",
+        "lit": "yes",
+        "maxspeed": "20",
+        "name": "Makatarungan",
+        "narrow": "yes",
+        "sidewalk": "no",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0591362,
+            14.6511367
+          ],
+          [
+            121.0590489,
+            14.6511491
+          ],
+          [
+            121.0589115,
+            14.6511453
+          ],
+          [
+            121.0588283,
+            14.6511469
+          ],
+          [
+            121.0587497,
+            14.6511694
+          ],
+          [
+            121.0586297,
+            14.6512598
+          ],
+          [
+            121.0581753,
+            14.6516359
+          ],
+          [
+            121.0580774,
+            14.6517215
+          ],
+          [
+            121.0579476,
+            14.6517944
+          ],
+          [
+            121.0577586,
+            14.651911
+          ],
+          [
+            121.0575302,
+            14.6519992
+          ],
+          [
+            121.0573196,
+            14.6520543
+          ],
+          [
+            121.0570662,
+            14.6520907
+          ],
+          [
+            121.0570068,
+            14.6520922
+          ]
+        ]
+      },
+      "id": "way/559724882"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/639876351",
+        "access": "private",
+        "highway": "residential",
+        "lanes": "2",
+        "maxspeed": "20",
+        "name": "Malambing Street",
+        "oneway": "yes",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.059311,
+            14.6473987
+          ],
+          [
+            121.0593341,
+            14.6474896
+          ],
+          [
+            121.0590677,
+            14.6487393
+          ],
+          [
+            121.0589991,
+            14.6490225
+          ],
+          [
+            121.0589496,
+            14.6491939
+          ],
+          [
+            121.0589262,
+            14.6492588
+          ],
+          [
+            121.0588857,
+            14.6493185
+          ],
+          [
+            121.0588485,
+            14.6493604
+          ],
+          [
+            121.0587855,
+            14.6493886
+          ]
+        ]
+      },
+      "id": "way/639876351"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/676939321",
+        "highway": "residential",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "30",
+        "name": "Mahinhin Street",
+        "oneway": "yes",
+        "oneway:conditional": "no@(Mo-Fr 18:00-06:00)",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0550792,
+            14.6462399
+          ],
+          [
+            121.0548744,
+            14.6466066
+          ],
+          [
+            121.0548414,
+            14.6466612
+          ]
+        ]
+      },
+      "id": "way/676939321"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/693901124",
+        "access": "destination",
+        "highway": "residential",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "20",
+        "name": "Mahusay Street",
+        "oneway": "yes",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0546463,
+            14.6480315
+          ],
+          [
+            121.0552427,
+            14.6483896
+          ],
+          [
+            121.0553502,
+            14.6484411
+          ],
+          [
+            121.0554428,
+            14.6484813
+          ],
+          [
+            121.0555375,
+            14.6485184
+          ],
+          [
+            121.0556227,
+            14.6485472
+          ],
+          [
+            121.0557079,
+            14.648574
+          ],
+          [
+            121.0557951,
+            14.6485977
+          ],
+          [
+            121.0559378,
+            14.6486317
+          ],
+          [
+            121.0563027,
+            14.6486959
+          ]
+        ]
+      },
+      "id": "way/693901124"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/693901125",
+        "highway": "tertiary",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "40",
+        "name": "Maginhawa Street",
+        "oneway": "yes",
+        "sidewalk:right": "yes",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0574759,
+            14.6473294
+          ],
+          [
+            121.0574094,
+            14.6474135
+          ],
+          [
+            121.0573433,
+            14.6475193
+          ],
+          [
+            121.0573084,
+            14.6475795
+          ],
+          [
+            121.0572649,
+            14.6476591
+          ],
+          [
+            121.0572357,
+            14.6477113
+          ],
+          [
+            121.0571872,
+            14.6478417
+          ],
+          [
+            121.0571296,
+            14.6480366
+          ],
+          [
+            121.0571025,
+            14.648157
+          ],
+          [
+            121.0570863,
+            14.6482232
+          ],
+          [
+            121.0570265,
+            14.648709
+          ]
+        ]
+      },
+      "id": "way/693901125"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/824295756",
+        "highway": "residential",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "20",
+        "name": "Mahusay Street",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0573407,
+            14.6488466
+          ],
+          [
+            121.0570188,
+            14.6487958
+          ]
+        ]
+      },
+      "id": "way/824295756"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/824295757",
+        "highway": "residential",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "30",
+        "name": "Marilag Street",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0569895,
+            14.6517677
+          ],
+          [
+            121.056705,
+            14.651766
+          ],
+          [
+            121.0565305,
+            14.6517334
+          ],
+          [
+            121.0562994,
+            14.651672
+          ]
+        ]
+      },
+      "id": "way/824295757"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/890256469",
+        "access": "yes",
+        "highway": "residential",
+        "lanes": "2",
+        "maxspeed": "20",
+        "motor_vehicle": "yes",
+        "name": "Maayusin Street",
+        "oneway": "yes",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0576109,
+            14.6488848
+          ],
+          [
+            121.0575206,
+            14.6494348
+          ],
+          [
+            121.0573997,
+            14.6502433
+          ],
+          [
+            121.0572882,
+            14.6509471
+          ],
+          [
+            121.0570065,
+            14.6514785
+          ],
+          [
+            121.05699,
+            14.6515306
+          ],
+          [
+            121.0569836,
+            14.6515785
+          ],
+          [
+            121.0569814,
+            14.6516254
+          ],
+          [
+            121.0569844,
+            14.6516784
+          ]
+        ]
+      },
+      "id": "way/890256469"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/900687921",
+        "highway": "residential",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "20",
+        "name": "Mayaman Street",
+        "sidewalk:right": "yes",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0542056,
+            14.6501922
+          ],
+          [
+            121.0541846,
+            14.6500627
+          ]
+        ]
+      },
+      "id": "way/900687921"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1063026931",
+        "access": "destination",
+        "highway": "residential",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "20",
+        "name": "Malumanay Street",
+        "oneway": "yes",
+        "postal_code": "1101",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0545119,
+            14.6460778
+          ],
+          [
+            121.0533507,
+            14.6479485
+          ]
+        ]
+      },
+      "id": "way/1063026931"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1063026932",
+        "highway": "residential",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "20",
+        "name": "Malumanay Street",
+        "oneway": "yes",
+        "postal_code": "1101",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0533507,
+            14.6479485
+          ],
+          [
+            121.0533004,
+            14.6480295
+          ]
+        ]
+      },
+      "id": "way/1063026932"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1063026933",
+        "access": "destination",
+        "highway": "residential",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "30",
+        "name": "Mahinhin Street",
+        "oneway": "yes",
+        "oneway:conditional": "no@(Mo-Fr 18:00-06:00)",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0548414,
+            14.6466612
+          ],
+          [
+            121.0546197,
+            14.6470206
+          ],
+          [
+            121.0544829,
+            14.6472454
+          ]
+        ]
+      },
+      "id": "way/1063026933"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1063026934",
+        "highway": "residential",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "30",
+        "name": "Mahinhin Street",
+        "oneway": "yes",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0537061,
+            14.6484304
+          ],
+          [
+            121.0536461,
+            14.6485228
+          ]
+        ]
+      },
+      "id": "way/1063026934"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1063026935",
+        "access": "destination",
+        "highway": "residential",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "20",
+        "name": "Matiwasay Street",
+        "oneway": "yes",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0549232,
+            14.6476224
+          ],
+          [
+            121.054976,
+            14.6475444
+          ]
+        ]
+      },
+      "id": "way/1063026935"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1063026936",
+        "access": "destination",
+        "highway": "residential",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "20",
+        "name": "Manigo Street",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0542187,
+            14.6497253
+          ],
+          [
+            121.0541278,
+            14.6497423
+          ]
+        ]
+      },
+      "id": "way/1063026936"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1063026937",
+        "highway": "residential",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "20",
+        "name": "Matiwasay Street",
+        "oneway": "yes",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0550411,
+            14.6515438
+          ],
+          [
+            121.0550599,
+            14.6516781
+          ]
+        ]
+      },
+      "id": "way/1063026937"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1063026938",
+        "highway": "residential",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "20",
+        "name": "Mahusay Street",
+        "oneway": "yes",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0568186,
+            14.6487725
+          ],
+          [
+            121.0569612,
+            14.6487894
+          ]
+        ]
+      },
+      "id": "way/1063026938"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1065527812",
+        "highway": "tertiary",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "30",
+        "name": "Mapagkawanggawa Street",
+        "postal_code": "1101",
+        "sidewalk": "both",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.057501,
+            14.6472602
+          ],
+          [
+            121.0573949,
+            14.6471445
+          ],
+          [
+            121.0573409,
+            14.6470601
+          ],
+          [
+            121.0572945,
+            14.6469652
+          ],
+          [
+            121.0572684,
+            14.6468943
+          ],
+          [
+            121.0572532,
+            14.6468412
+          ],
+          [
+            121.0572382,
+            14.6467693
+          ],
+          [
+            121.0572324,
+            14.6467216
+          ],
+          [
+            121.0572291,
+            14.6466943
+          ],
+          [
+            121.0572272,
+            14.6465892
+          ],
+          [
+            121.0572293,
+            14.6465095
+          ],
+          [
+            121.0572341,
+            14.6463022
+          ],
+          [
+            121.057237,
+            14.646158
+          ]
+        ]
+      },
+      "id": "way/1065527812"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1172898744",
+        "highway": "residential",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "20",
+        "name": "Marilag Street",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0570667,
+            14.6517554
+          ],
+          [
+            121.0569895,
+            14.6517677
+          ]
+        ]
+      },
+      "id": "way/1172898744"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1231841045",
+        "access": "destination",
+        "highway": "residential",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "30",
+        "name": "Mayumi Street",
+        "oneway": "no",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.054976,
+            14.6475444
+          ],
+          [
+            121.0544829,
+            14.6472454
+          ]
+        ]
+      },
+      "id": "way/1231841045"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1231841046",
+        "access": "destination",
+        "highway": "residential",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "30",
+        "name": "Mayumi Street",
+        "oneway": "no",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0550805,
+            14.6476069
+          ],
+          [
+            121.054976,
+            14.6475444
+          ]
+        ]
+      },
+      "id": "way/1231841046"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1231852821",
+        "access": "destination",
+        "highway": "residential",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "20",
+        "name": "Mahusay Street",
+        "oneway": "yes",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0563027,
+            14.6486959
+          ],
+          [
+            121.0568186,
+            14.6487725
+          ]
+        ]
+      },
+      "id": "way/1231852821"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1251617939",
+        "highway": "residential",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "30",
+        "name": "Marilag Street",
+        "oneway": "yes",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0557585,
+            14.6515793
+          ],
+          [
+            121.0558428,
+            14.6515939
+          ],
+          [
+            121.055902,
+            14.6516043
+          ],
+          [
+            121.0562994,
+            14.651672
+          ]
+        ]
+      },
+      "id": "way/1251617939"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1280059907",
+        "access": "destination",
+        "highway": "residential",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "20",
+        "name": "Matiwasay Street",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0548037,
+            14.6495949
+          ],
+          [
+            121.0545824,
+            14.6489176
+          ],
+          [
+            121.0544644,
+            14.6486028
+          ],
+          [
+            121.0544462,
+            14.648551
+          ],
+          [
+            121.0544328,
+            14.6484872
+          ],
+          [
+            121.0544235,
+            14.6484269
+          ],
+          [
+            121.0544314,
+            14.6483661
+          ],
+          [
+            121.0544765,
+            14.6482779
+          ],
+          [
+            121.0546463,
+            14.6480315
+          ]
+        ]
+      },
+      "id": "way/1280059907"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1282418985",
+        "access": "destination",
+        "foot": "yes",
+        "highway": "residential",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "20",
+        "motor_vehicle": "yes",
+        "name": "Matiwasay Street",
+        "oneway": "yes",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0549866,
+            14.6510092
+          ],
+          [
+            121.0550411,
+            14.6515438
+          ]
+        ]
+      },
+      "id": "way/1282418985"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1303421716",
+        "footway": "sidewalk",
+        "highway": "footway",
+        "tactile_paving": "no",
+        "wheelchair": "limited"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0542109,
+            14.6502326
+          ],
+          [
+            121.0536424,
+            14.6503208
+          ]
+        ]
+      },
+      "id": "way/1303421716"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1303811453",
+        "highway": "tertiary",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "40",
+        "name": "Maginhawa Street",
+        "oneway": "yes",
+        "sidewalk:right": "yes",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.057501,
+            14.6472602
+          ],
+          [
+            121.0574759,
+            14.6473294
+          ]
+        ]
+      },
+      "id": "way/1303811453"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1303811454",
+        "highway": "tertiary",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "40",
+        "name": "Maginhawa Street",
+        "oneway": "yes",
+        "sidewalk:right": "yes",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0574232,
+            14.6472938
+          ],
+          [
+            121.057501,
+            14.6472602
+          ]
+        ]
+      },
+      "id": "way/1303811454"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1303811455",
+        "highway": "tertiary",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "40",
+        "name": "Maginhawa Street",
+        "oneway": "yes",
+        "sidewalk:right": "yes",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0569612,
+            14.6487894
+          ],
+          [
+            121.0569727,
+            14.6487037
+          ]
+        ]
+      },
+      "id": "way/1303811455"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1303811456",
+        "highway": "tertiary",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "40",
+        "name": "Maginhawa Street",
+        "oneway": "yes",
+        "sidewalk:right": "yes",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0570265,
+            14.648709
+          ],
+          [
+            121.0570188,
+            14.6487958
+          ]
+        ]
+      },
+      "id": "way/1303811456"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1303811457",
+        "highway": "tertiary",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "40",
+        "name": "Maginhawa Street",
+        "oneway": "yes",
+        "sidewalk:right": "yes",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0569727,
+            14.6487037
+          ],
+          [
+            121.0570384,
+            14.6482159
+          ],
+          [
+            121.0570505,
+            14.6481449
+          ],
+          [
+            121.0571044,
+            14.6479198
+          ],
+          [
+            121.0571882,
+            14.6476899
+          ]
+        ]
+      },
+      "id": "way/1303811457"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1303811458",
+        "highway": "residential",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "20",
+        "name": "Mahusay Street",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0569612,
+            14.6487894
+          ],
+          [
+            121.0570188,
+            14.6487958
+          ]
+        ]
+      },
+      "id": "way/1303811458"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1303811460",
+        "access": "permissive",
+        "highway": "residential",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "30",
+        "name": "Mayumi Street",
+        "oneway": "yes",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0570384,
+            14.6482159
+          ],
+          [
+            121.056919,
+            14.6482021
+          ]
+        ]
+      },
+      "id": "way/1303811460"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1303811461",
+        "highway": "tertiary",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "40",
+        "name": "Maginhawa Street",
+        "oneway": "yes",
+        "sidewalk:right": "yes",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0570188,
+            14.6487958
+          ],
+          [
+            121.0570098,
+            14.6488564
+          ],
+          [
+            121.0569575,
+            14.6491959
+          ],
+          [
+            121.0569187,
+            14.6492647
+          ]
+        ]
+      },
+      "id": "way/1303811461"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1303811462",
+        "highway": "tertiary",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "40",
+        "name": "Maginhawa Street",
+        "oneway": "yes",
+        "sidewalk:right": "yes",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0569187,
+            14.6492647
+          ],
+          [
+            121.0568972,
+            14.6491865
+          ],
+          [
+            121.05695,
+            14.6488467
+          ],
+          [
+            121.0569612,
+            14.6487894
+          ]
+        ]
+      },
+      "id": "way/1303811462"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1303811464",
+        "highway": "tertiary",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "40",
+        "name": "Maginhawa Street",
+        "oneway": "yes",
+        "sidewalk:right": "yes",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0571882,
+            14.6476899
+          ],
+          [
+            121.0572925,
+            14.6474793
+          ],
+          [
+            121.0574232,
+            14.6472938
+          ]
+        ]
+      },
+      "id": "way/1303811464"
+    }
+  ]
+}
+
+}
