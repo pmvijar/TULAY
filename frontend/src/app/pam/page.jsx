@@ -15,9 +15,14 @@ import {
   BusFront,
   X,
   Rows4,
+  TriangleAlert,
+  Move,
+  PersonStanding,
 } from "lucide-react";
 import ReactDOMServer from "react-dom/server";
-
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import * as RadioGroup from "@radix-ui/react-radio-group";
+import "react-circular-progressbar/dist/styles.css";
 import "leaflet/dist/leaflet.css";
 
 const MapContainer = dynamic(
@@ -79,6 +84,62 @@ const PassageIcon = L.divIcon({
   iconAnchor: [20, 20],
 });
 
+const LayerSelector = ({ activeLayer, setActiveLayer }) => {
+  const layers = [
+    {
+      label: "Mobility",
+      value: "mobility",
+      icon: <Move className="w-4 h-4 text-blue-500" />,
+      // description: "Tracks stations and routes.",
+    },
+    {
+      label: "Safety",
+      value: "safety",
+      icon: <TriangleAlert className="w-4 h-4 text-yellow-300" />,
+      // description: "Tracks passages and incidents.",
+    },
+    {
+      label: "Accessibility",
+      value: "accessibility",
+      icon: <PersonStanding className="w-4 h-4 text-green-500" />,
+      // description: "Tracks roads and sidewalks.",
+    },
+  ];
+
+  return (
+    <div
+      className="absolute left-80 transform bottom-20 bg-white opacity-95 shadow-lg rounded-md p-3"
+      style={{
+        zIndex: 1000, // Ensure it appears above the map
+        width: "200px", // Adjust width if needed
+      }}
+    >
+      <RadioGroup.Root
+        value={activeLayer}
+        onValueChange={(value) => setActiveLayer(value)}
+        className="space-y-2 flex flex-col"
+      >
+        {layers.map((layer) => (
+          <RadioGroup.Item
+            key={layer.value}
+            value={layer.value}
+            className={`cursor-pointer border border-gray-300 rounded-md py-3 px-4 flex items-center space-x-3 ${
+              activeLayer === layer.value
+                ? "bg-blue-50 border-blue-400"
+                : "hover:border-gray-400"
+            }`}
+          >
+            {layer.icon} {/* Render the icon */}
+            <div className="flex flex-col text-gray-600">
+              <span className="text-sm font-semibold">{layer.label}</span>
+            </div>
+          </RadioGroup.Item>
+        ))}
+      </RadioGroup.Root>
+    </div>
+  );
+};
+
 const GISMapPage = () => {
   const [geoJsonLayers, setGeoJsonLayers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -87,6 +148,12 @@ const GISMapPage = () => {
   const [stations, setStations] = useState([]);
   const [passages, setPassages] = useState([]);
   const [selectedFeature, setSelectedFeature] = useState(null); // Unified state for selected barangay or station
+  const [activeLayers, setActiveLayers] = useState({
+    mobility: true,
+    safety: false,
+    accessibility: false,
+  });
+  const [activeLayer, setActiveLayer] = useState("accessibility");
 
   const renderStationMarkers = () => {
     const renderedNames = new Set();
@@ -193,9 +260,100 @@ const GISMapPage = () => {
     }
   };
 
+  const renderGeoJsonLayers = () => {
+    return geoUnits.map((geoUnit) => {
+      // Select the score based on the active layer
+      const score =
+        activeLayer === "accessibility"
+          ? geoUnit.properties.accessibilityScore
+          : activeLayer === "safety"
+          ? geoUnit.properties.safetyScore
+          : geoUnit.properties.mobilityScore;
+
+      // Generate color based on the selected score
+      const color = generateColorFromScore(score);
+
+      return (
+        <GeoJSON
+          key={geoUnit.properties.id}
+          data={geoUnit} // GeoJSON data
+          style={{
+            color: "gray", // Outline color
+            weight: 1.3, // Border thickness
+            fillOpacity: 0.2, // Transparency
+            fillColor: color, // Use the dynamically generated color
+          }}
+          onEachFeature={onEachBarangay} // Pass the function here
+        />
+      );
+    });
+  };
+
+  const ProgressIndicator = ({ score, label }) => {
+    return (
+      <div
+        style={{
+          position: "relative",
+          width: 120,
+          height: 120,
+          textAlign: "center",
+        }}
+      >
+        <CircularProgressbar
+          value={score}
+          text={``} // Remove the percentage text from CircularProgressbar
+          styles={buildStyles({
+            pathColor:
+              score > 90
+                ? "#4CAF50" // Green
+                : score > 80
+                ? "#8BC34A" // Light Green
+                : score > 60
+                ? "#FFC107" // Yellow
+                : score > 40
+                ? "#FF9800" // Orange
+                : score > 20
+                ? "#F44336" // Red
+                : "#D32F2F", // Dark Red
+            textColor: "#3A3D46", // Text color
+            trailColor: "#d6d6d6", // Gray background trail
+            textSize: "16px", // Adjust font size
+          })}
+        />
+        {/* Custom text and label inside the circle */}
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            color: "#3A3D46",
+            fontSize: "18px",
+            fontWeight: "bold",
+            lineHeight: "1.2",
+          }}
+        >
+          <div>{`${score}%`}</div> {/* Score */}
+          <div
+            style={{
+              fontSize: "10px",
+              fontWeight: "bold",
+              marginTop: "4px",
+              opacity: "0.6",
+            }}
+          >
+            {label}
+          </div>{" "}
+          {/* Label */}
+        </div>
+      </div>
+    );
+  };
+
   const renderRoads = () => {
+    console.log("Geo Units Before:", geoUnits);
     return geoUnits.flatMap((geoUnit) =>
-      geoUnit.roadsWithin.roads
+      geoUnit.properties.roadsWithin.roads
         .filter((road) => !road.hasSidewalk) // Only render roads without sidewalks
         .map((road) => (
           <GeoJSON
@@ -221,7 +379,7 @@ const GISMapPage = () => {
 
   const renderSidewalks = () => {
     return geoUnits.flatMap((geoUnit) =>
-      geoUnit.sidewalksWithin.sidewalks.map((sidewalk) => (
+      geoUnit.properties.sidewalksWithin.sidewalks.map((sidewalk) => (
         <GeoJSON
           key={sidewalk.osm_id}
           data={{
@@ -306,7 +464,7 @@ const GISMapPage = () => {
           }).then((res) => res.json()),
         ]);
 
-        setGeoUnits(geoUnits);
+        // setGeoUnits(geoUnits);
 
         const enrichedGeoUnits = geoUnits.map((unit) => {
           const sidewalkRatio =
@@ -323,7 +481,9 @@ const GISMapPage = () => {
               postalCode: unit.postalCode || "N/A",
               area: unit.area,
               population: unit.population,
-              color: generateColorFromScore(unit.proximityScore) || "gray",
+              roadsWithin: unit.roadsWithin,
+              sidewalksWithin: unit.sidewalksWithin,
+              // color: generateColorFromScore(unit.proximityScore) || "gray",
               proximityScore: unit.proximityScore || 0,
               fillOpacity: 0.4,
               ...(sidewalkRatio !== undefined && { sidewalkRatio }), // Add sidewalkRatio only if it's defined
@@ -333,22 +493,33 @@ const GISMapPage = () => {
               ...(unit.fatalityRate !== undefined && {
                 fatalityRate: unit.fatalityRate,
               }), // Add fatalityRate only if it exists
+              // accessibilityScore: 0.6, // Placeholder value
+              accessibilityScore: unit.accessibilityScore,
+              mobilityScore: unit.mobilityScore,
+              safetyScore: unit.safetyScore,
+              // mobilityScore: 0.4, // Placeholder value
+              // safetyScore: 0.2, // Placeholder value
             },
             geometry: unit.location, // Use the location field directly
           };
         });
 
-        setGeoJsonLayers(
-          enrichedGeoUnits.map((geoUnit) => ({
-            data: geoUnit,
-            style: {
-              color: "gray", // Outline color
-              weight: 1.3, // Border thickness
-              fillOpacity: 0.2, // Fill transparency
-              fillColor: geoUnit.properties.color, // Use generated color
-            },
-          }))
-        );
+        setGeoUnits(enrichedGeoUnits);
+
+        // setGeoJsonLayers(
+        //   console.log("Enriched Geo Units:", enrichedGeoUnits) ||
+        //     enrichedGeoUnits.map((geoUnit) => ({
+        //       data: geoUnit,
+        //       style: {
+        //         color: "gray", // Outline color
+        //         weight: 1.3, // Border thickness
+        //         fillOpacity: 0.2, // Fill transparency
+        //         fillColor: generateColorFromScore(
+        //           geoUnit.properties.proximityScore
+        //         ), // Use generated color
+        //       },
+        //     }))
+        // );
 
         setStations(stations);
         setPassages(passages);
@@ -405,7 +576,7 @@ const GISMapPage = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-row">
+    <div className="min-h-screen flex flex-row relative">
       <section className="flex flex-col justify-around min-w-56 px-3 bg-white shadow-md rounded-r-3xl">
         <div className="pt-6 pl-3 flex items-center">
           <Image
@@ -465,7 +636,7 @@ const GISMapPage = () => {
 
       {selectedFeature && (
         <div
-          className="absolute top-20 right-10 w-64 bg-white p-4 shadow-lg border border-gray-200 rounded-md"
+          className="absolute top-20 right-10 w-48 bg-white p-4 shadow-lg border border-gray-200 rounded-md"
           style={{
             zIndex: 1000,
           }}
@@ -482,7 +653,7 @@ const GISMapPage = () => {
             <div className="flex flex-row justify-between">
               <h3 className="text-lg font-semibold">{selectedFeature.name}</h3>
               <button
-                className=" text-gray"
+                className=" text-gray flex flex-col items-start"
                 onClick={() => setSelectedFeature(null)}
               >
                 <X />
@@ -491,7 +662,7 @@ const GISMapPage = () => {
 
             {selectedFeature.type === "geounit" && (
               <div classname="flex flex-col">
-                <div
+                {/* <div
                   style={{ color: selectedFeature.color }}
                   className="text-sm"
                 >
@@ -504,11 +675,21 @@ const GISMapPage = () => {
                   ) : (
                     <h1>Not Accessible</h1>
                   )}
+                </div> */}
+                <div className="flex flex-col my-4 space-y-4 items-center">
+                  <ProgressIndicator
+                    score={Math.round(selectedFeature.accessibilityScore * 100)}
+                    label="Accessibility"
+                  />
+                  <ProgressIndicator
+                    score={Math.round(selectedFeature.mobilityScore * 100)}
+                    label="Mobility"
+                  />
+                  <ProgressIndicator
+                    score={Math.round(selectedFeature.safetyScore * 100)}
+                    label="Safety"
+                  />
                 </div>
-                <h1>
-                  Accessibility Score:{" "}
-                  {(selectedFeature.proximityScore * 100).toFixed(2)}%
-                </h1>
               </div>
             )}
 
@@ -516,29 +697,26 @@ const GISMapPage = () => {
           </div>
         </div>
       )}
+      <LayerSelector
+        activeLayer={activeLayer}
+        setActiveLayer={setActiveLayer}
+      />
 
       <div className="flex-grow">
         <MapContainer
           center={[14.6197, 121.051]} // Coordinates for Cubao, Araneta City
           zoom={15} // Adjusted zoom level for a detailed view of the area
-          style={{ height: "100vh", width: "100%" }}
+          style={{ height: "100vh", width: "100%", zIndex: 1 }}
         >
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
-          {geoJsonLayers.map((layer, index) => (
-            <GeoJSON
-              key={index}
-              data={layer.data}
-              style={layer.style}
-              onEachFeature={onEachBarangay}
-            />
-          ))}
-          {renderStationMarkers()}
-          {renderPassageMarkers()}
-          {renderRoads()}
-          {renderSidewalks()}
+          {renderGeoJsonLayers()}
+          {activeLayer == "mobility" && renderStationMarkers()}
+          {activeLayer == "safety" && renderPassageMarkers()}
+          {activeLayer == "accessibility" && renderRoads()}
+          {activeLayer == "accessibility" && renderSidewalks()}
 
           {/* <MapWithTooltip /> */}
         </MapContainer>
