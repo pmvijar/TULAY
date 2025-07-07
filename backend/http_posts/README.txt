@@ -1,0 +1,1 @@
+post barangays first, before posting the road and sidewalks of each barangays

@@ -607,3 +607,39 @@ Content-Type: application/json
 {
   "userPrompt": "What term did I just ask you to define?"
 }
+
+###
+
+POST http://localhost:3001/calc-proximity
+Content-Type: application/json
+
+{
+  
+}
+
+###
+
+POST http://localhost:3001/get-geounits
+Content-Type: application/json
+
+{
+  
+}
+
+###
+
+POST http://localhost:3001/get-stations
+Content-Type: application/json
+
+{
+  
+}
+
+###
+
+POST http://localhost:3001/get-passages
+Content-Type: application/json
+
+{
+  
+}

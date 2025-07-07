@@ -1,0 +1,3140 @@
+###
+POST http://localhost:3001/upload-ways
+Content-Type: application/json
+
+{
+    "name": "Central",
+    "wayType": "sidewalk",
+    "geoJSON":
+    {
+  "type": "FeatureCollection",
+  "generator": "overpass-turbo",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "timestamp": "2025-01-16T07:03:18Z",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/10404066",
+        "footway": "sidewalk",
+        "highway": "footway",
+        "tactile_paving": "no",
+        "wheelchair": "limited"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0411116,
+            14.6460521
+          ],
+          [
+            121.0411262,
+            14.6461626
+          ],
+          [
+            121.0413188,
+            14.6462825
+          ],
+          [
+            121.0423776,
+            14.6469293
+          ],
+          [
+            121.0424774,
+            14.6469905
+          ],
+          [
+            121.0429109,
+            14.6472606
+          ],
+          [
+            121.0433017,
+            14.6475001
+          ],
+          [
+            121.0436288,
+            14.6476971
+          ],
+          [
+            121.0447081,
+            14.6483471
+          ],
+          [
+            121.0449021,
+            14.6484582
+          ],
+          [
+            121.0458008,
+            14.6490056
+          ],
+          [
+            121.0461361,
+            14.6492252
+          ],
+          [
+            121.0461779,
+            14.6492513
+          ],
+          [
+            121.0465815,
+            14.6495034
+          ],
+          [
+            121.0467041,
+            14.6495731
+          ],
+          [
+            121.0468047,
+            14.6496046
+          ],
+          [
+            121.0469181,
+            14.6496124
+          ],
+          [
+            121.0470364,
+            14.6496049
+          ],
+          [
+            121.0471533,
+            14.6495781
+          ],
+          [
+            121.0472754,
+            14.6495366
+          ],
+          [
+            121.0473767,
+            14.6494768
+          ],
+          [
+            121.0475794,
+            14.6492741
+          ],
+          [
+            121.048125,
+            14.6488553
+          ],
+          [
+            121.0481679,
+            14.6488073
+          ],
+          [
+            121.0482162,
+            14.6487399
+          ],
+          [
+            121.0482565,
+            14.6486698
+          ],
+          [
+            121.0482984,
+            14.6485833
+          ],
+          [
+            121.0483396,
+            14.648483
+          ],
+          [
+            121.0483641,
+            14.6484114
+          ],
+          [
+            121.0483785,
+            14.6483454
+          ],
+          [
+            121.0483865,
+            14.6482792
+          ],
+          [
+            121.0483865,
+            14.6482118
+          ],
+          [
+            121.0483755,
+            14.6480963
+          ],
+          [
+            121.0482645,
+            14.6476216
+          ],
+          [
+            121.0482225,
+            14.6474476
+          ],
+          [
+            121.0481417,
+            14.6470844
+          ],
+          [
+            121.0481371,
+            14.6470636
+          ],
+          [
+            121.0479128,
+            14.6460568
+          ],
+          [
+            121.0478348,
+            14.6457411
+          ]
+        ]
+      },
+      "id": "way/10404066"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/18578491",
+        "bicycle": "yes",
+        "cycleway:right": "lane",
+        "cycleway:right:lane": "advisory",
+        "foot": "no",
+        "highway": "primary",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "60",
+        "name": "East Avenue",
+        "oneway": "yes",
+        "ref": "174",
+        "sidewalk:right": "separate",
+        "source:maxspeed": "PH:urban",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0484369,
+            14.6480969
+          ],
+          [
+            121.0481958,
+            14.6470773
+          ],
+          [
+            121.04819,
+            14.6470528
+          ],
+          [
+            121.047951,
+            14.6460424
+          ],
+          [
+            121.0479437,
+            14.6460115
+          ],
+          [
+            121.0478772,
+            14.6457303
+          ],
+          [
+            121.0477134,
+            14.6450379
+          ]
+        ]
+      },
+      "id": "way/18578491"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/22873047",
+        "highway": "residential",
+        "lanes": "2",
+        "maxspeed": "30",
+        "name": "Matiyaga Street",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0495115,
+            14.6409067
+          ],
+          [
+            121.049767,
+            14.6408708
+          ],
+          [
+            121.0501423,
+            14.6408478
+          ],
+          [
+            121.0506402,
+            14.6408712
+          ],
+          [
+            121.0510357,
+            14.6409343
+          ],
+          [
+            121.0515199,
+            14.6410357
+          ]
+        ]
+      },
+      "id": "way/22873047"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/22918837",
+        "highway": "residential",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "30",
+        "name": "Maginoo Street",
+        "oneway": "yes",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0535235,
+            14.642629
+          ],
+          [
+            121.0532108,
+            14.6434392
+          ],
+          [
+            121.0529829,
+            14.6439517
+          ],
+          [
+            121.0526576,
+            14.6446523
+          ],
+          [
+            121.0522853,
+            14.6452411
+          ]
+        ]
+      },
+      "id": "way/22918837"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/22918900",
+        "highway": "residential",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "30",
+        "name": "Maginoo Street",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0534874,
+            14.6414985
+          ],
+          [
+            121.053404,
+            14.641828
+          ],
+          [
+            121.0533468,
+            14.6420685
+          ],
+          [
+            121.0533376,
+            14.6421133
+          ],
+          [
+            121.0535235,
+            14.642629
+          ]
+        ]
+      },
+      "id": "way/22918900"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/22918914",
+        "access": "destination",
+        "highway": "unclassified",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "30",
+        "name": "Mayaman Street",
+        "oneway": "yes",
+        "sidewalk": "both",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0491217,
+            14.6457581
+          ],
+          [
+            121.049394,
+            14.6457309
+          ],
+          [
+            121.0496521,
+            14.645715
+          ],
+          [
+            121.0499108,
+            14.6457125
+          ],
+          [
+            121.0501692,
+            14.6457233
+          ],
+          [
+            121.0504712,
+            14.645753
+          ],
+          [
+            121.0507707,
+            14.6458009
+          ],
+          [
+            121.0511182,
+            14.6458803
+          ],
+          [
+            121.0514502,
+            14.6459755
+          ],
+          [
+            121.0516162,
+            14.6460416
+          ],
+          [
+            121.0518994,
+            14.6461603
+          ]
+        ]
+      },
+      "id": "way/22918914"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/22918925",
+        "highway": "residential",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "30",
+        "name": "Masikap Street Extension",
+        "oneway": "yes",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0517384,
+            14.6450277
+          ],
+          [
+            121.0521615,
+            14.6442423
+          ],
+          [
+            121.0524227,
+            14.6437168
+          ],
+          [
+            121.0526586,
+            14.6431508
+          ],
+          [
+            121.0528417,
+            14.6426343
+          ],
+          [
+            121.0530102,
+            14.6420885
+          ],
+          [
+            121.0530245,
+            14.642044
+          ]
+        ]
+      },
+      "id": "way/22918925"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/22918928",
+        "highway": "residential",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "30",
+        "name": "Matulungin Street",
+        "oneway": "yes",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0528417,
+            14.6426343
+          ],
+          [
+            121.0512096,
+            14.642231
+          ],
+          [
+            121.0507214,
+            14.6421511
+          ],
+          [
+            121.0502466,
+            14.6421009
+          ],
+          [
+            121.0497915,
+            14.6421246
+          ]
+        ]
+      },
+      "id": "way/22918928"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/22919045",
+        "highway": "residential",
+        "lanes": "2",
+        "maxspeed": "30",
+        "name": "Maaralin Street",
+        "oneway": "yes",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0502021,
+            14.64386
+          ],
+          [
+            121.0504904,
+            14.6438757
+          ],
+          [
+            121.0506159,
+            14.6438987
+          ],
+          [
+            121.0521615,
+            14.6442423
+          ]
+        ]
+      },
+      "id": "way/22919045"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/22919099",
+        "highway": "residential",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "30",
+        "name": "Mabuhay Street",
+        "parking:left": "lane",
+        "parking:left:orientation": "parallel",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0496532,
+            14.6415292
+          ],
+          [
+            121.0499783,
+            14.6415013
+          ],
+          [
+            121.050383,
+            14.6415071
+          ],
+          [
+            121.0508377,
+            14.6415461
+          ],
+          [
+            121.0513644,
+            14.6416504
+          ]
+        ]
+      },
+      "id": "way/22919099"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/22919113",
+        "highway": "residential",
+        "lanes": "2",
+        "maxspeed": "30",
+        "name": "Masigla Street",
+        "oneway": "yes",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0524227,
+            14.6437168
+          ],
+          [
+            121.0522892,
+            14.6436432
+          ],
+          [
+            121.0507753,
+            14.6432904
+          ],
+          [
+            121.050438,
+            14.6432436
+          ],
+          [
+            121.0500578,
+            14.643244
+          ]
+        ]
+      },
+      "id": "way/22919113"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/23088393",
+        "access": "permissive",
+        "highway": "unclassified",
+        "lanes": "2",
+        "maxspeed": "30",
+        "name": "Makatarungan Street",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.047958,
+            14.6456043
+          ],
+          [
+            121.0480067,
+            14.6455907
+          ],
+          [
+            121.0480554,
+            14.6455774
+          ],
+          [
+            121.0483004,
+            14.6455172
+          ],
+          [
+            121.0485478,
+            14.6454669
+          ],
+          [
+            121.0487971,
+            14.6454265
+          ],
+          [
+            121.0490479,
+            14.645396
+          ],
+          [
+            121.0494237,
+            14.6453694
+          ],
+          [
+            121.0498005,
+            14.6453651
+          ],
+          [
+            121.0501768,
+            14.6453833
+          ],
+          [
+            121.050646,
+            14.6454378
+          ],
+          [
+            121.0511095,
+            14.6455272
+          ],
+          [
+            121.0515644,
+            14.6456509
+          ],
+          [
+            121.0519039,
+            14.6457678
+          ],
+          [
+            121.0522357,
+            14.6459039
+          ],
+          [
+            121.0525546,
+            14.6460565
+          ],
+          [
+            121.052666,
+            14.6461153
+          ]
+        ]
+      },
+      "id": "way/23088393"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/61450521",
+        "cycleway:right": "lane",
+        "cycleway:right:lane": "advisory",
+        "cycleway:separation:left": "double_solid_line",
+        "highway": "secondary",
+        "lanes": "3",
+        "lit": "yes",
+        "maxspeed": "50",
+        "name": "Kalayaan Avenue",
+        "oneway": "yes",
+        "oneway:bicycle": "yes",
+        "parking:lane:both": "no_parking",
+        "sidewalk:right": "yes",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0541882,
+            14.633739
+          ],
+          [
+            121.0542032,
+            14.6338049
+          ],
+          [
+            121.0542064,
+            14.6338462
+          ],
+          [
+            121.0541974,
+            14.6339037
+          ],
+          [
+            121.0541965,
+            14.6339666
+          ],
+          [
+            121.0542006,
+            14.6341879
+          ],
+          [
+            121.054233,
+            14.6344014
+          ],
+          [
+            121.05434,
+            14.6348525
+          ],
+          [
+            121.05439,
+            14.6350841
+          ],
+          [
+            121.0544416,
+            14.6353233
+          ],
+          [
+            121.0545816,
+            14.6358938
+          ],
+          [
+            121.0546158,
+            14.6360332
+          ],
+          [
+            121.0546426,
+            14.6361487
+          ],
+          [
+            121.0546621,
+            14.6362498
+          ],
+          [
+            121.0547313,
+            14.6366401
+          ],
+          [
+            121.0547404,
+            14.6366913
+          ],
+          [
+            121.0547618,
+            14.6368221
+          ],
+          [
+            121.0547863,
+            14.6369717
+          ],
+          [
+            121.0547871,
+            14.6369765
+          ],
+          [
+            121.0548752,
+            14.6375763
+          ],
+          [
+            121.0548878,
+            14.6376837
+          ],
+          [
+            121.0548965,
+            14.6378263
+          ],
+          [
+            121.054903,
+            14.637942
+          ],
+          [
+            121.0549205,
+            14.6382171
+          ],
+          [
+            121.0549308,
+            14.6385637
+          ],
+          [
+            121.0549357,
+            14.6392694
+          ],
+          [
+            121.0549352,
+            14.6393323
+          ],
+          [
+            121.0549122,
+            14.6398643
+          ],
+          [
+            121.054852,
+            14.6404678
+          ],
+          [
+            121.0548364,
+            14.640599
+          ],
+          [
+            121.0547325,
+            14.6412757
+          ],
+          [
+            121.0547034,
+            14.6414162
+          ],
+          [
+            121.0546858,
+            14.6415009
+          ],
+          [
+            121.0546535,
+            14.6416847
+          ],
+          [
+            121.0546155,
+            14.641848
+          ],
+          [
+            121.0545609,
+            14.6421014
+          ],
+          [
+            121.0545448,
+            14.6421703
+          ],
+          [
+            121.0544525,
+            14.6424944
+          ],
+          [
+            121.054359,
+            14.64278
+          ],
+          [
+            121.0543276,
+            14.642873
+          ],
+          [
+            121.0542989,
+            14.64297
+          ],
+          [
+            121.0540638,
+            14.6436198
+          ],
+          [
+            121.0537992,
+            14.6442958
+          ],
+          [
+            121.0537588,
+            14.6443798
+          ],
+          [
+            121.0535415,
+            14.6448301
+          ],
+          [
+            121.0533298,
+            14.645238
+          ],
+          [
+            121.0532836,
+            14.6453151
+          ]
+        ]
+      },
+      "id": "way/61450521"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/85238956",
+        "highway": "residential",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "30",
+        "name": "Malamig Street",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0550792,
+            14.6462399
+          ],
+          [
+            121.0550285,
+            14.6462197
+          ],
+          [
+            121.0545751,
+            14.6459809
+          ],
+          [
+            121.0540012,
+            14.645685
+          ],
+          [
+            121.0532836,
+            14.6453151
+          ]
+        ]
+      },
+      "id": "way/85238956"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/106618133",
+        "bicycle": "yes",
+        "cycleway:right": "lane",
+        "cycleway:right:lane": "advisory",
+        "highway": "primary",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "60",
+        "name": "East Avenue",
+        "oneway": "yes",
+        "ref": "174",
+        "sidewalk:right": "yes",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0477134,
+            14.6450379
+          ],
+          [
+            121.047522,
+            14.644193
+          ],
+          [
+            121.0475023,
+            14.6441061
+          ],
+          [
+            121.0474602,
+            14.6439203
+          ],
+          [
+            121.0473749,
+            14.6435439
+          ],
+          [
+            121.0473567,
+            14.6434636
+          ],
+          [
+            121.0473518,
+            14.6434419
+          ],
+          [
+            121.0473486,
+            14.6434276
+          ],
+          [
+            121.0473288,
+            14.6433404
+          ],
+          [
+            121.0473212,
+            14.6433069
+          ],
+          [
+            121.0472672,
+            14.6430686
+          ],
+          [
+            121.0471467,
+            14.6425365
+          ],
+          [
+            121.0470748,
+            14.6422194
+          ],
+          [
+            121.0470579,
+            14.6421448
+          ],
+          [
+            121.0468865,
+            14.6413882
+          ]
+        ]
+      },
+      "id": "way/106618133"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/120117150",
+        "highway": "residential",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "30",
+        "name": "Matatag Extension",
+        "sidewalk": "both"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0501768,
+            14.6453833
+          ],
+          [
+            121.0502072,
+            14.6447352
+          ]
+        ]
+      },
+      "id": "way/120117150"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/178724951",
+        "footway": "sidewalk",
+        "highway": "footway"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0497535,
+            14.6483002
+          ],
+          [
+            121.0498569,
+            14.6483062
+          ],
+          [
+            121.0499483,
+            14.6483121
+          ],
+          [
+            121.0499796,
+            14.6483141
+          ],
+          [
+            121.0500085,
+            14.648316
+          ]
+        ]
+      },
+      "id": "way/178724951"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/198153419",
+        "bicycle": "yes",
+        "cycleway:right": "lane",
+        "cycleway:right:lane": "advisory",
+        "foot": "no",
+        "highway": "primary",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "50",
+        "name": "East Avenue",
+        "oneway": "yes",
+        "ref": "174",
+        "sidewalk:right": "separate",
+        "source:maxspeed": "PH:urban",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0478134,
+            14.6450047
+          ],
+          [
+            121.047958,
+            14.6456043
+          ],
+          [
+            121.0480507,
+            14.6459836
+          ],
+          [
+            121.0482142,
+            14.6466581
+          ],
+          [
+            121.0483034,
+            14.647026
+          ],
+          [
+            121.0483094,
+            14.6470508
+          ],
+          [
+            121.0484176,
+            14.6474972
+          ],
+          [
+            121.0485444,
+            14.6480202
+          ],
+          [
+            121.048554,
+            14.6480597
+          ]
+        ]
+      },
+      "id": "way/198153419"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/198153420",
+        "cycleway": "lane",
+        "highway": "tertiary",
+        "lane_markings": "yes",
+        "lanes": "4",
+        "lcn": "yes",
+        "lit": "yes",
+        "maxspeed": "30",
+        "name": "Matalino Street",
+        "parking:lane:both": "no_parking",
+        "sidewalk": "both",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0479038,
+            14.6449661
+          ],
+          [
+            121.04833,
+            14.6448754
+          ],
+          [
+            121.0487724,
+            14.6447868
+          ],
+          [
+            121.0489563,
+            14.6447609
+          ],
+          [
+            121.0490141,
+            14.6447565
+          ],
+          [
+            121.0492925,
+            14.6447308
+          ],
+          [
+            121.0493376,
+            14.6447258
+          ],
+          [
+            121.0494249,
+            14.6447201
+          ],
+          [
+            121.049675,
+            14.6447109
+          ],
+          [
+            121.0500904,
+            14.6447305
+          ],
+          [
+            121.0502072,
+            14.6447352
+          ],
+          [
+            121.0504005,
+            14.6447463
+          ],
+          [
+            121.0509823,
+            14.6448277
+          ],
+          [
+            121.0512734,
+            14.6448926
+          ],
+          [
+            121.0515356,
+            14.6449656
+          ],
+          [
+            121.0517384,
+            14.6450277
+          ],
+          [
+            121.0519336,
+            14.6450974
+          ],
+          [
+            121.0521264,
+            14.6451734
+          ],
+          [
+            121.0522853,
+            14.6452411
+          ],
+          [
+            121.052472,
+            14.6453265
+          ],
+          [
+            121.052684,
+            14.6454312
+          ],
+          [
+            121.0530027,
+            14.6455864
+          ]
+        ]
+      },
+      "id": "way/198153420"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/227924733",
+        "highway": "residential",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "30",
+        "name": "Mapagbigay Street",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0512096,
+            14.642231
+          ],
+          [
+            121.0513644,
+            14.6416504
+          ],
+          [
+            121.0515199,
+            14.6410357
+          ]
+        ]
+      },
+      "id": "way/227924733"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/234438270",
+        "bicycle": "yes",
+        "cycleway:right": "lane",
+        "cycleway:right:lane": "advisory",
+        "highway": "primary",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "60",
+        "name": "East Avenue",
+        "oneway": "yes",
+        "ref": "174",
+        "sidewalk:right": "separate",
+        "source:maxspeed": "PH:urban",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.046975,
+            14.6412474
+          ],
+          [
+            121.0471691,
+            14.6421175
+          ],
+          [
+            121.0471843,
+            14.6421852
+          ],
+          [
+            121.0472587,
+            14.6425186
+          ],
+          [
+            121.0474284,
+            14.6432791
+          ],
+          [
+            121.0474375,
+            14.6433202
+          ],
+          [
+            121.0474555,
+            14.6434009
+          ],
+          [
+            121.0474639,
+            14.6434382
+          ],
+          [
+            121.0474818,
+            14.6435188
+          ],
+          [
+            121.0475386,
+            14.6437731
+          ],
+          [
+            121.0476075,
+            14.644082
+          ],
+          [
+            121.0476792,
+            14.6444033
+          ],
+          [
+            121.0478134,
+            14.6450047
+          ]
+        ]
+      },
+      "id": "way/234438270"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/559120880",
+        "access:lanes": "yes|yes|no",
+        "bus:lanes": "no|yes|designated",
+        "highway": "secondary",
+        "lanes": "3",
+        "lanes:bus": "1",
+        "lit": "yes",
+        "maxspeed": "40",
+        "name": "Senator Miriam P. Defensor-Santiago Avenue",
+        "name:etymology": "Miriam Palma Defensor Santiago",
+        "name:etymology:wikidata": "Q264252",
+        "old_name": "BIR Road",
+        "old_name:etymology": "Bureau of Internal Revenue",
+        "old_name:etymology:wikidata": "Q4998387",
+        "oneway": "yes",
+        "parking:lane:both": "no_stopping",
+        "sidewalk": "right",
+        "smoothness": "excellent",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0443246,
+            14.642871
+          ],
+          [
+            121.0438432,
+            14.6432257
+          ],
+          [
+            121.0433804,
+            14.6436028
+          ],
+          [
+            121.0429105,
+            14.6440214
+          ],
+          [
+            121.0426764,
+            14.6442455
+          ]
+        ]
+      },
+      "id": "way/559120880"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/561264587",
+        "footway": "sidewalk",
+        "highway": "footway",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0499133,
+            14.6488081
+          ],
+          [
+            121.0500101,
+            14.6488087
+          ],
+          [
+            121.0501657,
+            14.6488227
+          ],
+          [
+            121.0503196,
+            14.6488498
+          ],
+          [
+            121.0504704,
+            14.6488896
+          ],
+          [
+            121.0506171,
+            14.6489419
+          ],
+          [
+            121.0507585,
+            14.6490062
+          ],
+          [
+            121.0508937,
+            14.6490822
+          ],
+          [
+            121.0510215,
+            14.6491692
+          ],
+          [
+            121.0511412,
+            14.6492666
+          ],
+          [
+            121.0512516,
+            14.6493736
+          ],
+          [
+            121.0513521,
+            14.6494895
+          ],
+          [
+            121.0514418,
+            14.6496134
+          ],
+          [
+            121.0515201,
+            14.6497443
+          ],
+          [
+            121.0515864,
+            14.6498812
+          ],
+          [
+            121.0516402,
+            14.6500232
+          ],
+          [
+            121.0516811,
+            14.6501692
+          ],
+          [
+            121.0517088,
+            14.6503181
+          ],
+          [
+            121.051723,
+            14.6504687
+          ],
+          [
+            121.0516543,
+            14.650481
+          ]
+        ]
+      },
+      "id": "way/561264587"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/675764049",
+        "highway": "residential",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "30",
+        "name": "Matatag Street",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0504005,
+            14.6447463
+          ],
+          [
+            121.0502021,
+            14.64386
+          ],
+          [
+            121.0500578,
+            14.643244
+          ],
+          [
+            121.0499319,
+            14.6427055
+          ],
+          [
+            121.0497915,
+            14.6421246
+          ],
+          [
+            121.0496532,
+            14.6415292
+          ],
+          [
+            121.0495115,
+            14.6409067
+          ],
+          [
+            121.0493667,
+            14.6402927
+          ]
+        ]
+      },
+      "id": "way/675764049"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/675764052",
+        "highway": "tertiary",
+        "lanes": "2",
+        "maxspeed": "30",
+        "name": "Malakas Street",
+        "sidewalk": "both",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0487149,
+            14.6404147
+          ],
+          [
+            121.0491215,
+            14.6422234
+          ],
+          [
+            121.0496499,
+            14.644556
+          ],
+          [
+            121.049675,
+            14.6447109
+          ]
+        ]
+      },
+      "id": "way/675764052"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/675768339",
+        "cycleway:right": "lane",
+        "cycleway:right:lane": "advisory",
+        "cycleway:separation:left": "double_solid_line",
+        "highway": "secondary",
+        "lanes": "3",
+        "lit": "yes",
+        "maxspeed": "50",
+        "name": "Kalayaan Avenue",
+        "oneway": "yes",
+        "oneway:bicycle": "yes",
+        "parking:lane:both": "no_parking",
+        "sidewalk:right": "yes",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0520744,
+            14.6470183
+          ],
+          [
+            121.0521549,
+            14.6468939
+          ],
+          [
+            121.052471,
+            14.6464234
+          ],
+          [
+            121.0525909,
+            14.6462307
+          ],
+          [
+            121.052666,
+            14.6461153
+          ],
+          [
+            121.0527107,
+            14.6460436
+          ],
+          [
+            121.0528138,
+            14.6458872
+          ],
+          [
+            121.0529334,
+            14.6457033
+          ],
+          [
+            121.0530027,
+            14.6455864
+          ]
+        ]
+      },
+      "id": "way/675768339"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/675768341",
+        "access": "destination",
+        "highway": "unclassified",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "30",
+        "name": "Mayaman Street",
+        "oneway": "yes",
+        "sidewalk": "both"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.052275,
+            14.6463344
+          ],
+          [
+            121.0523632,
+            14.6463752
+          ],
+          [
+            121.0523901,
+            14.6463877
+          ],
+          [
+            121.052471,
+            14.6464234
+          ]
+        ]
+      },
+      "id": "way/675768341"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/705098894",
+        "access:lanes": "yes|yes|no",
+        "bus:lanes": "no|yes|designated",
+        "highway": "secondary",
+        "lanes": "3",
+        "lanes:bus": "1",
+        "lit": "yes",
+        "maxspeed": "40",
+        "name": "Senator Miriam P. Defensor-Santiago Avenue",
+        "name:etymology": "Miriam Palma Defensor Santiago",
+        "name:etymology:wikidata": "Q264252",
+        "old_name": "BIR Road",
+        "old_name:etymology": "Bureau of Internal Revenue",
+        "old_name:etymology:wikidata": "Q4998387",
+        "oneway": "yes",
+        "parking:lane:both": "no_stopping",
+        "sidewalk": "right",
+        "smoothness": "excellent",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0456627,
+            14.6419776
+          ],
+          [
+            121.0453477,
+            14.6421619
+          ],
+          [
+            121.0450399,
+            14.642357
+          ],
+          [
+            121.0449218,
+            14.6424376
+          ],
+          [
+            121.0447392,
+            14.6425623
+          ],
+          [
+            121.0446629,
+            14.6426165
+          ],
+          [
+            121.0445805,
+            14.6426767
+          ],
+          [
+            121.0443246,
+            14.642871
+          ]
+        ]
+      },
+      "id": "way/705098894"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/705098895",
+        "access:lanes": "yes|yes|no",
+        "bus:lanes": "no|yes|designated",
+        "highway": "secondary",
+        "lanes": "3",
+        "lanes:bus": "1",
+        "lit": "yes",
+        "maxspeed": "40",
+        "name": "Senator Miriam P. Defensor-Santiago Avenue",
+        "name:etymology": "Miriam Palma Defensor Santiago",
+        "name:etymology:wikidata": "Q264252",
+        "old_name": "BIR Road",
+        "old_name:etymology": "Bureau of Internal Revenue",
+        "old_name:etymology:wikidata": "Q4998387",
+        "oneway": "yes",
+        "parking:lane:both": "no_stopping",
+        "sidewalk": "right",
+        "smoothness": "excellent",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0468674,
+            14.6413061
+          ],
+          [
+            121.0467802,
+            14.6413509
+          ],
+          [
+            121.0462291,
+            14.6416512
+          ],
+          [
+            121.0457986,
+            14.6418993
+          ],
+          [
+            121.0456627,
+            14.6419776
+          ]
+        ]
+      },
+      "id": "way/705098895"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/708761531",
+        "footway": "sidewalk",
+        "highway": "footway",
+        "tactile_paving": "no",
+        "wheelchair": "yes"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0463098,
+            14.6379613
+          ],
+          [
+            121.0465369,
+            14.6389702
+          ],
+          [
+            121.0465651,
+            14.6390964
+          ],
+          [
+            121.0467029,
+            14.6397027
+          ],
+          [
+            121.0468136,
+            14.640187
+          ],
+          [
+            121.0469123,
+            14.6406153
+          ],
+          [
+            121.0469542,
+            14.6408044
+          ],
+          [
+            121.0469826,
+            14.6409277
+          ],
+          [
+            121.0472493,
+            14.6420978
+          ],
+          [
+            121.0472643,
+            14.6421629
+          ],
+          [
+            121.0475174,
+            14.6432562
+          ],
+          [
+            121.0475458,
+            14.6433812
+          ],
+          [
+            121.0475536,
+            14.6434155
+          ],
+          [
+            121.0476391,
+            14.6437916
+          ],
+          [
+            121.0477038,
+            14.6440617
+          ],
+          [
+            121.0477614,
+            14.6442966
+          ],
+          [
+            121.0479038,
+            14.6449661
+          ],
+          [
+            121.0480554,
+            14.6455774
+          ],
+          [
+            121.0481492,
+            14.6459622
+          ],
+          [
+            121.0481827,
+            14.646065
+          ],
+          [
+            121.0481901,
+            14.646139
+          ],
+          [
+            121.0483129,
+            14.6466363
+          ],
+          [
+            121.0484898,
+            14.647385
+          ],
+          [
+            121.0485092,
+            14.6474737
+          ],
+          [
+            121.0485285,
+            14.6475539
+          ],
+          [
+            121.0486588,
+            14.6480937
+          ],
+          [
+            121.0487299,
+            14.6481832
+          ],
+          [
+            121.0487795,
+            14.6482209
+          ],
+          [
+            121.048864,
+            14.6482778
+          ],
+          [
+            121.0489631,
+            14.648338
+          ],
+          [
+            121.0490759,
+            14.6483804
+          ],
+          [
+            121.0492207,
+            14.6483947
+          ],
+          [
+            121.0494044,
+            14.648374
+          ],
+          [
+            121.0495238,
+            14.6483493
+          ],
+          [
+            121.0496029,
+            14.6483195
+          ],
+          [
+            121.0496351,
+            14.6482919
+          ]
+        ]
+      },
+      "id": "way/708761531"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/716030309",
+        "footway": "sidewalk",
+        "highway": "footway",
+        "tactile_paving": "yes"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0501796,
+            14.6483271
+          ],
+          [
+            121.0501997,
+            14.6483454
+          ],
+          [
+            121.0502239,
+            14.648361
+          ],
+          [
+            121.0502923,
+            14.6483843
+          ],
+          [
+            121.0504049,
+            14.648409
+          ],
+          [
+            121.050535,
+            14.6484466
+          ],
+          [
+            121.0507013,
+            14.6485115
+          ],
+          [
+            121.0508099,
+            14.6485595
+          ],
+          [
+            121.0508636,
+            14.6485842
+          ],
+          [
+            121.0508917,
+            14.6485906
+          ],
+          [
+            121.0509293,
+            14.6485919
+          ],
+          [
+            121.0509574,
+            14.6485868
+          ],
+          [
+            121.0509829,
+            14.6485699
+          ],
+          [
+            121.051002,
+            14.6485465
+          ],
+          [
+            121.0511294,
+            14.6483522
+          ],
+          [
+            121.0511237,
+            14.6482922
+          ],
+          [
+            121.0512281,
+            14.6481394
+          ]
+        ]
+      },
+      "id": "way/716030309"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/856644234",
+        "access:lanes": "yes|yes|no",
+        "bus:lanes": "no|yes|designated",
+        "destination:ref": "170",
+        "destination:street": "Quezon Avenue",
+        "highway": "secondary",
+        "lanes": "3",
+        "lanes:bus": "1",
+        "lit": "yes",
+        "maxspeed": "40",
+        "name": "Senator Miriam P. Defensor-Santiago Avenue",
+        "name:etymology": "Miriam Palma Defensor Santiago",
+        "name:etymology:wikidata": "Q264252",
+        "name:it": "Viale Senatore Miriam P. Defensor-Santiago",
+        "old_name": "BIR Road",
+        "old_name:etymology": "Bureau of Internal Revenue",
+        "old_name:etymology:wikidata": "Q4998387",
+        "oneway": "yes",
+        "parking:lane:both": "no_stopping",
+        "sidewalk": "right",
+        "smoothness": "excellent",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0425609,
+            14.644354
+          ],
+          [
+            121.0425074,
+            14.6444064
+          ],
+          [
+            121.0424289,
+            14.6444832
+          ],
+          [
+            121.0423444,
+            14.6445658
+          ],
+          [
+            121.0421358,
+            14.644781
+          ],
+          [
+            121.0419529,
+            14.6449815
+          ],
+          [
+            121.0417768,
+            14.6451838
+          ]
+        ]
+      },
+      "id": "way/856644234"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/859217265",
+        "access:lanes": "yes|yes|no",
+        "bus:lanes": "no|yes|designated",
+        "destination:ref": "170",
+        "destination:street": "Quezon Avenue",
+        "highway": "secondary",
+        "lanes": "3",
+        "lanes:bus": "1",
+        "lit": "yes",
+        "maxspeed": "40",
+        "name": "Senator Miriam P. Defensor-Santiago Avenue",
+        "name:etymology": "Miriam Palma Defensor Santiago",
+        "name:etymology:wikidata": "Q264252",
+        "name:it": "Viale Senatore Miriam P. Defensor-Santiago",
+        "old_name": "BIR Road",
+        "old_name:etymology": "Bureau of Internal Revenue",
+        "old_name:etymology:wikidata": "Q4998387",
+        "oneway": "yes",
+        "parking:lane:both": "no_stopping",
+        "sidewalk": "right",
+        "smoothness": "excellent",
+        "surface": "concrete",
+        "turn:lanes": "through|right|right"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0417768,
+            14.6451838
+          ],
+          [
+            121.0415539,
+            14.6454373
+          ],
+          [
+            121.0413466,
+            14.6456994
+          ],
+          [
+            121.0411719,
+            14.6459236
+          ],
+          [
+            121.0410925,
+            14.6460255
+          ]
+        ]
+      },
+      "id": "way/859217265"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/894464831",
+        "cycleway:right": "lane",
+        "fine:foot": "2,000 PHP",
+        "fine:hgv": "5,000 PHP",
+        "foot": "use_sidepath",
+        "highway": "tertiary",
+        "lanes": "1",
+        "lit": "yes",
+        "maxspeed": "40",
+        "name": "Quezon Avenue",
+        "name:es": "Avenida Quezon",
+        "name:etymology": "Manuel Luis Quezon",
+        "name:etymology:wikidata": "Q1503",
+        "name:etymology:wikipedia": "es:Manuel L. Quezon",
+        "oneway": "yes",
+        "oneway:bicycle": "yes",
+        "ref": "170",
+        "sidewalk:right": "separate",
+        "wikidata": "Q7271598",
+        "wikipedia": "en:Quezon Avenue"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0412783,
+            14.646349
+          ],
+          [
+            121.0415553,
+            14.6464846
+          ],
+          [
+            121.0424492,
+            14.6470306
+          ],
+          [
+            121.0428494,
+            14.6472868
+          ],
+          [
+            121.0428744,
+            14.6473027
+          ],
+          [
+            121.0432283,
+            14.6475083
+          ],
+          [
+            121.0436037,
+            14.6477308
+          ],
+          [
+            121.0446845,
+            14.6483846
+          ],
+          [
+            121.0447638,
+            14.6484327
+          ],
+          [
+            121.0448765,
+            14.648501
+          ],
+          [
+            121.0457745,
+            14.6490456
+          ],
+          [
+            121.0461379,
+            14.649273
+          ],
+          [
+            121.0465629,
+            14.649539
+          ],
+          [
+            121.046689,
+            14.6496036
+          ],
+          [
+            121.0468014,
+            14.6496371
+          ],
+          [
+            121.0470353,
+            14.6496455
+          ],
+          [
+            121.047146,
+            14.6496299
+          ],
+          [
+            121.0472788,
+            14.6495871
+          ],
+          [
+            121.0477284,
+            14.6494052
+          ]
+        ]
+      },
+      "id": "way/894464831"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/894557556",
+        "access": "destination",
+        "highway": "unclassified",
+        "lanes": "2",
+        "lit": "yes",
+        "name": "Matatag Extension",
+        "sidewalk": "both"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0501692,
+            14.6457233
+          ],
+          [
+            121.0501772,
+            14.6454104
+          ],
+          [
+            121.0501768,
+            14.6453833
+          ]
+        ]
+      },
+      "id": "way/894557556"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/936510013",
+        "bicycle": "yes",
+        "cycleway:right": "lane",
+        "cycleway:right:lane": "advisory",
+        "foot": "no",
+        "highway": "primary",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "60",
+        "name": "East Avenue",
+        "oneway": "yes",
+        "ref": "174",
+        "sidewalk:right": "separate",
+        "source:maxspeed": "PH:urban",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0483717,
+            14.6486044
+          ],
+          [
+            121.0483953,
+            14.6485271
+          ],
+          [
+            121.0484099,
+            14.648468
+          ],
+          [
+            121.0484181,
+            14.6484356
+          ],
+          [
+            121.0484274,
+            14.6483869
+          ],
+          [
+            121.0484358,
+            14.6483383
+          ],
+          [
+            121.0484442,
+            14.6482734
+          ],
+          [
+            121.0484473,
+            14.6482278
+          ],
+          [
+            121.0484482,
+            14.6481981
+          ],
+          [
+            121.0484456,
+            14.6481553
+          ],
+          [
+            121.0484415,
+            14.6481235
+          ],
+          [
+            121.0484369,
+            14.6480969
+          ]
+        ]
+      },
+      "id": "way/936510013"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/936510014",
+        "bicycle": "yes",
+        "cycleway:right": "lane",
+        "cycleway:right:lane": "advisory",
+        "destination:ref": "170;173;174",
+        "foot": "no",
+        "highway": "primary",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "50",
+        "name": "East Avenue",
+        "oneway": "yes",
+        "ref": "174",
+        "sidewalk:right": "separate",
+        "source:maxspeed": "PH:urban",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.048554,
+            14.6480597
+          ],
+          [
+            121.0485649,
+            14.6480911
+          ],
+          [
+            121.0485823,
+            14.6481229
+          ],
+          [
+            121.0485998,
+            14.6481521
+          ],
+          [
+            121.0486189,
+            14.6481768
+          ],
+          [
+            121.048642,
+            14.6482033
+          ],
+          [
+            121.0486742,
+            14.6482338
+          ],
+          [
+            121.0487037,
+            14.6482585
+          ],
+          [
+            121.048764,
+            14.6483046
+          ],
+          [
+            121.0488332,
+            14.6483498
+          ]
+        ]
+      },
+      "id": "way/936510014"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1065527802",
+        "highway": "residential",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "20",
+        "name": "Matahimik Street",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0540012,
+            14.645685
+          ],
+          [
+            121.0540347,
+            14.6456189
+          ],
+          [
+            121.0544537,
+            14.6448784
+          ],
+          [
+            121.0548717,
+            14.6438942
+          ],
+          [
+            121.0551906,
+            14.6429704
+          ],
+          [
+            121.0553392,
+            14.6423834
+          ],
+          [
+            121.0553611,
+            14.6423037
+          ]
+        ]
+      },
+      "id": "way/1065527802"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1231058175",
+        "bicycle": "dismount",
+        "footway": "sidewalk",
+        "highway": "footway",
+        "oneway": "yes",
+        "oneway:bicycle": "yes",
+        "oneway:foot": "yes",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0497842,
+            14.6488795
+          ],
+          [
+            121.0497829,
+            14.6488053
+          ],
+          [
+            121.0498538,
+            14.6488077
+          ],
+          [
+            121.0499133,
+            14.6488081
+          ],
+          [
+            121.0499092,
+            14.6488808
+          ]
+        ]
+      },
+      "id": "way/1231058175"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1231856656",
+        "access": "destination",
+        "highway": "unclassified",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "30",
+        "name": "Mayaman Street",
+        "oneway": "yes",
+        "sidewalk": "both"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0518994,
+            14.6461603
+          ],
+          [
+            121.0520122,
+            14.6462126
+          ],
+          [
+            121.052275,
+            14.6463344
+          ]
+        ]
+      },
+      "id": "way/1231856656"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1248787340",
+        "bicycle": "no",
+        "destination:ref": "170",
+        "highway": "secondary",
+        "lanes": "2",
+        "maxspeed": "40",
+        "name": "Senator Miriam P. Defensor-Santiago Avenue",
+        "name:etymology": "Miriam Palma Defensor Santiago",
+        "name:etymology:wikidata": "Q264252",
+        "name:it": "Viale Senatore Miriam P. Defensor-Santiago",
+        "old_name": "BIR Road",
+        "old_name:etymology": "Bureau of Internal Revenue",
+        "old_name:etymology:wikidata": "Q4998387",
+        "oneway": "yes",
+        "sidewalk": "right",
+        "smoothness": "good",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0410925,
+            14.6460255
+          ],
+          [
+            121.0410823,
+            14.6460404
+          ],
+          [
+            121.0410767,
+            14.6460527
+          ]
+        ]
+      },
+      "id": "way/1248787340"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1307844910",
+        "bicycle": "yes",
+        "cycleway:right": "lane",
+        "cycleway:right:lane": "advisory",
+        "foot": "no",
+        "highway": "primary",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "60",
+        "name": "East Avenue",
+        "oneway": "yes",
+        "ref": "174",
+        "sidewalk:right": "yes",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0468865,
+            14.6413882
+          ],
+          [
+            121.0468674,
+            14.6413061
+          ],
+          [
+            121.0468488,
+            14.6412266
+          ],
+          [
+            121.0468185,
+            14.6410973
+          ]
+        ]
+      },
+      "id": "way/1307844910"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1308326448",
+        "highway": "residential",
+        "lane_markings": "yes",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "30",
+        "name": "Mabuhay Street",
+        "oneway": "yes",
+        "parking:left": "lane",
+        "parking:left:orientation": "parallel",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0513644,
+            14.6416504
+          ],
+          [
+            121.0529682,
+            14.6420307
+          ],
+          [
+            121.0530245,
+            14.642044
+          ],
+          [
+            121.0533376,
+            14.6421133
+          ]
+        ]
+      },
+      "id": "way/1308326448"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1308326449",
+        "highway": "service",
+        "lanes": "2",
+        "maxspeed": "30",
+        "name": "Masigla Street",
+        "oneway": "yes",
+        "service": "alley",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0529829,
+            14.6439517
+          ],
+          [
+            121.0524227,
+            14.6437168
+          ]
+        ]
+      },
+      "id": "way/1308326449"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1308326450",
+        "highway": "residential",
+        "lanes": "2",
+        "maxspeed": "30",
+        "name": "Masigla Street",
+        "oneway": "yes",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0537121,
+            14.6442621
+          ],
+          [
+            121.0529829,
+            14.6439517
+          ]
+        ]
+      },
+      "id": "way/1308326450"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1308326451",
+        "highway": "residential",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "30",
+        "name": "Matulungin Street",
+        "sidewalk": "both",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0491215,
+            14.6422234
+          ],
+          [
+            121.0497915,
+            14.6421246
+          ]
+        ]
+      },
+      "id": "way/1308326451"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1312030600",
+        "access:lanes": "yes|yes|no",
+        "bus:lanes": "no|yes|designated",
+        "destination:ref": "170",
+        "destination:street": "Quezon Avenue",
+        "highway": "secondary",
+        "lanes": "3",
+        "lanes:bus": "1",
+        "lit": "yes",
+        "maxspeed": "40",
+        "name": "Senator Miriam P. Defensor-Santiago Avenue",
+        "name:etymology": "Miriam Palma Defensor Santiago",
+        "name:etymology:wikidata": "Q264252",
+        "name:it": "Viale Senatore Miriam P. Defensor-Santiago",
+        "old_name": "BIR Road",
+        "old_name:etymology": "Bureau of Internal Revenue",
+        "old_name:etymology:wikidata": "Q4998387",
+        "oneway": "yes",
+        "parking:lane:both": "no_stopping",
+        "sidewalk": "right",
+        "smoothness": "excellent",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0426268,
+            14.6442935
+          ],
+          [
+            121.0425609,
+            14.644354
+          ]
+        ]
+      },
+      "id": "way/1312030600"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1312049445",
+        "access:lanes": "yes|yes|no",
+        "bus:lanes": "no|yes|designated",
+        "highway": "secondary",
+        "lanes": "3",
+        "lanes:bus": "1",
+        "lit": "yes",
+        "maxspeed": "40",
+        "name": "Senator Miriam P. Defensor-Santiago Avenue",
+        "name:etymology": "Miriam Palma Defensor Santiago",
+        "name:etymology:wikidata": "Q264252",
+        "name:it": "Viale Senatore Miriam P. Defensor-Santiago",
+        "old_name": "BIR Road",
+        "old_name:etymology": "Bureau of Internal Revenue",
+        "old_name:etymology:wikidata": "Q4998387",
+        "oneway": "yes",
+        "parking:lane:both": "no_stopping",
+        "sidewalk": "right",
+        "smoothness": "excellent",
+        "surface": "concrete"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0426764,
+            14.6442455
+          ],
+          [
+            121.0426268,
+            14.6442935
+          ]
+        ]
+      },
+      "id": "way/1312049445"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1312053570",
+        "cycleway": "lane",
+        "highway": "tertiary",
+        "lane_markings": "yes",
+        "lanes": "4",
+        "lcn": "yes",
+        "lit": "yes",
+        "maxspeed": "30",
+        "name": "Matalino Street",
+        "parking:lane:both": "no_parking",
+        "sidewalk": "both",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0478134,
+            14.6450047
+          ],
+          [
+            121.0478718,
+            14.6449806
+          ],
+          [
+            121.0479038,
+            14.6449661
+          ]
+        ]
+      },
+      "id": "way/1312053570"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1324904148",
+        "cycleway:right": "lane",
+        "cycleway:right:lane": "advisory",
+        "cycleway:separation:left": "double_solid_line",
+        "highway": "secondary",
+        "lanes": "3",
+        "lit": "yes",
+        "maxspeed": "50",
+        "name": "Kalayaan Avenue",
+        "oneway": "yes",
+        "oneway:bicycle": "yes",
+        "parking:lane:both": "no_parking",
+        "sidewalk:right": "yes",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0530027,
+            14.6455864
+          ],
+          [
+            121.0530793,
+            14.6454652
+          ],
+          [
+            121.053236,
+            14.645193
+          ],
+          [
+            121.0534699,
+            14.6447694
+          ],
+          [
+            121.053527,
+            14.6446509
+          ],
+          [
+            121.0537121,
+            14.6442621
+          ],
+          [
+            121.0539742,
+            14.6435981
+          ],
+          [
+            121.0542034,
+            14.6429359
+          ],
+          [
+            121.0542395,
+            14.6428463
+          ],
+          [
+            121.054276,
+            14.6427435
+          ],
+          [
+            121.0543631,
+            14.6424695
+          ],
+          [
+            121.0544574,
+            14.642141
+          ],
+          [
+            121.0545487,
+            14.6417742
+          ],
+          [
+            121.0546231,
+            14.6413986
+          ],
+          [
+            121.0546535,
+            14.6412587
+          ],
+          [
+            121.0547521,
+            14.6405814
+          ],
+          [
+            121.054768,
+            14.640456
+          ],
+          [
+            121.0548227,
+            14.6398615
+          ],
+          [
+            121.054832,
+            14.6393331
+          ],
+          [
+            121.0548369,
+            14.639275
+          ],
+          [
+            121.0548332,
+            14.6387241
+          ],
+          [
+            121.0548323,
+            14.6382279
+          ],
+          [
+            121.0548125,
+            14.6379354
+          ],
+          [
+            121.0547734,
+            14.6375942
+          ],
+          [
+            121.0546887,
+            14.6369871
+          ],
+          [
+            121.0546678,
+            14.6368536
+          ],
+          [
+            121.0546236,
+            14.6365721
+          ]
+        ]
+      },
+      "id": "way/1324904148"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1338232976",
+        "footway": "sidewalk",
+        "highway": "footway"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0513303,
+            14.6479899
+          ],
+          [
+            121.0513822,
+            14.6479668
+          ],
+          [
+            121.0515532,
+            14.6477063
+          ]
+        ]
+      },
+      "id": "way/1338232976"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1338232977",
+        "covered": "yes",
+        "footway": "sidewalk",
+        "highway": "footway",
+        "public_transport": "platform"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0512281,
+            14.6481394
+          ],
+          [
+            121.0513303,
+            14.6479899
+          ]
+        ]
+      },
+      "id": "way/1338232977"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "way/1343973244",
+        "access": "destination",
+        "highway": "unclassified",
+        "lanes": "2",
+        "lit": "yes",
+        "maxspeed": "30",
+        "name": "Mayaman Street",
+        "oneway": "yes",
+        "sidewalk": "both",
+        "surface": "asphalt"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.0491217,
+            14.6457581
+          ],
+          [
+            121.0482767,
+            14.6459329
+          ],
+          [
+            121.0482688,
+            14.6459346
+          ],
+          [
+            121.0481492,
+            14.6459622
+          ],
+          [
+            121.0481043,
+            14.6459725
+          ],
+          [
+            121.0480507,
+            14.6459836
+          ]
+        ]
+      },
+      "id": "way/1343973244"
+    }
+  ]
+}
+}

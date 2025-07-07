@@ -74,7 +74,7 @@ export default function HomePage() {
               <div className='text-xs text-red-500 h-2'>{error}</div>
               <Button
                 type='submit'
-                className='w-full rounded-md text-white bg-gradient-to-r from-teal-800 to-cyan-500 hover:shadow-sm'
+                className='w-full rounded-md text-white bg-gradient-to-r from-teal-900 to-cyan-500 hover:shadow-sm'
               >
                 Login
               </Button>

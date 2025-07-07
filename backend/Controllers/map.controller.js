@@ -44,7 +44,7 @@ const objectsToCSV = (data) => {
 
 export const getPassengerLoadData = async (request, reply) => {
   try {
-    const { location} = request.body;
+    const { location } = request.body;
 
     const locationRegex = new RegExp(location, "i");
 
@@ -60,12 +60,12 @@ export const getPassengerLoadData = async (request, reply) => {
     let formattedData = [];
     let isWithinTimeRange = false;
     let lastTimestamp = null;
-    const fiveMinutes = 5*60*1000; // 5 minutes in milliseconds
+    const fiveMinutes = 5 * 60 * 1000; // 5 minutes in milliseconds
     let prevLat = null;
     let prevLon = null;
     let routeTallies = {};
     let driverRoutes = {};
-    let pastdriver =null;
+    let pastdriver = null;
     let currentDriverRoute = {};
 
     for (const file of files) {
@@ -75,107 +75,112 @@ export const getPassengerLoadData = async (request, reply) => {
         const timestamp = new Date(row.timeStamp);
         const driver = row.driver || "Unknown";
 
-        if(isNaN(timestamp)){continue}
-          if (!lastTimestamp || ((timestamp.getTime() - lastTimestamp.getTime()) >= fiveMinutes || pastdriver!=driver)) {
-            const lat = parseFloat(row.latitude);
-            const lon = parseFloat(row.longitude);
-
-            // Determine route
-            let route = row.route;
-            if (route !== "Northbound" && route !== "Southbound") {
-              if (prevLat !== null && prevLon !== null) {
-                const firstStation = edsaStations[0];
-                const lastStation = edsaStations[edsaStations.length - 1];
-
-                const distToFirst = Math.sqrt(
-                  Math.pow(lat - firstStation.lat, 2) +
-                    Math.pow(lon - firstStation.lon, 2)
-                );
-                const distToLast = Math.sqrt(
-                  Math.pow(lat - lastStation.lat, 2) +
-                    Math.pow(lon - lastStation.lon, 2)
-                );
-
-                const prevDistToFirst = Math.sqrt(
-                  Math.pow(prevLat - firstStation.lat, 2) +
-                    Math.pow(prevLon - firstStation.lon, 2)
-                );
-                const prevDistToLast = Math.sqrt(
-                  Math.pow(prevLat - lastStation.lat, 2) +
-                    Math.pow(prevLon - lastStation.lon, 2)
-                );
-
-                if (
-                  distToFirst < prevDistToFirst &&
-                  distToLast > prevDistToLast
-                ) {
-                  route = "Northbound";
-                } else if (
-                  distToFirst > prevDistToFirst &&
-                  distToLast < prevDistToLast
-                ) {
-                  route = "Southbound";
-                }
-              }
-            }
-
-            // Update route tallies
-            if (!routeTallies[driver]) {
-              routeTallies[driver] = { Northbound: 0, Southbound: 0 };
-            }
-            if (route === "Northbound" || route === "Southbound") {
-              routeTallies[driver][route]++;
-            }
-
-            // Determine the most common route for the driver
-            if (
-              !driverRoutes[driver] ||
-              routeTallies[driver][route] >
-                routeTallies[driver][driverRoutes[driver]]
-            ) {
-              driverRoutes[driver] = route;
-            }
-
-            // If route is still unknown, use the most common route for the driver
-            if (route !== "Northbound" && route !== "Southbound") {
-              route = driverRoutes[driver] || "Unknown";
-            }
-
-            // Update current driver route
-            if (route === "Northbound" || route === "Southbound") {
-              currentDriverRoute[driver] = route;
-            }
-
-            // Update previous unknown routes
-            if (currentDriverRoute[driver]) {
-              for (let i = formattedData.length - 1; i >= 0; i--) {
-                if (
-                  formattedData[i].driver === driver &&
-                  formattedData[i].route === "Unknown"
-                ) {
-                  formattedData[i].route = currentDriverRoute[driver];
-                } else {
-                  break;
-                }
-              }
-            }
-
-            formattedData.push({
-              timestamp: timestamp.toISOString(),
-              passengerLoad: parseInt(row.Numpass) || 0,
-              latitude: lat,
-              longitude: lon,
-              altitude: parseFloat(row.altitude),
-              route: route,
-              driver: driver,
-            });
-            lastTimestamp = timestamp;
-            prevLat = lat;
-            prevLon = lon;
-            pastdriver=driver;
-          }
+        if (isNaN(timestamp)) {
+          continue;
         }
-      
+        if (
+          !lastTimestamp ||
+          timestamp.getTime() - lastTimestamp.getTime() >= fiveMinutes ||
+          pastdriver != driver
+        ) {
+          const lat = parseFloat(row.latitude);
+          const lon = parseFloat(row.longitude);
+
+          // Determine route
+          let route = row.route;
+          if (route !== "Northbound" && route !== "Southbound") {
+            if (prevLat !== null && prevLon !== null) {
+              const firstStation = edsaStations[0];
+              const lastStation = edsaStations[edsaStations.length - 1];
+
+              const distToFirst = Math.sqrt(
+                Math.pow(lat - firstStation.lat, 2) +
+                  Math.pow(lon - firstStation.lon, 2)
+              );
+              const distToLast = Math.sqrt(
+                Math.pow(lat - lastStation.lat, 2) +
+                  Math.pow(lon - lastStation.lon, 2)
+              );
+
+              const prevDistToFirst = Math.sqrt(
+                Math.pow(prevLat - firstStation.lat, 2) +
+                  Math.pow(prevLon - firstStation.lon, 2)
+              );
+              const prevDistToLast = Math.sqrt(
+                Math.pow(prevLat - lastStation.lat, 2) +
+                  Math.pow(prevLon - lastStation.lon, 2)
+              );
+
+              if (
+                distToFirst < prevDistToFirst &&
+                distToLast > prevDistToLast
+              ) {
+                route = "Northbound";
+              } else if (
+                distToFirst > prevDistToFirst &&
+                distToLast < prevDistToLast
+              ) {
+                route = "Southbound";
+              }
+            }
+          }
+
+          // Update route tallies
+          if (!routeTallies[driver]) {
+            routeTallies[driver] = { Northbound: 0, Southbound: 0 };
+          }
+          if (route === "Northbound" || route === "Southbound") {
+            routeTallies[driver][route]++;
+          }
+
+          // Determine the most common route for the driver
+          if (
+            !driverRoutes[driver] ||
+            routeTallies[driver][route] >
+              routeTallies[driver][driverRoutes[driver]]
+          ) {
+            driverRoutes[driver] = route;
+          }
+
+          // If route is still unknown, use the most common route for the driver
+          if (route !== "Northbound" && route !== "Southbound") {
+            route = driverRoutes[driver] || "Unknown";
+          }
+
+          // Update current driver route
+          if (route === "Northbound" || route === "Southbound") {
+            currentDriverRoute[driver] = route;
+          }
+
+          // Update previous unknown routes
+          if (currentDriverRoute[driver]) {
+            for (let i = formattedData.length - 1; i >= 0; i--) {
+              if (
+                formattedData[i].driver === driver &&
+                formattedData[i].route === "Unknown"
+              ) {
+                formattedData[i].route = currentDriverRoute[driver];
+              } else {
+                break;
+              }
+            }
+          }
+
+          formattedData.push({
+            timestamp: timestamp.toISOString(),
+            passengerLoad: parseInt(row.Numpass) || 0,
+            latitude: lat,
+            longitude: lon,
+            altitude: parseFloat(row.altitude),
+            route: route,
+            driver: driver,
+          });
+          lastTimestamp = timestamp;
+          prevLat = lat;
+          prevLon = lon;
+          pastdriver = driver;
+        }
+      }
 
       // if (isWithinTimeRange && new Date(fileContent[fileContent.length - 1].timeStamp) > new Date(endTimestamp)) {
       //   break;
@@ -217,20 +222,19 @@ export const getRoute = async (request, reply) => {
       const fileContent = JSON.parse(file.fileContent);
 
       for (const row of fileContent) {
-            const lat = parseFloat(row.latitude);
-            const lon = parseFloat(row.longitude);
-            const alt = parseFloat(row.altitude);
-            const key = `${lat},${lon},${alt}`;
-            heatmapData.set(key, {
-              latitude: lat,
-              longitude: lon,
-              altitude: alt,
-            });
-          }
-          break;
-        }
+        const lat = parseFloat(row.latitude);
+        const lon = parseFloat(row.longitude);
+        const alt = parseFloat(row.altitude);
+        const key = `${lat},${lon},${alt}`;
+        heatmapData.set(key, {
+          latitude: lat,
+          longitude: lon,
+          altitude: alt,
+        });
+      }
+      break;
+    }
 
-    
     const formattedData = Array.from(heatmapData.values());
     return reply.code(200).send(formattedData);
   } catch (error) {
@@ -241,11 +245,10 @@ export const getRoute = async (request, reply) => {
   }
 };
 
-
 // Route: POST /getBoardingAlightingHeatmap
 export const getBoardingAlightingHeatmap = async (request, reply) => {
   try {
-    const { location} = request.body;
+    const { location } = request.body;
 
     const locationRegex = new RegExp(location, "i");
 
@@ -269,7 +272,7 @@ export const getBoardingAlightingHeatmap = async (request, reply) => {
       for (const row of fileContent) {
         const timestamp = new Date(row.timeStamp);
         const driver = row.driver || "Unknown";
-        
+
         if (
           !lastTimestamp ||
           timestamp.getTime() - lastTimestamp.getTime() >= fiveMinutes
@@ -279,8 +282,8 @@ export const getBoardingAlightingHeatmap = async (request, reply) => {
           const alt = parseFloat(row.altitude);
           const boarded = stringToBoolean(row.Board);
           const alighted = stringToBoolean(row.Alight);
-          
-        if(boarded || alighted){
+
+          if (boarded || alighted) {
             const key = `${lat},${lon},${alt},${timestamp}`;
 
             heatmapData.set(key, {
@@ -290,11 +293,9 @@ export const getBoardingAlightingHeatmap = async (request, reply) => {
               boarding: boarded,
               alighting: alighted,
             });
+          }
         }
-        
-          
-        }
-      };
+      }
     }
 
     const formattedData = Array.from(heatmapData.values());
@@ -311,7 +312,7 @@ export const getBoardingAlightingHeatmap = async (request, reply) => {
 export const getBoardingAlightingStackedBar = async (request, reply) => {
   try {
     const { location } = request.body;
-    const locationRegex = new RegExp(location, 'i');
+    const locationRegex = new RegExp(location, "i");
 
     const files = await File.find({
       originalFilename: locationRegex,
@@ -324,61 +325,57 @@ export const getBoardingAlightingStackedBar = async (request, reply) => {
     }
 
     let stackedBarData = new Map();
-    let days = new Map()
+    let days = new Map();
     for (const file of files) {
       const fileContent = JSON.parse(file.fileContent);
 
       for (const row of fileContent) {
         const timestamp = new Date(row.timeStamp);
-        const driver = row.driver || 'Unknown';
+        const driver = row.driver || "Unknown";
         const boarded = stringToBoolean(row.Board) ? 1 : 0;
         const alighted = stringToBoolean(row.Alight) ? 1 : 0;
-        const year = timestamp.getFullYear()
-        const month = timestamp.getMonth()
-        const day = timestamp.getDate()
-        const hour = timestamp.getHours()
-        const hourDate = new Date(year,month,day,hour)
-        if(!Object.keys(days).includes(`${hourDate}`)){
-          days[`${hourDate}`]={
+        const year = timestamp.getFullYear();
+        const month = timestamp.getMonth();
+        const day = timestamp.getDate();
+        const hour = timestamp.getHours();
+        const hourDate = new Date(year, month, day, hour);
+        if (!Object.keys(days).includes(`${hourDate}`)) {
+          days[`${hourDate}`] = {
             totalBoarding: 0,
             totalAlighting: 0,
             totalpass: 0,
-          }
+          };
         }
-        if(boarded || alighted)
-        stackedBarData.set(timestamp, {
-          timestamp: timestamp,
-          boarding: boarded,
-          alighting: alighted,
-          driver: driver,
-          pass:parseInt(row.Pass)
-        });
-      
-      };
-      
+        if (boarded || alighted)
+          stackedBarData.set(timestamp, {
+            timestamp: timestamp,
+            boarding: boarded,
+            alighting: alighted,
+            driver: driver,
+            pass: parseInt(row.Pass),
+          });
+      }
     }
     // const Hour = 60 * 60 * 1000; // 1hr in milliseconds
 
-
-
     const formattedData = Array.from(stackedBarData.values());
 
-    formattedData.forEach(data=>{
+    formattedData.forEach((data) => {
       const entryTime = data.timestamp;
       const hour = entryTime.getHours(); // Get the hour (0-23) in UTC
-      const year = entryTime.getFullYear()
-      const month = entryTime.getMonth()
-      const day = entryTime.getDate()
-      const hourDate = new Date(year,month,day,hour)
-    // Update the hourly data for the corresponding hour
-      days[`${hourDate}`].timestamp=hourDate.toISOString();
+      const year = entryTime.getFullYear();
+      const month = entryTime.getMonth();
+      const day = entryTime.getDate();
+      const hourDate = new Date(year, month, day, hour);
+      // Update the hourly data for the corresponding hour
+      days[`${hourDate}`].timestamp = hourDate.toISOString();
       days[`${hourDate}`].totalBoarding += data.boarding;
       days[`${hourDate}`].totalAlighting += data.alighting;
       days[`${hourDate}`].totalpass += data.pass;
       // hourlyData[hour].entries.push(data);
-    })
+    });
 
-    return reply.code(200).send( Object.values(days));
+    return reply.code(200).send(Object.values(days));
   } catch (error) {
     console.error("Error in getBoardingAlightingStackedBar:", error);
     return reply
@@ -416,7 +413,7 @@ export const getGPSData = async (request, reply) => {
       for (const row of fileContent) {
         const timestamp = new Date(row.timeStamp);
         const driver = row.driver || "Unknown";
-        
+
         if (
           !lastTimestamp ||
           timestamp.getTime() - lastTimestamp.getTime() >= fiveMinutes
@@ -509,9 +506,10 @@ export const getGPSData = async (request, reply) => {
           lastTimestamp = timestamp;
           prevLat = lat;
           prevLon = lon;
-        }}
-      };
-    
+        }
+      }
+    }
+
     // const csvData = objectsToCSV(formattedData);
     return reply.code(200).send(formattedData);
   } catch (error) {
@@ -525,14 +523,16 @@ export const getGPSData = async (request, reply) => {
 export const getPeakHours = async (request, reply) => {
   try {
     const { location, time } = request.query;
-    const locationRegex = new RegExp(location, 'i');
+    const locationRegex = new RegExp(location, "i");
 
     const files = await File.find({
-      originalFilename: locationRegex 
+      originalFilename: locationRegex,
     }).sort({ chunkIndex: 1 });
-    
+
     if (files.length === 0) {
-      return reply.code(404).send({ error: 'No files found for the specified location' });
+      return reply
+        .code(404)
+        .send({ error: "No files found for the specified location" });
     }
 
     let stackedBarData = new Map();
@@ -540,19 +540,18 @@ export const getPeakHours = async (request, reply) => {
     for (const file of files) {
       const fileContent = JSON.parse(file.fileContent);
 
-      fileContent.forEach(row => {
+      fileContent.forEach((row) => {
         const timestamp = new Date(row.timeStamp);
-        const driver = row.driver || 'Unknown';
+        const driver = row.driver || "Unknown";
         const boarded = stringToBoolean(row.Board) ? 1 : 0;
         const alighted = stringToBoolean(row.Alight) ? 1 : 0;
 
-        if(boarded || alighted)
-        stackedBarData.set(timestamp.toISOString(), {
-          timestamp: timestamp,
-          gpsSpeed: parseFloat(row.gpsSpeed),
-        });
+        if (boarded || alighted)
+          stackedBarData.set(timestamp.toISOString(), {
+            timestamp: timestamp,
+            gpsSpeed: parseFloat(row.gpsSpeed),
+          });
       });
-      
     }
     const Hour = 60 * 60 * 1000; // 1hr in milliseconds
     const hourlyData = Array.from({ length: 24 }, () => ({
@@ -560,23 +559,24 @@ export const getPeakHours = async (request, reply) => {
       entries: 0,
     }));
 
-
     const formattedData = Array.from(stackedBarData.values());
 
-    formattedData.forEach(data=>{
+    formattedData.forEach((data) => {
       const entryTime = data.timestamp;
       const hour = entryTime.getHours(); // Get the hour (0-23) in UTC
 
-    // Update the hourly data for the corresponding hour
+      // Update the hourly data for the corresponding hour
       hourlyData[hour].averageSpeed += data.gpsSpeed;
       hourlyData[hour].entries += 1;
       // hourlyData[hour].entries.push(data);
-    })
+    });
 
-    hourlyData.forEach(hour => {
-      hourlyData[hourlyData.indexOf(hour)].averageSpeed = hourlyData[hourlyData.indexOf(hour)].averageSpeed/(hourlyData[hourlyData.indexOf(hour)].entries);
-      if(!hourlyData[hourlyData.indexOf(hour)].averageSpeed){
-        hourlyData[hourlyData.indexOf(hour)].averageSpeed=0
+    hourlyData.forEach((hour) => {
+      hourlyData[hourlyData.indexOf(hour)].averageSpeed =
+        hourlyData[hourlyData.indexOf(hour)].averageSpeed /
+        hourlyData[hourlyData.indexOf(hour)].entries;
+      if (!hourlyData[hourlyData.indexOf(hour)].averageSpeed) {
+        hourlyData[hourlyData.indexOf(hour)].averageSpeed = 0;
       }
     });
 
@@ -590,7 +590,7 @@ export const getPeakHours = async (request, reply) => {
 export const getGPSSpeedLineChart = async (request, reply) => {
   try {
     const { location } = request.body;
-    const locationRegex = new RegExp(location, 'i');
+    const locationRegex = new RegExp(location, "i");
 
     const files = await File.find({
       originalFilename: locationRegex,
@@ -603,62 +603,58 @@ export const getGPSSpeedLineChart = async (request, reply) => {
     }
 
     let stackedBarData = new Map();
-    let days = new Map()
+    let days = new Map();
     for (const file of files) {
       const fileContent = JSON.parse(file.fileContent);
 
       for (const row of fileContent) {
         const timestamp = new Date(row.timeStamp);
-        const driver = row.driver || 'Unknown';
-        const speed = parseFloat(row.gpsSpeed)
-        const year = timestamp.getFullYear()
-        const month = timestamp.getMonth()
-        const day = timestamp.getDate()
-        const hour = timestamp.getHours()
-        const hourDate = new Date(year,month,day,hour)
-        if(!Object.keys(days).includes(`${hourDate}`)){
-          days[`${hourDate}`]={
+        const driver = row.driver || "Unknown";
+        const speed = parseFloat(row.gpsSpeed);
+        const year = timestamp.getFullYear();
+        const month = timestamp.getMonth();
+        const day = timestamp.getDate();
+        const hour = timestamp.getHours();
+        const hourDate = new Date(year, month, day, hour);
+        if (!Object.keys(days).includes(`${hourDate}`)) {
+          days[`${hourDate}`] = {
             speed: 0,
-            entries:0
-          }
+            entries: 0,
+          };
         }
 
         stackedBarData.set(timestamp, {
           timestamp: timestamp,
           gpsSpeed: speed,
         });
-      
-      };
-      
+      }
     }
     // const Hour = 60 * 60 * 1000; // 1hr in milliseconds
 
-
-
     const formattedData = Array.from(stackedBarData.values());
 
-    formattedData.forEach(data=>{
+    formattedData.forEach((data) => {
       const entryTime = data.timestamp;
       const hour = entryTime.getHours(); // Get the hour (0-23) in UTC
-      const year = entryTime.getFullYear()
-      const month = entryTime.getMonth()
-      const day = entryTime.getDate()
-      const hourDate = new Date(year,month,day,hour)
-      if(!isNaN(hourDate)){
-        days[`${hourDate}`].timestamp=hourDate.toISOString();
-      days[`${hourDate}`].speed += data.gpsSpeed;
-      days[`${hourDate}`].entries += 1;
+      const year = entryTime.getFullYear();
+      const month = entryTime.getMonth();
+      const day = entryTime.getDate();
+      const hourDate = new Date(year, month, day, hour);
+      if (!isNaN(hourDate)) {
+        days[`${hourDate}`].timestamp = hourDate.toISOString();
+        days[`${hourDate}`].speed += data.gpsSpeed;
+        days[`${hourDate}`].entries += 1;
       }
-    // Update the hourly data for the corresponding hour
-      
+      // Update the hourly data for the corresponding hour
+
       // hourlyData[hour].entries.push(data);
-    })
+    });
 
-    Object.keys(days).forEach(keys=>{
-      days[keys].speed = days[keys].speed /days[keys].entries;
-    })
+    Object.keys(days).forEach((keys) => {
+      days[keys].speed = days[keys].speed / days[keys].entries;
+    });
 
-    return reply.code(200).send( Object.values(days));
+    return reply.code(200).send(Object.values(days));
   } catch (error) {
     console.error("Error in getBoardingAlightingStackedBar:", error);
     return reply
@@ -666,8 +662,6 @@ export const getGPSSpeedLineChart = async (request, reply) => {
       .send({ error: "Internal Server Error", details: error.message });
   }
 };
-
-
 
 export const uploadFile = async (request, reply) => {
   try {
@@ -799,8 +793,6 @@ export const getFile = async (request, reply) => {
     return reply.code(500).send({ error: "Internal Server Error" });
   }
 };
-
-
 
 async function saveChunk(filename, fileType, dataTypes, data, chunkIndex) {
   const chunkContent = JSON.stringify(data);
