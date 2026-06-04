@@ -14,10 +14,11 @@ engineers, and LGU staff who need to defend a priority order with evidence.
 This repository began as the LakbAI bus-analytics codebase and contains two
 products. The **TULAY** app is the pedestrian-mobility GIS:
 
-- **Accessibility map** (`/pam`) — Quezon City barangays shaded by an accessibility,
-  safety, or mobility layer, over EDSA busway stations and pedestrian crossings.
-  Select an area for its three sub-scores, population, and crossings, then generate
-  AI recommended actions grounded in the weakest scores.
+- **Accessibility map** (`/pam`) — all 814 barangays across the 17 cities of Metro Manila,
+  shaded by an accessibility, safety, or mobility layer. Toggle landmark overlays
+  (rail/busway stations, pedestrian crossings, hospitals, schools). Select an area for its
+  three sub-scores, population, and nearest-station distance, then generate AI recommended
+  actions grounded in the weakest scores.
 - **Transit coverage** (`/gis-map`) — station walking-catchment rings (near / medium /
   far) over the same barangays shaded by pedestrian-access priority, with a drill-in
   showing each area's priority score.
@@ -36,10 +37,12 @@ not part of the TULAY app.
     connection for serverless), falling back to derived data when the DB is unset.
   - `POST /api/recommend` calls OpenRouter (cheapest configurable model) for prioritized
     infrastructure actions, with a deterministic offline fallback.
-- **Data:** MongoDB Atlas, seeded from the real QC barangay GeoJSON and EDSA station
-  coordinates. The frontend fetches live data through a single `apiPost` client that
-  falls back to identical derived mock data, so the app renders offline and shows a
-  live / mock status badge.
+- **Data:** MongoDB Atlas. Built from public sources by `scripts/build-ncr.mjs`:
+  barangay boundaries from faeldon/philippines-json-maps (2023), and rail/busway stations
+  plus hospitals and schools from OpenStreetMap (Overpass). The priority score is modeled
+  on real transit proximity. The frontend fetches live data through a single `apiPost`
+  client that falls back to the same dataset bundled as lazy-loaded JSON, so the app
+  renders offline and shows a live / mock status badge.
 - **Deploy:** Vercel.
 
 ## Local development
@@ -65,15 +68,17 @@ OPENROUTER_API_KEY=sk-or-...
 OPENROUTER_MODEL=meta-llama/llama-3.1-8b-instruct   # optional; cheap default
 ```
 
-### Seed the database
+### Build the dataset and seed the database
 
 ```bash
 cd frontend
-MONGODB_URI="mongodb+srv://..." node scripts/seed.mjs
+MONGODB_URI="mongodb+srv://..." node scripts/build-ncr.mjs   # Metro Manila (all 17 cities)
 ```
 
-The seed is idempotent (upserts keyed by `_id`) and uses the same derivation the
-offline fallback uses, so live and fallback data are identical.
+`build-ncr.mjs` fetches the public barangay boundaries and OSM landmarks, models the
+scores, simplifies geometry, writes the bundled fallback JSON to `src/data/`, and seeds
+Atlas (collections cleared and reinserted). `scripts/seed.mjs` is the older Quezon-City-only
+seed kept for reference.
 
 ## Notes and limitations
 
