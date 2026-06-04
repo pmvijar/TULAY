@@ -29,6 +29,35 @@ const FALLBACKS = {
   "/dashboard/gps-speed-line": () => mockGpsSpeedLine(),
   "/insights": () => MOCK_INSIGHTS,
   "/policy": () => MOCK_POLICY,
+  "/recommend": (body) => {
+    const scores = [
+      { k: "accessibility", v: body?.accessibilityScore ?? 1 },
+      { k: "safety", v: body?.safetyScore ?? 1 },
+      { k: "mobility", v: body?.mobilityScore ?? 1 },
+    ].sort((a, c) => a.v - c.v);
+    const lib = {
+      accessibility: {
+        title: "Add ramped, shaded footways to the nearest station",
+        detail:
+          "Close the last-mile gap with continuous, accessible sidewalks and curb ramps.",
+      },
+      safety: {
+        title: "Install signalized crossings at high-conflict intersections",
+        detail:
+          "Add pedestrian-protected phases and refuge islands where foot traffic meets fast traffic.",
+      },
+      mobility: {
+        title: "Introduce a feeder or shared-mobility link",
+        detail:
+          "Connect the barangay interior to the corridor to cut walking distance.",
+      },
+    };
+    return {
+      summary: `${body?.name || "This area"} scores lowest on ${scores[0].k}.`,
+      actions: scores.map((s, i) => ({ priority: i + 1, ...lib[s.k] })),
+      offline: true,
+    };
+  },
   "/chat": (body) => ({
     response:
       "I'm running in offline mode right now, so this is a sample answer. Connect the backend (OpenRouter key + MongoDB) to get live, document-grounded responses about pedestrian mobility, busway operations, and transport policy.",

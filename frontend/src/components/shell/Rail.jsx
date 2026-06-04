@@ -2,22 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  LayoutDashboard,
-  Footprints,
-  Radius,
-  Sparkles,
-  HelpCircle,
-  Bell,
-  LogOut,
-} from "lucide-react";
+import { Footprints, Radius } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+// TULAY is a focused two-view GIS app: the accessibility map and transit
+// coverage. The rail navigates only between these. No auth menu / notifications
+// here -- there is no real auth, so we don't fake the chrome.
 const NAV = [
-  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/pam", label: "Accessibility map", icon: Footprints },
   { href: "/gis-map", label: "Transit coverage", icon: Radius },
-  { href: "/recommendations", label: "Recommendations", icon: Sparkles },
 ];
 
 function RailLink({ href, label, icon: Icon, active }) {
@@ -47,7 +40,7 @@ export function Rail() {
   return (
     <aside className="z-40 flex h-screen w-16 shrink-0 flex-col items-center border-r border-border bg-surface/80 py-4 backdrop-blur-sm">
       <Link
-        href="/dashboard"
+        href="/pam"
         aria-label="TULAY home"
         className="mb-5 flex h-11 w-11 items-center justify-center rounded-[12px] bg-accent text-accent-fg shadow-sm"
       >
@@ -64,23 +57,9 @@ export function Rail() {
         ))}
       </nav>
 
-      <div className="flex flex-col items-center gap-1.5">
-        <RailLink href="#help" label="Help" icon={HelpCircle} active={false} />
-        <RailLink
-          href="#alerts"
-          label="Notifications"
-          icon={Bell}
-          active={false}
-        />
-        <Link
-          href="/"
-          title="Sign out"
-          aria-label="Sign out"
-          className="flex h-11 w-11 items-center justify-center rounded-[12px] text-muted-foreground transition-colors duration-200 hover:bg-surface-muted hover:text-danger"
-        >
-          <LogOut className="h-[18px] w-[18px]" strokeWidth={1.9} />
-        </Link>
-      </div>
+      <span className="nums select-none text-[9px] font-semibold tracking-widest text-muted-foreground/60">
+        TULAY
+      </span>
     </aside>
   );
 }

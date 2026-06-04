@@ -14,6 +14,8 @@ import {
   Footprints,
   MapPin,
   Layers,
+  Sparkles,
+  Loader2,
 } from "lucide-react";
 import "leaflet/dist/leaflet.css";
 
@@ -90,6 +92,22 @@ export default function AccessibilityMapPage() {
   const [activeLayer, setActiveLayer] = useState("accessibility");
   const [selected, setSelected] = useState(null);
   const [query, setQuery] = useState("");
+  const [rec, setRec] = useState(null);
+  const [recLoading, setRecLoading] = useState(false);
+
+  async function getRecommendations(unit) {
+    setRecLoading(true);
+    setRec(null);
+    const { data } = await apiPost("/recommend", {
+      name: unit.name,
+      accessibilityScore: unit.accessibilityScore,
+      safetyScore: unit.safetyScore,
+      mobilityScore: unit.mobilityScore,
+      population: unit.population,
+    });
+    setRec(data);
+    setRecLoading(false);
+  }
 
   const [icons, setIcons] = useState({});
   useEffect(() => {
@@ -123,6 +141,11 @@ export default function AccessibilityMapPage() {
       setIsLoading(false);
     })();
   }, []);
+
+  useEffect(() => {
+    setRec(null);
+    setRecLoading(false);
+  }, [selected?._id]);
 
   const scoreOf = (unit) =>
     unit?.[SCORE_KEY[activeLayer]] ?? unit?.proximityScore ?? 0;
@@ -268,7 +291,7 @@ export default function AccessibilityMapPage() {
             return (
               <button
                 key={u._id}
-                onClick={() => setSelected({ ...u })}
+                onClick={() => setSelected({ ...u, type: "geounit" })}
                 className={cn(
                   "flex w-full items-center justify-between gap-2 rounded-md px-2.5 py-2 text-left transition-colors",
                   isSel ? "bg-accent-soft" : "hover:bg-surface-muted"
@@ -411,6 +434,63 @@ export default function AccessibilityMapPage() {
                   label="Mobility"
                   score={selected.mobilityScore ?? 0}
                 />
+              </div>
+
+              <div className="mt-5 border-t border-border pt-4">
+                {!rec && !recLoading && (
+                  <Button
+                    variant="quiet"
+                    size="sm"
+                    className="w-full"
+                    onClick={() => getRecommendations(selected)}
+                  >
+                    <Sparkles className="h-4 w-4 text-accent" />
+                    Recommend actions
+                  </Button>
+                )}
+                {recLoading && (
+                  <div className="flex items-center justify-center gap-2 py-2 text-[13px] text-muted-foreground">
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    Generating recommendations…
+                  </div>
+                )}
+                {rec && (
+                  <div className="animate-fade-up">
+                    <div className="mb-2 flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+                      <Sparkles className="h-3.5 w-3.5 text-accent" />
+                      Recommended actions
+                      {rec.offline && (
+                        <span className="ml-auto rounded-full bg-surface-muted px-1.5 py-0.5 text-[10px] normal-case tracking-normal">
+                          offline
+                        </span>
+                      )}
+                    </div>
+                    {rec.summary && (
+                      <p className="mb-3 text-[13px] leading-relaxed text-foreground">
+                        {rec.summary}
+                      </p>
+                    )}
+                    <ol className="flex flex-col gap-2.5">
+                      {(rec.actions || []).map((a) => (
+                        <li key={a.priority} className="flex gap-2.5">
+                          <span className="nums mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent-soft text-[11px] font-semibold text-accent">
+                            {a.priority}
+                          </span>
+                          <div>
+                            <div className="text-[13px] font-medium leading-snug">
+                              {a.title}
+                            </div>
+                            {a.detail && (
+                              <div className="mt-0.5 text-[12px] leading-snug text-muted-foreground">
+                                {a.detail}
+                              </div>
+                            )}
+                          </div>
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                )}
               </div>
             </>
           ) : (
