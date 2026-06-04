@@ -133,3 +133,6 @@ dist
 pam-*.png
 *.screenshot.png
 .playwright-mcp/
+*.png
+!frontend/public/**
+.vercel
