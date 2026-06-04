@@ -1,744 +1,434 @@
 "use client";
-import React, { useEffect, useState } from "react";
+
+import React, { useEffect, useState, useMemo } from "react";
 import dynamic from "next/dynamic";
-import L from "leaflet";
-import { useMapEvent } from "react-leaflet";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import {
-  LayoutDashboard,
-  LogOut,
-  Lightbulb,
-  Footprints,
-  TrainFront,
-  BusFront,
-  X,
-  Rows4,
-  TriangleAlert,
-  Move,
-  PersonStanding,
-} from "lucide-react";
 import ReactDOMServer from "react-dom/server";
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-import * as RadioGroup from "@radix-ui/react-radio-group";
-import "react-circular-progressbar/dist/styles.css";
+import {
+  Search,
+  X,
+  Move,
+  TriangleAlert,
+  PersonStanding,
+  BusFront,
+  TrainFront,
+  Footprints,
+  MapPin,
+  Layers,
+} from "lucide-react";
 import "leaflet/dist/leaflet.css";
 
+import { AppShell } from "@/components/shell/AppShell";
+import { GlassPanel } from "@/components/ui/glass-panel";
+import { Button } from "@/components/ui/button";
+import { ScoreBar } from "@/components/ui/score-bar";
+import { StatusBadge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
+import { qualityColor } from "@/lib/scoring";
+import { apiPost } from "@/lib/api";
+
 const MapContainer = dynamic(
-  () => import("react-leaflet").then((mod) => mod.MapContainer),
+  () => import("react-leaflet").then((m) => m.MapContainer),
   { ssr: false }
 );
 const TileLayer = dynamic(
-  () => import("react-leaflet").then((mod) => mod.TileLayer),
+  () => import("react-leaflet").then((m) => m.TileLayer),
   { ssr: false }
 );
-const GeoJSON = dynamic(
-  () => import("react-leaflet").then((mod) => mod.GeoJSON),
-  {
-    ssr: false,
-  }
-);
-const Tooltip = dynamic(
-  () => import("react-leaflet").then((mod) => mod.Tooltip),
-  {
-    ssr: false,
-  }
-);
-
-const Marker = dynamic(
-  () => import("react-leaflet").then((mod) => mod.Marker),
-  { ssr: false }
-);
-
-const TrainIcon = L.divIcon({
-  className: "custom-div-icon", // Add a base class for potential extensions
-  html: ReactDOMServer.renderToString(
-    <div className="flex items-center justify-center w-10 h-10 bg-white opacity-80 border-1 border-gray-600 rounded-full shadow-md">
-      <TrainFront className="w-6 h-6 text-blue-600" />
-    </div>
-  ),
-  iconSize: [40, 40], // Size of the outer circle
-  iconAnchor: [20, 20], // Anchor point in the center of the circle
+const GeoJSON = dynamic(() => import("react-leaflet").then((m) => m.GeoJSON), {
+  ssr: false,
+});
+const Tooltip = dynamic(() => import("react-leaflet").then((m) => m.Tooltip), {
+  ssr: false,
+});
+const Marker = dynamic(() => import("react-leaflet").then((m) => m.Marker), {
+  ssr: false,
 });
 
-const BusIcon = L.divIcon({
-  className: "custom-div-icon", // Add a base class for potential extensions
-  html: ReactDOMServer.renderToString(
-    <div className="flex items-center justify-center w-10 h-10 bg-white opacity-50 border-1 border-gray-600 rounded-full shadow-md">
-      <BusFront className="w-6 h-6 text-blue-600" />
-    </div>
-  ),
-  iconSize: [40, 40], // Size of the outer circle
-  iconAnchor: [20, 20], // Anchor point in the center of the circle
-});
+const LAYERS = [
+  { value: "accessibility", label: "Accessibility", icon: PersonStanding },
+  { value: "safety", label: "Safety", icon: TriangleAlert },
+  { value: "mobility", label: "Mobility", icon: Move },
+];
 
-const PassageIcon = L.divIcon({
-  className: "custom-div-icon", // Base class for styling
-  html: ReactDOMServer.renderToString(
-    <div className="flex items-center justify-center w-6 h-6 bg-gray-800 opacity-80 border-1 border-gray-500 rounded-full shadow-md">
-      <Rows4 className="w-4 h-4 text-white" />
-    </div>
-  ),
-  iconSize: [40, 40],
-  iconAnchor: [20, 20],
-});
-
-const LayerSelector = ({ activeLayer, setActiveLayer }) => {
-  const layers = [
-    {
-      label: "Mobility",
-      value: "mobility",
-      icon: <Move className="w-4 h-4 text-blue-500" />,
-      // description: "Tracks stations and routes.",
-    },
-    {
-      label: "Safety",
-      value: "safety",
-      icon: <TriangleAlert className="w-4 h-4 text-yellow-300" />,
-      // description: "Tracks passages and incidents.",
-    },
-    {
-      label: "Accessibility",
-      value: "accessibility",
-      icon: <PersonStanding className="w-4 h-4 text-green-500" />,
-      // description: "Tracks roads and sidewalks.",
-    },
-  ];
-
-  return (
-    <div
-      className="absolute left-80 transform bottom-20 bg-white opacity-95 shadow-lg rounded-md p-3"
-      style={{
-        zIndex: 1000, // Ensure it appears above the map
-        width: "200px", // Adjust width if needed
-      }}
-    >
-      <RadioGroup.Root
-        value={activeLayer}
-        onValueChange={(value) => setActiveLayer(value)}
-        className="space-y-2 flex flex-col"
-      >
-        {layers.map((layer) => (
-          <RadioGroup.Item
-            key={layer.value}
-            value={layer.value}
-            className={`cursor-pointer border border-gray-300 rounded-md py-3 px-4 flex items-center space-x-3 ${
-              activeLayer === layer.value
-                ? "bg-blue-50 border-blue-400"
-                : "hover:border-gray-400"
-            }`}
-          >
-            {layer.icon} {/* Render the icon */}
-            <div className="flex flex-col text-gray-600">
-              <span className="text-sm font-semibold">{layer.label}</span>
-            </div>
-          </RadioGroup.Item>
-        ))}
-      </RadioGroup.Root>
-    </div>
-  );
+const SCORE_KEY = {
+  accessibility: "accessibilityScore",
+  safety: "safetyScore",
+  mobility: "mobilityScore",
 };
 
-const GISMapPage = () => {
-  const [geoJsonLayers, setGeoJsonLayers] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+function makeIcon(L, Comp, ring) {
+  return L.divIcon({
+    className: "tulay-div-icon",
+    html: ReactDOMServer.renderToString(
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: 32,
+          height: 32,
+          borderRadius: 9999,
+          background: "oklch(0.995 0.003 258 / 0.92)",
+          border: `1.5px solid ${ring}`,
+          boxShadow: "0 4px 12px -4px oklch(0.4 0.03 264 / 0.4)",
+        }}
+      >
+        <Comp width={16} height={16} color={ring} />
+      </div>
+    ),
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+  });
+}
+
+export default function AccessibilityMapPage() {
   const [geoUnits, setGeoUnits] = useState([]);
   const [stations, setStations] = useState([]);
   const [passages, setPassages] = useState([]);
-  const [selectedFeature, setSelectedFeature] = useState(null); // Unified state for selected barangay or station
-  const [activeLayers, setActiveLayers] = useState({
-    mobility: true,
-    safety: false,
-    accessibility: false,
-  });
+  const [isLoading, setIsLoading] = useState(true);
+  const [source, setSource] = useState("live");
   const [activeLayer, setActiveLayer] = useState("accessibility");
+  const [selected, setSelected] = useState(null);
+  const [query, setQuery] = useState("");
 
-  const renderStationMarkers = () => {
-    const renderedNames = new Set();
-
-    return stations
-      .filter((station) => station.name && station.name !== "N/A")
-      .filter((station) => {
-        if (renderedNames.has(station.name)) {
-          return false;
-        } else {
-          renderedNames.add(station.name);
-          return true;
-        }
-      })
-      .map((station) => (
-        <Marker
-          key={station.id}
-          position={[
-            station.location.coordinates[1],
-            station.location.coordinates[0],
-          ]}
-          icon={station.transportType[0] === "train" ? TrainIcon : BusIcon} // Conditional icon
-          eventHandlers={{
-            click: () => {
-              const updatedStation = { ...station, type: "station" }; // Add type: "station"
-              console.log("Selected Station:", updatedStation);
-              setSelectedFeature(updatedStation);
-            },
-          }}
-        >
-          <Tooltip>{station.name}</Tooltip>
-        </Marker>
-      ));
-  };
-
-  const renderPassageMarkers = () => {
-    const renderedPassages = new Set();
-
-    return passages
-      .filter((passage) => passage.osm_id && passage.osm_id !== "N/A")
-      .filter((passage) => {
-        if (renderedPassages.has(passage.osm_id)) {
-          return false;
-        } else {
-          renderedPassages.add(passage.osm_id);
-          return true;
-        }
-      })
-      .map((passage) => (
-        <Marker
-          key={passage.osm_id}
-          position={[
-            passage.location.coordinates[1],
-            passage.location.coordinates[0],
-          ]}
-          icon={PassageIcon}
-          eventHandlers={{
-            click: () => {
-              // const updatedPassage = { ...passage, type: "passage" };
-              // console.log("Selected Passage:", updatedPassage);
-              // setSelectedFeature(updatedPassage);
-            },
-          }}
-        >
-          <Tooltip>
-            {passage.type.charAt(0).toUpperCase() + passage.type.slice(1)}
-          </Tooltip>
-        </Marker>
-      ));
-  };
-
-  const generateColorFromScore = (score) => {
-    // Clamp the score between 0 and 1
-    score = Math.min(Math.max(score, 0), 1);
-
-    let red, green;
-
-    if (score < 0.5) {
-      // Transition from red to yellow
-      red = 255;
-      green = Math.floor(score * 2 * 255);
-    } else {
-      // Transition from yellow to green
-      red = Math.floor((1 - score) * 2 * 255);
-      green = 255;
-    }
-
-    // Return the color in RGB format
-    return `rgb(${red}, ${green}, 0)`;
-  };
-
-  const getRoadColor = (hasSidewalk) => (hasSidewalk ? "green" : "red");
-
-  const getSidewalkColor = (sidewalkType) => {
-    switch (sidewalkType) {
-      case "both":
-        return "green";
-      case "separate":
-        return "yellow";
-      case "none":
-      case "unknown":
-      default:
-        return "gray"; // Optional for visualization
-    }
-  };
-
-  const renderGeoJsonLayers = () => {
-    return geoUnits.map((geoUnit) => {
-      // Select the score based on the active layer
-      const score =
-        activeLayer === "accessibility"
-          ? geoUnit.properties.accessibilityScore
-          : activeLayer === "safety"
-          ? geoUnit.properties.safetyScore
-          : geoUnit.properties.mobilityScore;
-
-      // Generate color based on the selected score
-      const color = generateColorFromScore(score);
-
-      return (
-        <GeoJSON
-          key={geoUnit.properties.id}
-          data={geoUnit} // GeoJSON data
-          style={{
-            color: "gray", // Outline color
-            weight: 1.3, // Border thickness
-            fillOpacity: 0.2, // Transparency
-            fillColor: color, // Use the dynamically generated color
-          }}
-          onEachFeature={onEachBarangay} // Pass the function here
-        />
-      );
-    });
-  };
-
-  const ProgressIndicator = ({ score, label }) => {
-    return (
-      <div
-        style={{
-          position: "relative",
-          width: 120,
-          height: 120,
-          textAlign: "center",
-        }}
-      >
-        <CircularProgressbar
-          value={score}
-          text={``} // Remove the percentage text from CircularProgressbar
-          styles={buildStyles({
-            pathColor:
-              score > 90
-                ? "#4CAF50" // Green
-                : score > 80
-                ? "#8BC34A" // Light Green
-                : score > 60
-                ? "#FFC107" // Yellow
-                : score > 40
-                ? "#FF9800" // Orange
-                : score > 20
-                ? "#F44336" // Red
-                : "#D32F2F", // Dark Red
-            textColor: "#3A3D46", // Text color
-            trailColor: "#d6d6d6", // Gray background trail
-            textSize: "16px", // Adjust font size
-          })}
-        />
-        {/* Custom text and label inside the circle */}
-        <div
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            color: "#3A3D46",
-            fontSize: "18px",
-            fontWeight: "bold",
-            lineHeight: "1.2",
-          }}
-        >
-          <div>{`${score}%`}</div> {/* Score */}
-          <div
-            style={{
-              fontSize: "10px",
-              fontWeight: "bold",
-              marginTop: "4px",
-              opacity: "0.6",
-            }}
-          >
-            {label}
-          </div>{" "}
-          {/* Label */}
-        </div>
-      </div>
-    );
-  };
-
-  const renderRoads = () => {
-    console.log("Geo Units Before:", geoUnits);
-    return geoUnits.flatMap((geoUnit) =>
-      geoUnit.properties.roadsWithin.roads
-        .filter((road) => !road.hasSidewalk) // Only render roads without sidewalks
-        .map((road) => (
-          <GeoJSON
-            key={road.osm_id}
-            data={{
-              type: "Feature",
-              properties: { hasSidewalk: road.hasSidewalk },
-              geometry: road.location,
-            }}
-            style={{
-              color: "red", // Red for roads without sidewalks
-              weight: 4,
-              opacity: 0.6,
-            }}
-            onEachFeature={(feature, layer) => {
-              const label = "Missing sidewalks on both sides";
-              layer.bindTooltip(label);
-            }}
-          />
-        ))
-    );
-  };
-
-  const renderSidewalks = () => {
-    return geoUnits.flatMap((geoUnit) =>
-      geoUnit.properties.sidewalksWithin.sidewalks.map((sidewalk) => (
-        <GeoJSON
-          key={sidewalk.osm_id}
-          data={{
-            type: "Feature",
-            properties: { sidewalkType: sidewalk.sidewalkType },
-            geometry: sidewalk.location,
-          }}
-          style={{
-            color: sidewalk.sidewalkType === "both" ? "green" : "yellow", // Green for both, yellow for others
-            weight: 4,
-            opacity: 0.6,
-          }}
-          onEachFeature={(feature, layer) => {
-            const label =
-              sidewalk.sidewalkType === "both"
-                ? "Has sidewalks on both sides"
-                : "Missing sidewalk on one side";
-            layer.bindTooltip(label);
-          }}
-        />
-      ))
-    );
-  };
-
-  const getSidewalkLabel = (sidewalkType) => {
-    switch (sidewalkType) {
-      case "both":
-        return "Has sidewalks on both sides";
-      case "left":
-      case "right":
-        return "Missing sidewalk on one side";
-      case "none":
-      case "unknown":
-      default:
-        return "Missing sidewalks on both sides";
-    }
-  };
-
-  const getRoadLabel = (hasSidewalk) =>
-    hasSidewalk
-      ? "Has sidewalks on both sides"
-      : "Missing sidewalks on both sides";
-
-  const onEachRoad = (feature, layer) => {
-    const label = getRoadLabel(feature.properties.hasSidewalk);
-    layer.bindTooltip(label);
-  };
-
-  const onEachSidewalk = (feature, layer) => {
-    const label = getSidewalkLabel(feature.properties.sidewalkType);
-    layer.bindTooltip(label);
-  };
-
+  const [icons, setIcons] = useState({});
   useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-
-      try {
-        const [geoUnits, stations, passages] = await Promise.all([
-          fetch("http://localhost:3001/get-geounits", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ location: "EDSA" }), // Include body
-          }).then((res) => res.json()),
-
-          fetch("http://localhost:3001/get-stations", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ location: "EDSA" }), // Include body
-          }).then((res) => res.json()),
-
-          fetch("http://localhost:3001/get-passages", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ location: "EDSA" }), // Include body
-          }).then((res) => res.json()),
-        ]);
-
-        // setGeoUnits(geoUnits);
-
-        const enrichedGeoUnits = geoUnits.map((unit) => {
-          const sidewalkRatio =
-            unit.roadsWithin.roadLength !== 0
-              ? unit.sidewalksWithin.sidewalkLength /
-                unit.roadsWithin.roadLength
-              : undefined;
-
-          return {
-            type: "Feature",
-            properties: {
-              id: unit._id,
-              name: unit.name || "Unnamed GeoUnit",
-              postalCode: unit.postalCode || "N/A",
-              area: unit.area,
-              population: unit.population,
-              roadsWithin: unit.roadsWithin,
-              sidewalksWithin: unit.sidewalksWithin,
-              // color: generateColorFromScore(unit.proximityScore) || "gray",
-              proximityScore: unit.proximityScore || 0,
-              fillOpacity: 0.4,
-              ...(sidewalkRatio !== undefined && { sidewalkRatio }), // Add sidewalkRatio only if it's defined
-              ...(unit.injuryRate !== undefined && {
-                injuryRate: unit.injuryRate,
-              }), // Add injuryRate only if it exists
-              ...(unit.fatalityRate !== undefined && {
-                fatalityRate: unit.fatalityRate,
-              }), // Add fatalityRate only if it exists
-              // accessibilityScore: 0.6, // Placeholder value
-              accessibilityScore: unit.accessibilityScore,
-              mobilityScore: unit.mobilityScore,
-              safetyScore: unit.safetyScore,
-              // mobilityScore: 0.4, // Placeholder value
-              // safetyScore: 0.2, // Placeholder value
-            },
-            geometry: unit.location, // Use the location field directly
-          };
-        });
-
-        setGeoUnits(enrichedGeoUnits);
-
-        // setGeoJsonLayers(
-        //   console.log("Enriched Geo Units:", enrichedGeoUnits) ||
-        //     enrichedGeoUnits.map((geoUnit) => ({
-        //       data: geoUnit,
-        //       style: {
-        //         color: "gray", // Outline color
-        //         weight: 1.3, // Border thickness
-        //         fillOpacity: 0.2, // Fill transparency
-        //         fillColor: generateColorFromScore(
-        //           geoUnit.properties.proximityScore
-        //         ), // Use generated color
-        //       },
-        //     }))
-        // );
-
-        setStations(stations);
-        setPassages(passages);
-        console.log("stations:", stations); // Logs when stations are updated
-        console.log("passages:", passages); // Logs when passages are updated
-        console.log("geoUnits:", geoUnits); // Logs when geoUnits are updated
-      } catch (err) {
-        setError("Failed to fetch data. Please try again later.");
-        console.error("Error fetching data:", err);
-      } finally {
-        setIsLoading(false);
-      }
+    let active = true;
+    import("leaflet").then((mod) => {
+      const L = mod.default || mod;
+      if (!active) return;
+      setIcons({
+        bus: makeIcon(L, BusFront, "oklch(0.555 0.175 258)"),
+        train: makeIcon(L, TrainFront, "oklch(0.5 0.18 280)"),
+        passage: makeIcon(L, Footprints, "oklch(0.62 0.14 152)"),
+      });
+    });
+    return () => {
+      active = false;
     };
-
-    fetchData();
   }, []);
 
-  const onEachBarangay = (feature, layer) => {
-    if (feature.properties) {
-      // Bind a tooltip to display the name and accessibility score
-      layer.bindTooltip(`${feature.properties.name}`);
+  useEffect(() => {
+    (async () => {
+      setIsLoading(true);
+      const [g, s, p] = await Promise.all([
+        apiPost("/gis/geounits", { location: "EDSA" }),
+        apiPost("/gis/stations", { location: "EDSA" }),
+        apiPost("/gis/passages", { location: "EDSA" }),
+      ]);
+      setGeoUnits(Array.isArray(g.data) ? g.data : []);
+      setStations(Array.isArray(s.data) ? s.data : []);
+      setPassages(Array.isArray(p.data) ? p.data : []);
+      setSource(g.source);
+      setIsLoading(false);
+    })();
+  }, []);
 
-      // Add a click event listener to the layer
-      layer.on("click", () => {
-        const updatedProperties = { ...feature.properties, type: "geounit" };
-        console.log("Selected Geo Unit:", updatedProperties);
-        setSelectedFeature(updatedProperties);
-      });
-    }
-  };
+  const scoreOf = (unit) =>
+    unit?.[SCORE_KEY[activeLayer]] ?? unit?.proximityScore ?? 0;
 
-  // Tooltip on hover to show lat, long
-  function MapWithTooltip() {
-    const map = useMapEvent("mousemove", (e) => {
-      const { lat, lng } = e.latlng;
-      const tooltip = document.getElementById("latlon-tooltip");
-      tooltip.innerHTML = `Lat: ${lat.toFixed(6)} | Lng: ${lng.toFixed(6)}`;
-      tooltip.style.left = `${e.originalEvent.clientX + 10}px`;
-      tooltip.style.top = `${e.originalEvent.clientY + 10}px`;
-      tooltip.style.display = "block";
-    });
+  const features = useMemo(
+    () =>
+      geoUnits.map((u) => ({
+        type: "Feature",
+        properties: { ...u, type: "geounit" },
+        geometry: u.location,
+      })),
+    [geoUnits]
+  );
 
-    return null;
-  }
-
-  // Function to generate colors based on the proximity score
-
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <p className="text-lg font-semibold">Loading...</p>
-      </div>
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    const list = [...geoUnits].sort(
+      (a, b) => scoreOf(b) - scoreOf(a)
     );
-  }
+    if (!q) return list;
+    return list.filter((u) => u.name?.toLowerCase().includes(q));
+  }, [geoUnits, query, activeLayer]);
+
+  const dedupStations = useMemo(() => {
+    const seen = new Set();
+    return stations.filter((s) => {
+      if (!s.name || s.name === "N/A" || seen.has(s.name)) return false;
+      seen.add(s.name);
+      return true;
+    });
+  }, [stations]);
 
   return (
-    <div className="min-h-screen flex flex-row relative">
-      <section className="flex flex-col justify-around min-w-56 px-3 bg-white shadow-md rounded-r-3xl">
-        <div className="pt-6 pl-3 flex items-center">
-          <Image
-            src="/lakbai-logo.png"
-            alt="LakbAI Logo"
-            width={50}
-            height={50}
-            className="mr-4"
-          />
-          <div>
-            <h1 className="text-2xl font-bold text-gray-800">LakbAI</h1>
-            <h2 className="text-xl -mt-2">Analytics</h2>
-          </div>
-        </div>
-        <nav className="my-4 flex flex-col justify-between min-h-[84%]">
-          <section>
-            <Link href="/dashboard">
-              <Button
-                variant="ghost"
-                className="flex flex-row rounded-lg w-full justify-start px-4 text-left hover:bg-teal-50"
-              >
-                <LayoutDashboard className="mr-2 h-4 w-4" />
-                Dashboard
-              </Button>
-            </Link>
-            <Link href="/recommendations">
-              <Button
-                variant="ghost"
-                className="flex flex-row rounded-lg w-full justify-start px-4 text-left hover:bg-teal-50"
-              >
-                <Lightbulb className="mr-2 h-4 w-4" />
-                Recommendations
-              </Button>
-            </Link>
-            <Link href="/gis-map">
-              <Button
-                variant="ghost"
-                className="flex flex-row rounded-lg w-full justify-start px-4 text-left hover:bg-teal-50"
-              >
-                <Footprints className="mr-2 h-4 w-4" />
-                Pedestrian Accessibility Map
-              </Button>
-            </Link>
-          </section>
+    <AppShell>
+      {/* Full-bleed map */}
+      <div className="absolute inset-0">
+        {!isLoading && (
+          <MapContainer
+            center={[14.63, 121.04]}
+            zoom={13}
+            zoomControl={true}
+            style={{ height: "100%", width: "100%" }}
+          >
+            <TileLayer
+              url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+              attribution='&copy; OpenStreetMap &copy; CARTO'
+            />
+            {features.map((f) => {
+              const score = scoreOf(f.properties);
+              const isSel = selected?._id === f.properties._id;
+              return (
+                <GeoJSON
+                  key={f.properties._id + activeLayer}
+                  data={f}
+                  style={{
+                    color: isSel
+                      ? "oklch(0.555 0.175 258)"
+                      : "oklch(0.86 0.009 258)",
+                    weight: isSel ? 2.5 : 0.8,
+                    fillColor: qualityColor(score),
+                    fillOpacity: isSel ? 0.62 : 0.45,
+                  }}
+                  eventHandlers={{
+                    click: () => setSelected({ ...f.properties }),
+                  }}
+                >
+                  <Tooltip sticky>{f.properties.name}</Tooltip>
+                </GeoJSON>
+              );
+            })}
 
-          <Link href="/">
+            {activeLayer === "mobility" &&
+              dedupStations.map((s) => (
+                <Marker
+                  key={s._id}
+                  position={[
+                    s.location.coordinates[1],
+                    s.location.coordinates[0],
+                  ]}
+                  icon={
+                    s.transportType?.[0] === "train" ? icons.train : icons.bus
+                  }
+                  eventHandlers={{
+                    click: () => setSelected({ ...s, type: "station" }),
+                  }}
+                >
+                  <Tooltip>{s.name}</Tooltip>
+                </Marker>
+              ))}
+
+            {activeLayer === "safety" &&
+              passages.map((p) => (
+                <Marker
+                  key={p._id}
+                  position={[
+                    p.location.coordinates[1],
+                    p.location.coordinates[0],
+                  ]}
+                  icon={icons.passage}
+                >
+                  <Tooltip className="capitalize">{p.type}</Tooltip>
+                </Marker>
+              ))}
+          </MapContainer>
+        )}
+      </div>
+
+      {/* Header / breadcrumb */}
+      <GlassPanel className="absolute left-6 top-6 z-[500] w-[340px] p-5">
+        <div className="mb-3 flex items-center justify-between">
+          <div className="flex items-center gap-1.5 text-[12px] font-medium text-muted-foreground">
+            <MapPin className="h-3.5 w-3.5" />
+            Quezon City
+            <span className="text-border-strong">/</span>
+            EDSA corridor
+          </div>
+          <StatusBadge
+            status={source === "live" ? "live" : "offline"}
+            label={source === "live" ? "Live" : "Mock data"}
+          />
+        </div>
+        <h1 className="text-[20px] font-semibold tracking-tight">
+          Accessibility map
+        </h1>
+        <p className="mb-4 mt-0.5 text-[13px] text-muted-foreground">
+          Barangays shaded by {activeLayer}. Select an area for its full profile.
+        </p>
+
+        <div className="relative">
+          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Find a barangay"
+            className="h-10 w-full rounded-md border border-border bg-surface/80 pl-9 pr-3 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-accent focus:ring-2 focus:ring-ring"
+          />
+        </div>
+
+        <div className="mt-2 max-h-[260px] space-y-0.5 overflow-y-auto pr-1">
+          {filtered.slice(0, 60).map((u) => {
+            const score = scoreOf(u);
+            const isSel = selected?._id === u._id;
+            return (
+              <button
+                key={u._id}
+                onClick={() => setSelected({ ...u })}
+                className={cn(
+                  "flex w-full items-center justify-between gap-2 rounded-md px-2.5 py-2 text-left transition-colors",
+                  isSel ? "bg-accent-soft" : "hover:bg-surface-muted"
+                )}
+              >
+                <span className="truncate text-[13px] font-medium">
+                  {u.name}
+                </span>
+                <span className="flex items-center gap-2">
+                  <span className="h-1.5 w-12 overflow-hidden rounded-full bg-surface-muted">
+                    <span
+                      className="block h-full rounded-full"
+                      style={{
+                        width: `${Math.round(score * 100)}%`,
+                        background: qualityColor(score),
+                      }}
+                    />
+                  </span>
+                  <span
+                    className="nums w-7 text-right text-[12px] font-semibold"
+                    style={{ color: qualityColor(score) }}
+                  >
+                    {Math.round(score * 100)}
+                  </span>
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </GlassPanel>
+
+      {/* Layer switch */}
+      <GlassPanel className="absolute bottom-6 left-6 z-[500] p-1.5">
+        <div className="flex items-center gap-1">
+          <span className="px-2 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+            <Layers className="mr-1 inline h-3.5 w-3.5" />
+            Layer
+          </span>
+          {LAYERS.map((l) => {
+            const Icon = l.icon;
+            const active = activeLayer === l.value;
+            return (
+              <button
+                key={l.value}
+                onClick={() => setActiveLayer(l.value)}
+                className={cn(
+                  "flex items-center gap-1.5 rounded-md px-3 py-1.5 text-[13px] font-medium transition-all duration-200 ease-out-quint",
+                  active
+                    ? "bg-accent text-accent-fg shadow-sm"
+                    : "text-muted-foreground hover:bg-surface-muted hover:text-foreground"
+                )}
+              >
+                <Icon className="h-4 w-4" />
+                {l.label}
+              </button>
+            );
+          })}
+        </div>
+      </GlassPanel>
+
+      {/* Legend */}
+      <GlassPanel className="absolute bottom-6 right-6 z-[500] px-4 py-3">
+        <div className="mb-1.5 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+          {activeLayer} score
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="text-[11px] text-muted-foreground">Poor</span>
+          <div
+            className="h-2 w-32 rounded-full"
+            style={{
+              background:
+                "linear-gradient(90deg, oklch(0.585 0.20 27), oklch(0.78 0.15 85), oklch(0.62 0.14 152))",
+            }}
+          />
+          <span className="text-[11px] text-muted-foreground">Good</span>
+        </div>
+      </GlassPanel>
+
+      {/* Drill-in */}
+      {selected && (
+        <GlassPanel className="absolute right-6 top-6 z-[600] w-[320px] p-5">
+          <div className="flex items-start justify-between gap-2">
+            <div>
+              <div className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+                {selected.type === "station" ? "Busway station" : "Barangay"}
+              </div>
+              <h2 className="mt-0.5 text-[18px] font-semibold tracking-tight">
+                {selected.name}
+              </h2>
+            </div>
             <Button
               variant="ghost"
-              className="flex flex-row rounded-lg w-full justify-start px-4 text-left text-red-600 hover:text-red-700 hover:bg-red-50"
+              size="icon-sm"
+              onClick={() => setSelected(null)}
+              aria-label="Close"
             >
-              <LogOut className="mr-2 h-4 w-4" />
-              Logout
+              <X className="h-4 w-4" />
             </Button>
-          </Link>
-        </nav>
-      </section>
+          </div>
 
-      {selectedFeature && (
-        <div
-          className="absolute top-20 right-10 w-48 bg-white p-4 shadow-lg border border-gray-200 rounded-md"
-          style={{
-            zIndex: 1000,
-          }}
-        >
-          <h1 className="font-bold text-xs text-gray-500">
-            {selectedFeature.type === "geounit"
-              ? "Barangay"
-              : "Station - " +
-                selectedFeature.transportType[0].charAt(0).toUpperCase() +
-                selectedFeature.transportType[0].slice(1)}
-          </h1>
-
-          <div className="flex flex-col">
-            <div className="flex flex-row justify-between">
-              <h3 className="text-lg font-semibold">{selectedFeature.name}</h3>
-              <button
-                className=" text-gray flex flex-col items-start"
-                onClick={() => setSelectedFeature(null)}
-              >
-                <X />
-              </button>
-            </div>
-
-            {selectedFeature.type === "geounit" && (
-              <div classname="flex flex-col">
-                {/* <div
-                  style={{ color: selectedFeature.color }}
-                  className="text-sm"
-                >
-                  {selectedFeature.proximityScore > 0.7 ? (
-                    <h1 className="text-sm">Highly Accessible</h1>
-                  ) : selectedFeature.proximityScore > 0.5 ? (
-                    <h1>Moderately Accessible</h1>
-                  ) : selectedFeature.proximityScore > 0.2 ? (
-                    <h1>Less Accessible</h1>
-                  ) : (
-                    <h1>Not Accessible</h1>
-                  )}
-                </div> */}
-                <div className="flex flex-col my-4 space-y-4 items-center">
-                  <ProgressIndicator
-                    score={Math.round(selectedFeature.accessibilityScore * 100)}
-                    label="Accessibility"
-                  />
-                  <ProgressIndicator
-                    score={Math.round(selectedFeature.mobilityScore * 100)}
-                    label="Mobility"
-                  />
-                  <ProgressIndicator
-                    score={Math.round(selectedFeature.safetyScore * 100)}
-                    label="Safety"
-                  />
+          {selected.type === "geounit" ? (
+            <>
+              <div className="mt-4 flex gap-4">
+                <div className="flex flex-col">
+                  <span className="text-[11px] uppercase tracking-wide text-muted-foreground">
+                    Population
+                  </span>
+                  <span className="nums text-[18px] font-semibold">
+                    {selected.population?.toLocaleString() ?? "—"}
+                  </span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-[11px] uppercase tracking-wide text-muted-foreground">
+                    Area
+                  </span>
+                  <span className="nums text-[18px] font-semibold">
+                    {selected.area ?? "—"}{" "}
+                    <span className="text-[12px] font-normal text-muted-foreground">
+                      km²
+                    </span>
+                  </span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-[11px] uppercase tracking-wide text-muted-foreground">
+                    Crossings
+                  </span>
+                  <span className="nums text-[18px] font-semibold">
+                    {selected.passageCount ?? "—"}
+                  </span>
                 </div>
               </div>
-            )}
 
-            {selectedFeature.type === "station" && <></>}
-          </div>
+              <div className="mt-5 flex flex-col gap-3.5">
+                <ScoreBar
+                  label="Accessibility"
+                  score={selected.accessibilityScore ?? 0}
+                />
+                <ScoreBar label="Safety" score={selected.safetyScore ?? 0} />
+                <ScoreBar
+                  label="Mobility"
+                  score={selected.mobilityScore ?? 0}
+                />
+              </div>
+            </>
+          ) : (
+            <div className="mt-4 text-[13px] text-muted-foreground">
+              EDSA busway station. Stations anchor the accessibility model:
+              barangays within a short walk score higher on mobility.
+            </div>
+          )}
+        </GlassPanel>
+      )}
+
+      {isLoading && (
+        <div className="absolute inset-0 z-[700] flex items-center justify-center bg-background/60 backdrop-blur-sm">
+          <span className="text-sm font-medium text-muted-foreground">
+            Loading map…
+          </span>
         </div>
       )}
-      <LayerSelector
-        activeLayer={activeLayer}
-        setActiveLayer={setActiveLayer}
-      />
-
-      <div className="flex-grow">
-        <MapContainer
-          center={[14.6197, 121.051]} // Coordinates for Cubao, Araneta City
-          zoom={15} // Adjusted zoom level for a detailed view of the area
-          style={{ height: "100vh", width: "100%", zIndex: 1 }}
-        >
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          />
-          {renderGeoJsonLayers()}
-          {activeLayer == "mobility" && renderStationMarkers()}
-          {activeLayer == "safety" && renderPassageMarkers()}
-          {activeLayer == "accessibility" && renderRoads()}
-          {activeLayer == "accessibility" && renderSidewalks()}
-
-          {/* <MapWithTooltip /> */}
-        </MapContainer>
-
-        {/* Tooltip HTML element */}
-        <div
-          id="latlon-tooltip"
-          style={{
-            position: "absolute",
-            background: "white",
-            padding: "5px",
-            borderRadius: "5px",
-            pointerEvents: "none",
-            display: "none",
-            zIndex: 1000,
-          }}
-        >
-          Lat: -- | Lng: --
-        </div>
-      </div>
-    </div>
+    </AppShell>
   );
-};
-
-export default GISMapPage;
+}
