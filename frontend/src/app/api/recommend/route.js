@@ -44,6 +44,16 @@ export async function POST(req) {
     body = await req.json();
   } catch {}
 
+  // Bound untrusted input before it reaches the model (public, paid endpoint).
+  const clampScore = (n) => Math.min(1, Math.max(0, Number(n) || 0));
+  body = {
+    name: String(body.name ?? "this area").slice(0, 80),
+    accessibilityScore: clampScore(body.accessibilityScore),
+    safetyScore: clampScore(body.safetyScore),
+    mobilityScore: clampScore(body.mobilityScore),
+    population: Math.min(5_000_000, Math.max(0, Number(body.population) || 0)),
+  };
+
   const key = process.env.OPENROUTER_API_KEY;
   if (!key) return NextResponse.json(fallbackActions(body));
 
