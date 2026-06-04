@@ -11,7 +11,7 @@ export async function POST() {
       const db = await getDb();
       const docs = await db
         .collection("geounits")
-        .find({}, { projection: { _id: 0 } })
+        .find({})
         .toArray();
       if (docs.length) return NextResponse.json(docs);
     }

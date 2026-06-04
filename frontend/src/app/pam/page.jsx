@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import dynamic from "next/dynamic";
 import ReactDOMServer from "react-dom/server";
 import {
@@ -94,6 +94,33 @@ export default function AccessibilityMapPage() {
   const [query, setQuery] = useState("");
   const [rec, setRec] = useState(null);
   const [recLoading, setRecLoading] = useState(false);
+  const mapRef = useRef(null);
+
+  // Pan/zoom the map to the selected area (so picking from the list moves it too).
+  useEffect(() => {
+    const geom = selected?.location;
+    const map = mapRef.current;
+    if (!map || !geom?.coordinates) return;
+    let minX = 180, minY = 90, maxX = -180, maxY = -90;
+    const walk = (a) => {
+      if (typeof a[0] === "number") {
+        minX = Math.min(minX, a[0]); maxX = Math.max(maxX, a[0]);
+        minY = Math.min(minY, a[1]); maxY = Math.max(maxY, a[1]);
+      } else a.forEach(walk);
+    };
+    walk(geom.coordinates);
+    map.flyToBounds(
+      [[minY, minX], [maxY, maxX]],
+      { padding: [80, 80], duration: 0.6, maxZoom: 15 }
+    );
+  }, [selected?._id]);
+
+  // Esc closes the drill-in.
+  useEffect(() => {
+    const onKey = (e) => e.key === "Escape" && setSelected(null);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   async function getRecommendations(unit) {
     setRecLoading(true);
@@ -184,6 +211,7 @@ export default function AccessibilityMapPage() {
       <div className="absolute inset-0">
         {!isLoading && (
           <MapContainer
+            ref={mapRef}
             center={[14.63, 121.04]}
             zoom={13}
             zoomControl={true}
@@ -202,11 +230,11 @@ export default function AccessibilityMapPage() {
                   data={f}
                   style={{
                     color: isSel
-                      ? "oklch(0.555 0.175 258)"
-                      : "oklch(0.86 0.009 258)",
-                    weight: isSel ? 2.5 : 0.8,
+                      ? "oklch(0.5 0.18 258)"
+                      : "oklch(0.62 0.012 264 / 0.5)",
+                    weight: isSel ? 3 : 0.6,
                     fillColor: qualityColor(score),
-                    fillOpacity: isSel ? 0.62 : 0.45,
+                    fillOpacity: isSel ? 0.42 : 0.3,
                   }}
                   eventHandlers={{
                     click: () => setSelected({ ...f.properties }),

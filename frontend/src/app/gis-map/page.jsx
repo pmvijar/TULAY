@@ -83,11 +83,11 @@ export default function TransitCoveragePage() {
     const fills = geoUnits.map((u) => ({
       data: u.location,
       style: {
-        color: "oklch(0.86 0.009 258)",
-        weight: 0.8,
+        color: "oklch(0.62 0.012 264 / 0.45)",
+        weight: 0.6,
         opacity: 1,
         fillColor: scoreColor(u.proximityScore),
-        fillOpacity: 0.42,
+        fillOpacity: 0.3,
       },
       unit: u,
     }));
@@ -100,6 +100,12 @@ export default function TransitCoveragePage() {
 
     setLayers([...rings, ...fills]);
   }, [geoUnits, stations]);
+
+  useEffect(() => {
+    const onKey = (e) => e.key === "Escape" && setSelected(null);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   return (
     <AppShell>
@@ -128,6 +134,18 @@ export default function TransitCoveragePage() {
                 {layer.unit && <Tooltip sticky>{layer.unit.name}</Tooltip>}
               </GeoJSON>
             ))}
+            {selected?.location && (
+              <GeoJSON
+                key={"sel-" + selected._id}
+                data={selected.location}
+                style={{
+                  color: "oklch(0.5 0.18 258)",
+                  weight: 3,
+                  fillColor: scoreColor(selected.proximityScore),
+                  fillOpacity: 0.42,
+                }}
+              />
+            )}
           </MapContainer>
         )}
       </div>

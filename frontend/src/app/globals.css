@@ -132,3 +132,8 @@
   color: var(--foreground) !important;
   border-color: var(--glass-border) !important;
 }
+/* Kill the default browser focus rectangle drawn around a clicked map shape. */
+.leaflet-interactive:focus,
+.leaflet-interactive:focus-visible {
+  outline: none !important;
+}
