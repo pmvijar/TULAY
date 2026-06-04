@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getDb, hasDb } from "@/lib/db";
-import { mockGeoUnits } from "@/lib/mock";
+import fallbackData from "@/data/ncr-geounits.json";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 15;
@@ -19,5 +19,5 @@ export async function POST() {
     console.error("geounits db error:", err.message);
   }
   // Derived fallback (same source the DB is seeded from).
-  return NextResponse.json(mockGeoUnits());
+  return NextResponse.json(fallbackData);
 }

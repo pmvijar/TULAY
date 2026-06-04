@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getDb, hasDb } from "@/lib/db";
-import { mockStations } from "@/lib/mock";
+import fallbackData from "@/data/ncr-stations.json";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 15;
@@ -18,5 +18,5 @@ export async function POST() {
   } catch (err) {
     console.error("stations db error:", err.message);
   }
-  return NextResponse.json(mockStations());
+  return NextResponse.json(fallbackData);
 }

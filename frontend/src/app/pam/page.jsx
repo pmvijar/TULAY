@@ -16,6 +16,8 @@ import {
   Layers,
   Sparkles,
   Loader2,
+  Hospital,
+  GraduationCap,
 } from "lucide-react";
 import "leaflet/dist/leaflet.css";
 
@@ -45,6 +47,14 @@ const Tooltip = dynamic(() => import("react-leaflet").then((m) => m.Tooltip), {
 const Marker = dynamic(() => import("react-leaflet").then((m) => m.Marker), {
   ssr: false,
 });
+const CircleMarker = dynamic(
+  () => import("react-leaflet").then((m) => m.CircleMarker),
+  { ssr: false }
+);
+const FlyToSelected = dynamic(
+  () => import("@/components/map/FlyToSelected"),
+  { ssr: false }
+);
 
 const LAYERS = [
   { value: "accessibility", label: "Accessibility", icon: PersonStanding },
@@ -57,6 +67,16 @@ const SCORE_KEY = {
   safety: "safetyScore",
   mobility: "mobilityScore",
 };
+
+// Toggleable landmark overlays. Station proximity already factors into the
+// priority score; hospitals, schools, and crossings give planners the context
+// behind it.
+const POI_LAYERS = [
+  { key: "stations", label: "Stations", icon: TrainFront, color: "oklch(0.5 0.18 280)" },
+  { key: "crossings", label: "Crossings", icon: Footprints, color: "oklch(0.62 0.14 152)" },
+  { key: "hospitals", label: "Hospitals", icon: Hospital, color: "oklch(0.585 0.20 27)" },
+  { key: "schools", label: "Schools", icon: GraduationCap, color: "oklch(0.66 0.16 50)" },
+];
 
 function makeIcon(L, Comp, ring) {
   return L.divIcon({
@@ -90,30 +110,18 @@ export default function AccessibilityMapPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [source, setSource] = useState("live");
   const [activeLayer, setActiveLayer] = useState("accessibility");
+  const [pois, setPois] = useState([]);
+  const [show, setShow] = useState({
+    stations: true,
+    crossings: false,
+    hospitals: false,
+    schools: false,
+  });
   const [selected, setSelected] = useState(null);
+  const toggle = (k) => setShow((s) => ({ ...s, [k]: !s[k] }));
   const [query, setQuery] = useState("");
   const [rec, setRec] = useState(null);
   const [recLoading, setRecLoading] = useState(false);
-  const mapRef = useRef(null);
-
-  // Pan/zoom the map to the selected area (so picking from the list moves it too).
-  useEffect(() => {
-    const geom = selected?.location;
-    const map = mapRef.current;
-    if (!map || !geom?.coordinates) return;
-    let minX = 180, minY = 90, maxX = -180, maxY = -90;
-    const walk = (a) => {
-      if (typeof a[0] === "number") {
-        minX = Math.min(minX, a[0]); maxX = Math.max(maxX, a[0]);
-        minY = Math.min(minY, a[1]); maxY = Math.max(maxY, a[1]);
-      } else a.forEach(walk);
-    };
-    walk(geom.coordinates);
-    map.flyToBounds(
-      [[minY, minX], [maxY, maxX]],
-      { padding: [80, 80], duration: 0.6, maxZoom: 15 }
-    );
-  }, [selected?._id]);
 
   // Esc closes the drill-in.
   useEffect(() => {
@@ -156,14 +164,16 @@ export default function AccessibilityMapPage() {
   useEffect(() => {
     (async () => {
       setIsLoading(true);
-      const [g, s, p] = await Promise.all([
-        apiPost("/gis/geounits", { location: "EDSA" }),
-        apiPost("/gis/stations", { location: "EDSA" }),
-        apiPost("/gis/passages", { location: "EDSA" }),
+      const [g, s, p, poi] = await Promise.all([
+        apiPost("/gis/geounits", { location: "NCR" }),
+        apiPost("/gis/stations", { location: "NCR" }),
+        apiPost("/gis/passages", { location: "NCR" }),
+        apiPost("/gis/pois", { location: "NCR" }),
       ]);
       setGeoUnits(Array.isArray(g.data) ? g.data : []);
       setStations(Array.isArray(s.data) ? s.data : []);
       setPassages(Array.isArray(p.data) ? p.data : []);
+      setPois(Array.isArray(poi.data) ? poi.data : []);
       setSource(g.source);
       setIsLoading(false);
     })();
@@ -177,15 +187,33 @@ export default function AccessibilityMapPage() {
   const scoreOf = (unit) =>
     unit?.[SCORE_KEY[activeLayer]] ?? unit?.proximityScore ?? 0;
 
-  const features = useMemo(
-    () =>
-      geoUnits.map((u) => ({
+  // One FeatureCollection rendered as a single layer (scales to ~800+ barangays).
+  const featureCollection = useMemo(
+    () => ({
+      type: "FeatureCollection",
+      features: geoUnits.map((u) => ({
         type: "Feature",
         properties: { ...u, type: "geounit" },
         geometry: u.location,
       })),
+    }),
     [geoUnits]
   );
+
+  const styleFn = (feature) => {
+    const score = feature.properties[SCORE_KEY[activeLayer]] ?? 0;
+    return {
+      color: "oklch(0.62 0.012 264 / 0.45)",
+      weight: 0.5,
+      fillColor: qualityColor(score),
+      fillOpacity: 0.32,
+    };
+  };
+
+  const onEachFeature = (feature, layer) => {
+    layer.bindTooltip(feature.properties.name, { sticky: true });
+    layer.on("click", () => setSelected({ ...feature.properties, type: "geounit" }));
+  };
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -193,7 +221,10 @@ export default function AccessibilityMapPage() {
       (a, b) => scoreOf(b) - scoreOf(a)
     );
     if (!q) return list;
-    return list.filter((u) => u.name?.toLowerCase().includes(q));
+    return list.filter(
+      (u) =>
+        u.name?.toLowerCase().includes(q) || u.city?.toLowerCase().includes(q)
+    );
   }, [geoUnits, query, activeLayer]);
 
   const dedupStations = useMemo(() => {
@@ -211,9 +242,8 @@ export default function AccessibilityMapPage() {
       <div className="absolute inset-0">
         {!isLoading && (
           <MapContainer
-            ref={mapRef}
-            center={[14.63, 121.04]}
-            zoom={13}
+            center={[14.58, 121.0]}
+            zoom={11}
             zoomControl={true}
             style={{ height: "100%", width: "100%" }}
           >
@@ -221,31 +251,32 @@ export default function AccessibilityMapPage() {
               url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
               attribution='&copy; OpenStreetMap &copy; CARTO'
             />
-            {features.map((f) => {
-              const score = scoreOf(f.properties);
-              const isSel = selected?._id === f.properties._id;
-              return (
-                <GeoJSON
-                  key={f.properties._id + activeLayer}
-                  data={f}
-                  style={{
-                    color: isSel
-                      ? "oklch(0.5 0.18 258)"
-                      : "oklch(0.62 0.012 264 / 0.5)",
-                    weight: isSel ? 3 : 0.6,
-                    fillColor: qualityColor(score),
-                    fillOpacity: isSel ? 0.42 : 0.3,
-                  }}
-                  eventHandlers={{
-                    click: () => setSelected({ ...f.properties }),
-                  }}
-                >
-                  <Tooltip sticky>{f.properties.name}</Tooltip>
-                </GeoJSON>
-              );
-            })}
+            <GeoJSON
+              key={activeLayer}
+              data={featureCollection}
+              style={styleFn}
+              onEachFeature={onEachFeature}
+            />
+            {selected?.location && (
+              <FlyToSelected geometry={selected.location} id={selected._id} />
+            )}
+            {selected?.location && (
+              <GeoJSON
+                key={"sel-" + selected._id + activeLayer}
+                data={selected.location}
+                style={{
+                  color: "oklch(0.5 0.18 258)",
+                  weight: 3,
+                  fillColor: qualityColor(
+                    selected[SCORE_KEY[activeLayer]] ?? selected.proximityScore ?? 0
+                  ),
+                  fillOpacity: 0.45,
+                }}
+                interactive={false}
+              />
+            )}
 
-            {activeLayer === "mobility" &&
+            {show.stations &&
               dedupStations.map((s) => (
                 <Marker
                   key={s._id}
@@ -264,19 +295,60 @@ export default function AccessibilityMapPage() {
                 </Marker>
               ))}
 
-            {activeLayer === "safety" &&
+            {show.crossings &&
               passages.map((p) => (
-                <Marker
+                <CircleMarker
                   key={p._id}
-                  position={[
-                    p.location.coordinates[1],
-                    p.location.coordinates[0],
-                  ]}
-                  icon={icons.passage}
+                  center={[p.location.coordinates[1], p.location.coordinates[0]]}
+                  radius={3}
+                  pathOptions={{
+                    color: "oklch(0.62 0.14 152)",
+                    fillColor: "oklch(0.62 0.14 152)",
+                    fillOpacity: 0.85,
+                    weight: 0,
+                  }}
                 >
                   <Tooltip className="capitalize">{p.type}</Tooltip>
-                </Marker>
+                </CircleMarker>
               ))}
+
+            {show.hospitals &&
+              pois
+                .filter((p) => p.kind === "hospital")
+                .map((p) => (
+                  <CircleMarker
+                    key={p._id}
+                    center={[p.location.coordinates[1], p.location.coordinates[0]]}
+                    radius={4}
+                    pathOptions={{
+                      color: "oklch(0.99 0.01 258)",
+                      fillColor: "oklch(0.585 0.20 27)",
+                      fillOpacity: 0.95,
+                      weight: 1.2,
+                    }}
+                  >
+                    <Tooltip>{p.name}</Tooltip>
+                  </CircleMarker>
+                ))}
+
+            {show.schools &&
+              pois
+                .filter((p) => p.kind === "school")
+                .map((p) => (
+                  <CircleMarker
+                    key={p._id}
+                    center={[p.location.coordinates[1], p.location.coordinates[0]]}
+                    radius={3}
+                    pathOptions={{
+                      color: "oklch(0.66 0.16 50)",
+                      fillColor: "oklch(0.66 0.16 50)",
+                      fillOpacity: 0.85,
+                      weight: 0,
+                    }}
+                  >
+                    <Tooltip>{p.name}</Tooltip>
+                  </CircleMarker>
+                ))}
           </MapContainer>
         )}
       </div>
@@ -286,9 +358,9 @@ export default function AccessibilityMapPage() {
         <div className="mb-3 flex items-center justify-between">
           <div className="flex items-center gap-1.5 text-[12px] font-medium text-muted-foreground">
             <MapPin className="h-3.5 w-3.5" />
-            Quezon City
+            Metro Manila
             <span className="text-border-strong">/</span>
-            EDSA corridor
+            {geoUnits.length} barangays
           </div>
           <StatusBadge
             status={source === "live" ? "live" : "offline"}
@@ -325,10 +397,17 @@ export default function AccessibilityMapPage() {
                   isSel ? "bg-accent-soft" : "hover:bg-surface-muted"
                 )}
               >
-                <span className="truncate text-[13px] font-medium">
-                  {u.name}
+                <span className="flex min-w-0 flex-col">
+                  <span className="truncate text-[13px] font-medium">
+                    {u.name}
+                  </span>
+                  {u.city && (
+                    <span className="truncate text-[11px] text-muted-foreground">
+                      {u.city}
+                    </span>
+                  )}
                 </span>
-                <span className="flex items-center gap-2">
+                <span className="flex shrink-0 items-center gap-2">
                   <span className="h-1.5 w-12 overflow-hidden rounded-full bg-surface-muted">
                     <span
                       className="block h-full rounded-full"
@@ -351,12 +430,12 @@ export default function AccessibilityMapPage() {
         </div>
       </GlassPanel>
 
-      {/* Layer switch */}
-      <GlassPanel className="absolute bottom-6 left-6 z-[500] p-1.5">
+      {/* Layer + landmark controls */}
+      <GlassPanel className="absolute bottom-6 left-6 z-[500] flex flex-col gap-2 p-3">
         <div className="flex items-center gap-1">
-          <span className="px-2 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+          <span className="w-[52px] shrink-0 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
             <Layers className="mr-1 inline h-3.5 w-3.5" />
-            Layer
+            Shade
           </span>
           {LAYERS.map((l) => {
             const Icon = l.icon;
@@ -374,6 +453,34 @@ export default function AccessibilityMapPage() {
               >
                 <Icon className="h-4 w-4" />
                 {l.label}
+              </button>
+            );
+          })}
+        </div>
+        <div className="flex items-center gap-1 border-t border-border/60 pt-2">
+          <span className="w-[52px] shrink-0 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+            Show
+          </span>
+          {POI_LAYERS.map((p) => {
+            const Icon = p.icon;
+            const on = show[p.key];
+            return (
+              <button
+                key={p.key}
+                onClick={() => toggle(p.key)}
+                aria-pressed={on}
+                className={cn(
+                  "flex items-center gap-1.5 rounded-md border px-2.5 py-1.5 text-[13px] font-medium transition-all duration-200 ease-out-quint",
+                  on
+                    ? "border-transparent bg-surface-muted text-foreground"
+                    : "border-border bg-transparent text-muted-foreground hover:text-foreground"
+                )}
+              >
+                <Icon
+                  className="h-4 w-4"
+                  style={{ color: on ? p.color : "currentColor" }}
+                />
+                {p.label}
               </button>
             );
           })}
@@ -404,7 +511,11 @@ export default function AccessibilityMapPage() {
           <div className="flex items-start justify-between gap-2">
             <div>
               <div className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
-                {selected.type === "station" ? "Busway station" : "Barangay"}
+                {selected.type === "station"
+                  ? selected.line || "Station"
+                  : selected.city
+                  ? `Barangay · ${selected.city}`
+                  : "Barangay"}
               </div>
               <h2 className="mt-0.5 text-[18px] font-semibold tracking-tight">
                 {selected.name}

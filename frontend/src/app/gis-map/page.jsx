@@ -77,29 +77,49 @@ export default function TransitCoveragePage() {
 
     const ringLayer = (data, color) => ({
       data,
-      style: { color, fillColor: color, fillOpacity: 0.16, opacity: 0, weight: 0 },
+      style: { color, fillColor: color, fillOpacity: 0.14, opacity: 0, weight: 0 },
     });
 
-    const fills = geoUnits.map((u) => ({
-      data: u.location,
-      style: {
-        color: "oklch(0.62 0.012 264 / 0.45)",
-        weight: 0.6,
-        opacity: 1,
-        fillColor: scoreColor(u.proximityScore),
-        fillOpacity: 0.3,
-      },
-      unit: u,
-    }));
+    try {
+      const rings = [
+        ringLayer(union(buffers.far), RING.far),
+        ringLayer(union(buffers.medium), RING.medium),
+        ringLayer(union(buffers.near), RING.near),
+      ].filter((l) => l.data);
+      setLayers(rings);
+    } catch (err) {
+      console.error("buffer union failed:", err.message);
+      setLayers([]);
+    }
+  }, [stations]);
 
-    const rings = [
-      ringLayer(union(buffers.far), RING.far),
-      ringLayer(union(buffers.medium), RING.medium),
-      ringLayer(union(buffers.near), RING.near),
-    ].filter((l) => l.data);
-
-    setLayers([...rings, ...fills]);
-  }, [geoUnits, stations]);
+  // Barangay choropleth as a single layer (scales to ~800+ areas).
+  const fc = useMemo(
+    () => ({
+      type: "FeatureCollection",
+      features: geoUnits.map((u) => ({
+        type: "Feature",
+        properties: { _id: u._id, name: u.name, city: u.city },
+        geometry: u.location,
+      })),
+    }),
+    [geoUnits]
+  );
+  const byId = useMemo(() => {
+    const m = {};
+    geoUnits.forEach((u) => (m[u._id] = u));
+    return m;
+  }, [geoUnits]);
+  const styleFn = (feature) => ({
+    color: "oklch(0.62 0.012 264 / 0.45)",
+    weight: 0.5,
+    fillColor: scoreColor(byId[feature.properties._id]?.proximityScore ?? 0),
+    fillOpacity: 0.3,
+  });
+  const onEachFeature = (feature, layer) => {
+    layer.bindTooltip(feature.properties.name, { sticky: true });
+    layer.on("click", () => setSelected(byId[feature.properties._id]));
+  };
 
   useEffect(() => {
     const onKey = (e) => e.key === "Escape" && setSelected(null);
@@ -112,8 +132,8 @@ export default function TransitCoveragePage() {
       <div className="absolute inset-0">
         {!isLoading && (
           <MapContainer
-            center={[14.651675, 121.049444]}
-            zoom={12}
+            center={[14.58, 121.0]}
+            zoom={11}
             style={{ height: "100%", width: "100%" }}
           >
             <TileLayer
@@ -121,19 +141,16 @@ export default function TransitCoveragePage() {
               attribution="&copy; OpenStreetMap &copy; CARTO"
             />
             {layers.map((layer, i) => (
-              <GeoJSON
-                key={i + (layer.unit?._id || "ring")}
-                data={layer.data}
-                style={layer.style}
-                eventHandlers={
-                  layer.unit
-                    ? { click: () => setSelected(layer.unit) }
-                    : undefined
-                }
-              >
-                {layer.unit && <Tooltip sticky>{layer.unit.name}</Tooltip>}
-              </GeoJSON>
+              <GeoJSON key={"ring-" + i} data={layer.data} style={layer.style} />
             ))}
+            {fc.features.length > 0 && (
+              <GeoJSON
+                key={fc.features.length}
+                data={fc}
+                style={styleFn}
+                onEachFeature={onEachFeature}
+              />
+            )}
             {selected?.location && (
               <GeoJSON
                 key={"sel-" + selected._id}
@@ -155,7 +172,7 @@ export default function TransitCoveragePage() {
         <div className="mb-3 flex items-center justify-between">
           <div className="flex items-center gap-1.5 text-[12px] font-medium text-muted-foreground">
             <MapPin className="h-3.5 w-3.5" />
-            Quezon City
+            Metro Manila
           </div>
           <StatusBadge
             status={source === "live" ? "live" : "offline"}

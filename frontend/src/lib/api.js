@@ -18,10 +18,22 @@ import {
 
 const BASE = process.env.NEXT_PUBLIC_API_BASE || "/api";
 
+// Metro Manila fallback data is large, so load it lazily (separate chunk, only
+// fetched if a live request fails). Falls back to the QC-derived data if the
+// bundled NCR dataset is unavailable for any reason.
+const ncr = (file, derived) => async () => {
+  try {
+    return (await import(`@/data/${file}.json`)).default;
+  } catch {
+    return derived();
+  }
+};
+
 const FALLBACKS = {
-  "/gis/geounits": () => mockGeoUnits(),
-  "/gis/stations": () => mockStations(),
-  "/gis/passages": () => mockPassages(),
+  "/gis/geounits": ncr("ncr-geounits", mockGeoUnits),
+  "/gis/stations": ncr("ncr-stations", mockStations),
+  "/gis/passages": ncr("ncr-passages", mockPassages),
+  "/gis/pois": ncr("ncr-pois", () => []),
   "/dashboard/passenger-load": () => mockPassengerLoad(),
   "/dashboard/boarding-alighting-bar": () => mockBoardingAlightingBar(),
   "/dashboard/boarding-alighting-heatmap": () => mockBoardingAlightingHeatmap(),
@@ -83,7 +95,7 @@ export async function apiPost(path, body = {}, { timeoutMs = 12000 } = {}) {
     return { data, source: "live" };
   } catch (err) {
     if (fallback) {
-      return { data: fallback(body), source: "mock", error: err.message };
+      return { data: await fallback(body), source: "mock", error: err.message };
     }
     throw err;
   }
