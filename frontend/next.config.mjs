@@ -7,11 +7,6 @@ const nextConfig = {
     });
     return config;
   },
-  // TULAY ships as a focused GIS app; open on the accessibility map.
-  // (The legacy login at "/" is preserved in code; this redirect is reversible.)
-  async redirects() {
-    return [{ source: "/", destination: "/pam", permanent: false }];
-  },
 };
 
 export default nextConfig;

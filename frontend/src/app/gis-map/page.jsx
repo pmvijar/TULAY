@@ -10,7 +10,6 @@ import { AppShell } from "@/components/shell/AppShell";
 import { GlassPanel } from "@/components/ui/glass-panel";
 import { Button } from "@/components/ui/button";
 import { ScoreBadge } from "@/components/ui/badge";
-import { StatusBadge } from "@/components/ui/badge";
 import { X } from "lucide-react";
 import { scoreColor, scoreLabel } from "@/lib/scoring";
 import { apiPost } from "@/lib/api";
@@ -174,10 +173,6 @@ export default function TransitCoveragePage() {
             <MapPin className="h-3.5 w-3.5" />
             Metro Manila
           </div>
-          <StatusBadge
-            status={source === "live" ? "live" : "offline"}
-            label={source === "live" ? "Live" : "Mock data"}
-          />
         </div>
         <h1 className="flex items-center gap-2 text-[20px] font-semibold tracking-tight">
           <Radius className="h-5 w-5 text-accent" />

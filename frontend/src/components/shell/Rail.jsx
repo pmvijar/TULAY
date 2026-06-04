@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Footprints, Radius } from "lucide-react";
+import { Footprints, Radius, LayoutDashboard } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-// TULAY is a focused two-view GIS app: the accessibility map and transit
-// coverage. The rail navigates only between these. No auth menu / notifications
-// here -- there is no real auth, so we don't fake the chrome.
+// TULAY's app views. The rail navigates between the overview dashboard and the
+// two maps. No auth menu / notifications -- there is no real auth, so we don't
+// fake the chrome.
 const NAV = [
+  { href: "/overview", label: "Overview", icon: LayoutDashboard },
   { href: "/pam", label: "Accessibility map", icon: Footprints },
   { href: "/gis-map", label: "Transit coverage", icon: Radius },
 ];
@@ -40,7 +41,7 @@ export function Rail() {
   return (
     <aside className="z-40 flex h-screen w-16 shrink-0 flex-col items-center border-r border-border bg-surface/80 py-4 backdrop-blur-sm">
       <Link
-        href="/pam"
+        href="/"
         aria-label="TULAY home"
         className="mb-5 flex h-11 w-11 items-center justify-center rounded-[12px] bg-accent text-accent-fg shadow-sm"
       >

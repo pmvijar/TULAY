@@ -25,7 +25,6 @@ import { AppShell } from "@/components/shell/AppShell";
 import { GlassPanel } from "@/components/ui/glass-panel";
 import { Button } from "@/components/ui/button";
 import { ScoreBar } from "@/components/ui/score-bar";
-import { StatusBadge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { qualityColor } from "@/lib/scoring";
 import { apiPost } from "@/lib/api";
@@ -362,10 +361,6 @@ export default function AccessibilityMapPage() {
             <span className="text-border-strong">/</span>
             {geoUnits.length} barangays
           </div>
-          <StatusBadge
-            status={source === "live" ? "live" : "offline"}
-            label={source === "live" ? "Live" : "Mock data"}
-          />
         </div>
         <h1 className="text-[20px] font-semibold tracking-tight">
           Accessibility map

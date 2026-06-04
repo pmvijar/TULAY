@@ -41,6 +41,20 @@ const FALLBACKS = {
   "/dashboard/gps-speed-line": () => mockGpsSpeedLine(),
   "/insights": () => MOCK_INSIGHTS,
   "/policy": () => MOCK_POLICY,
+  "/overview-insights": (s) => ({
+    summary: `Across ${s?.totalBarangays || 0} barangays in ${s?.cities || 0} Metro Manila cities, pedestrian-access priority concentrates on areas far from rail and busway stations.`,
+    insights: [
+      { title: "Priority follows the transit gap", detail: "The highest-priority barangays cluster where walking distance to the nearest station is longest." },
+      { title: "Coverage is uneven across cities", detail: "Average priority varies widely between LGUs, so budget should be weighted toward the worst-access cities." },
+      { title: "Safe crossings lag behind proximity", detail: "Some areas sit near a station yet score poorly, pointing to missing crossings rather than distance." },
+    ],
+    actions: [
+      { priority: 1, title: "Fund last-mile footways in the top-priority fringe barangays", detail: "Continuous, accessible sidewalks where station distance is greatest." },
+      { priority: 2, title: "Add protected crossings near high-traffic stations", detail: "Footbridges and signalized crossings where foot traffic meets fast roads." },
+      { priority: 3, title: "Weight the budget by city-level access gaps", detail: "Allocate proportionally to each city's average priority." },
+    ],
+    offline: true,
+  }),
   "/recommend": (body) => {
     const scores = [
       { k: "accessibility", v: body?.accessibilityScore ?? 1 },
