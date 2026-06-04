@@ -3,7 +3,8 @@ import { NextResponse } from "next/server";
 export const dynamic = "force-dynamic";
 export const maxDuration = 30;
 
-const MODEL = process.env.OPENROUTER_MODEL || "google/gemini-flash-1.5-8b";
+const MODEL =
+  process.env.OPENROUTER_MODEL || "meta-llama/llama-3.1-8b-instruct";
 
 // Deterministic fallback so the feature degrades gracefully with no key / on
 // error. Targets the weakest sub-score with a concrete action.
