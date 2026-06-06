@@ -13,12 +13,9 @@ const geistMono = localFont({
 });
 
 export const metadata = {
-  title: "LakbAI Analytics",
+  title: "TULAY · Pedestrian mobility GIS",
   description:
-    "A NextJS Application for Bus Transportation Analytics in Metro Manila",
-  icons: {
-    icon: "/lakbai-logo.png",
-  },
+    "A data-driven GIS tool that scores city areas on accessibility, safety, and mobility, and recommends where pedestrian infrastructure budget should go first.",
 };
 
 export default function RootLayout({ children }) {
@@ -27,7 +24,6 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <link rel='icon' href='/lakbai-logo.png' type='image/png' sizes='any' />
         {children}
       </body>
     </html>

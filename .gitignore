@@ -128,3 +128,11 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# local artifacts
+pam-*.png
+*.screenshot.png
+.playwright-mcp/
+*.png
+!frontend/public/**
+.vercel
